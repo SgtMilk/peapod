@@ -3,3 +3,47 @@
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE.txt', which is part of this source code package.
  */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.login {
+  height: 100vh;
+  width: 100vw;
+}
+
+.titlebar-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 8vh;
+  background-color: #84e462;
+  color: #225311;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+.body-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92vh;
+  width: 100%;
+  background-color: #5dc03a;
+}
+
+.button-login {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8vh;
+  width: 12vw;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #8bdd6d;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}

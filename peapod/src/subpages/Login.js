@@ -5,12 +5,18 @@
  */
 
 import React from 'react'
-import 'Login.css'
+import './Login.css'
 
 export const Login = () => {
     return (
-        <div>
-            <p>Beep Boop I want the loops</p>
+        <div className = 'login'>
+            <div className = 'titlebar-login'>
+                <h1>Peapod</h1>
+            </div>
+            <div className = 'body-login'>
+                <button className = 'button-login'>Sign In</button>
+                <button className = 'button-login'>Sign Up</button>
+            </div>
         </div>
     )
 }

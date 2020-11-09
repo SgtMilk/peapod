@@ -4,14 +4,21 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-import React from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css';
+import { Login } from "./subpages/Login";
+import {Dashboard} from "./subpages/Dashboard"
+import {NotFoundPage} from "./subpages/NotFoundPage"
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={Dashboard} />
+        <Route path="/login" exact component={Login} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
