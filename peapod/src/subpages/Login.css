@@ -17,10 +17,10 @@
   justify-content: center;
   width: 100vw;
   height: 8vh;
-  background-color: #84e462;
-  color: #225311;
+  background-color: #225311;
+  color: #e2e97e;
   font-family: "Montserrat", sans-serif;
-  font-size: 3vh;
+  font-size: 6vh;
 }
 
 .body-login {
@@ -29,7 +29,20 @@
   justify-content: center;
   height: 92vh;
   width: 100%;
-  background-color: #5dc03a;
+  background-color: rgb(211, 211, 211);
+  background-image: radial-gradient(#225311 20%, transparent 20%),
+    radial-gradient(#78a567 20%, transparent 20%);
+  background-position: 0 0, 7.5vh 7.5vh;
+  background-size: 15vh 15vh;
+}
+
+.wrapper-button-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #225311;
+  padding: 6vh;
+  border-radius: 5vh;
 }
 
 .button-login {
@@ -43,7 +56,18 @@
   margin-left: 2vw;
   border-radius: 2vh;
   background-color: #225311;
-  color: #8bdd6d;
+  color: #e2e97e;
   font-family: "Montserrat", sans-serif;
   font-size: 3vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
+}
+
+.button-login:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
 }

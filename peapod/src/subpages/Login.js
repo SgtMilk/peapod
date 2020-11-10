@@ -11,11 +11,13 @@ export const Login = () => {
     return (
         <div className = 'login'>
             <div className = 'titlebar-login'>
-                <h1>Peapod</h1>
+                <p>Peapod</p>
             </div>
             <div className = 'body-login'>
+                <div className = 'wrapper-button-login'>
                 <button className = 'button-login'>Sign In</button>
                 <button className = 'button-login'>Sign Up</button>
+                </div>    
             </div>
         </div>
     )
