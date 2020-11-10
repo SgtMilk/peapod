@@ -1,10 +1,8 @@
-const Pool = require("pg").Pool;
+const { Pool } = require("pg");
+const config = require("./config");
+
 const pool = new Pool({
-  user: "me",
-  host: "localhost",
-  database: "api",
-  password: "password",
-  port: 5432,
+  connectionString: config.DATABASE_URI,
 });
 
 export default pool;
