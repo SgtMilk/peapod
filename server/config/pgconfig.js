@@ -4,18 +4,12 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-/**
- * Imports
- */
+const pgconfig = {
+  dbuser: "temp",
+  host: "temp",
+  database: "temp",
+  password: "temp",
+  port: 8000,
+};
 
-/**
- * Server and DB connection
- */
-
-/**
- * Middleware
- */
-
-/**
- * Controller functions
- */
+export default pgconfig;
