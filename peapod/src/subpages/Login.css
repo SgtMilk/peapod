@@ -41,8 +41,10 @@
   align-items: center;
   justify-content: center;
   background-color: #225311;
-  padding: 6vh;
+  height: 25vh;
+  width: 40vw;
   border-radius: 5vh;
+  transition: 0.5s;
 }
 
 .button-login {
@@ -50,6 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   height: 8vh;
   width: 12vw;
   margin-right: 2vw;
@@ -61,6 +64,7 @@
   font-size: 3vh;
   transition: 0.3s;
   border: #225311 0.3vh solid;
+  margin: 1vh;
 }
 
 .button-login:hover {
@@ -70,4 +74,56 @@
     radial-gradient(black 20%, transparent 20%);
   background-position: 0 0, 0.8vh 0.8vh;
   background-size: 1vh 1vh;
+}
+
+/* This is to control what to see ======================================*/
+.screen1-login {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  z-index: inherit;
+  transition: 1s;
+}
+
+.screen2-login {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  z-index: -1;
+  transition: 1s;
+}
+
+.screen3-login {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  z-index: -1;
+  transition: 1s;
+}
+
+/* screen 2 stuff ======================================*/
+
+.wrapper-screen2-login {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Screen 3 stuff ======================================*/
+
+.disclaimer-login {
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1vh;
+  width: 40vw;
+  text-align: center;
+  margin-top: 2vh;
 }
