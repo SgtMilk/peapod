@@ -4,27 +4,17 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-
 /**
  * Imports
  */
-
-
-
 
 /**
  * Server and DB connection
  */
 
-
-
-
 /**
  * Middleware
  */
-
-
-
 
 /**
  * Controller functions

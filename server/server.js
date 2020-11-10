@@ -4,26 +4,23 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-
 /**
  * Imports
  */
 
 //the mighty Express herself
 const express = require("express");
+const http = require("http");
 
 //middleware
 const cors = require("cors");
-const bodyparser = require("body-parser");
+const bodyParser = require("body-parser");
+const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
 
 //database
 const { Pool, Client } = require("pg");
 const pgconfig = require("./config/pgconfig");
-
-//service methods
-const auth = require("./controllers/auth");
-const pods = require("./controllers/pods");
-const activities = require("./controllers/activities");
 
 //authentication
 const passport = require("passport");
@@ -31,17 +28,18 @@ const router = require("./routes/root");
 const config = require("./config/config");
 require("./config/passport-setup");
 require("express-async-errors");
+
 /**
  * PG DB connection
  */
 
- const pool = new Pool({
-     user: pgconfig.dbuser,
-     host: pgconfig.host,
-     database: pgconfig.database,
-     password: pgconfig.password,
-     port: pgconfig.port,
- });
+const pool = new Pool({
+  user: pgconfig.dbuser,
+  host: pgconfig.host,
+  database: pgconfig.database,
+  password: pgconfig.password,
+  port: pgconfig.port,
+});
 
 /**
  * Middleware
@@ -49,11 +47,29 @@ require("express-async-errors");
 
 const app = express();
 
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [config.KEYS.cookie.secret],
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
+
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(
+  cors({
+    origin: config.HOME_PAGE_DOMAIN, // allow to server to accept request from different origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // allow session cookie from browser to pass through
+  })
+);
+app.use(bodyParser.json());
+app.use("/", router);
 
-/**
- * Controller functions
- */
-
-
+// Open server for requests
+const server = http.createServer(app);
+server.listen(config.PORT, () => {
+  logger.info(`Server is currently running on port ${config.PORT}`);
+});

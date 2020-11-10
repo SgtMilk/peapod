@@ -4,17 +4,15 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-
 /**
  * Imports
  */
-
+const pool = require("../config/pg-config");
 require("express-async-errors");
 
 /**
  * Service functions
  */
-
 
 const loginSuccess = (req, res, next) => {
   if (req.user)
