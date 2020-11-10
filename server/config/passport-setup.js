@@ -15,25 +15,36 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const config = require("./config");
+const pool = require("./pg-config");
 const pgconfig = require("./pg-config");
-
-pgconfig.connect();
+const tables = require("../database/tables");
+const { v4: uuidv4 } = require("uuid");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser(async (id, done) => {
   /* 
     Find in db and return
     */
-  User.findById(id)
+  const connection = await pool.connect();
+  const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${id}'`);
+  const user = userQuery.rows[0];
+
+  if (!user) {
+    done(new Error("Failed to deserialize an user"));
+  }
+  else {
+    done(null, user.rows[0]);
+  }
+  /*User.findById(id)
     .then((user) => {
       done(null, user);
     })
     .catch(() => {
       done(new Error("Failed to deserialize an user"));
-    });
+    });*/
 });
 
 //  https://stackoverflow.com/questions/56798593/facebook-authentication-strategy-with-passport-js-express-and-typescript
@@ -45,43 +56,27 @@ passport.use(
       callbackURL: "/auth/google/redirect",
     },
     async (accessToken, refreshToken, profile, done) => {
-      //  Search DB for user
-      const user = await User.findOne({
+      const connection = await pool.connect();
+      const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE google_id='${profile.id}' OR email='${profile.emails[0].value}';`);
+      const user = userQuery.rows[0];
+      /*const user = await User.findOne({
         $or: [{ googleID: profile.id }, { email: profile.emails[0].value }],
-      });
+      });*/
 
-      //  If no user -> create a user in DB
       if (!user) {
         /* 
         Create a user
         */
-        const newUser = await new User({
-          displayName: profile.displayName,
-          name: profile.name,
-          email: profile.emails[0].value,
-          googleID: profile.id,
-          // eslint-disable-next-line nos-underscore-dangle
-          createdAt: new Date(),
-          security: {
-            activated: true,
-            verified: false,
-            public: false,
-          },
-          analysesCount: 0,
-          account: "INVESTOR",
-        }).save();
-
-        if (newUser) done(null, newUser);
+        const uuid = uuidv4();
+        user = await connection.query(`INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, google_id, facebook_id, riskLevel) VALUES('${uuid}', '${profile.email}', '${profile.firstname}', '${profile.lastname}', '${profile.googleID}', '${profile.facebookID}', '${profile.riskLevel}');`);
+        if (user.rows[0]) done(null, user);
+      } else if (user && !user.googleID) {
+        /*
+        Update user's google id
+        */
+        user = await connection.query(`UPDATE ${tables.users} SET google_id='${profile.id}' WHERE email='${profile.emails[0].value}';`);
       }
-
-      //  If user but no googleID, then user.googleID = profile.id
-      if (user && !user.googleID) {
-        user.googleID = profile.id;
-        await user.save();
-      }
-
-      //  Return user data
-      done(null, user);
+        done(null, user);
     }
   )
 );

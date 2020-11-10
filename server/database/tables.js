@@ -6,6 +6,14 @@ const tables = {
     user_activities: 'user_activities',
 }
 
-//users: || profile_id || email || firstname || lastname || 
+//users: || user_uuid || email || firstname || lastname || google_id || facebook_id || riskLevel ||
 
-export default tables;
+//pods: || pod_uuid || name ||
+
+//pod_users: || pod_uuid || user_uuid ||
+
+//activities: || activity_id || name || date || indoor || socialinteraction || proximity || peoplepresent ||
+
+//user_activities: || user_uuid || activity_id ||
+
+module.exports = tables;
