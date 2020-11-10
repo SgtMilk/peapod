@@ -17,6 +17,8 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const config = require("./config");
 const pgconfig = require("./pg-config");
 
+pgconfig.connect();
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
