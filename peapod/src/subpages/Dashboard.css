@@ -4,6 +4,53 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
 .dashboard {
-  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.titlebar-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 8vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 6vh;
+}
+
+.body-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92vh;
+  width: 100vw;
+  background-color: rgb(211, 211, 211);
+  background-image: radial-gradient(#225311 20%, transparent 20%),
+    radial-gradient(#78a567 20%, transparent 20%);
+  background-position: 0 0, 7.5vh 7.5vh;
+  background-size: 15vh 15vh;
+}
+
+.wrapper-button-dashboard {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  background-color: #225311;
+  height: 80vh;
+  width: 90vw;
+  border-radius: 5vh;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.grid-item-dashboard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -28,7 +28,7 @@
   align-items: center;
   justify-content: center;
   height: 92vh;
-  width: 100%;
+  width: 100vw;
   background-color: rgb(211, 211, 211);
   background-image: radial-gradient(#225311 20%, transparent 20%),
     radial-gradient(#78a567 20%, transparent 20%);
@@ -126,4 +126,31 @@
   width: 40vw;
   text-align: center;
   margin-top: 2vh;
+}
+
+/* Screen 3 stuff ======================================*/
+@media only screen and (orientation: portrait) {
+  .titlebar-login {
+    height: 10vh;
+  }
+
+  .body-login {
+    height: 90vh;
+  }
+
+  .wrapper-button-login {
+    height: 40vh;
+    width: 70vw;
+  }
+
+  .screen1-login {
+    flex-direction: column;
+  }
+
+  .button-login {
+    width: 55vw;
+    font-size: 7vh;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+  }
 }
