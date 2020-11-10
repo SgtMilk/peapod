@@ -32,4 +32,4 @@ const config = {
   HOME_PAGE_DOMAIN,
 };
 
-export default config;
+module.exports = config;

@@ -6,7 +6,7 @@
 
 const express = require("express");
 const passport = require("passport");
-const {} = require("../controllers/auth");
+const { loginSuccess, loginFailed, logout } = require("../controllers/auth");
 const config = require("../config/config");
 require("express-async-errors");
 
@@ -32,4 +32,4 @@ google.get(
 );
 
 auth.use("/google", google);
-export default auth;
+module.exports = auth;

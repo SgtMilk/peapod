@@ -48,4 +48,4 @@ const authCheck = (req, res, next) => {
   }
 };
 
-export { loginSuccess, loginFailed, logout, authCheck };
+module.exports = { loginSuccess, loginFailed, logout, authCheck };

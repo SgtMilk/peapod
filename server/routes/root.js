@@ -3,9 +3,6 @@
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE.txt', which is part of this source code package.
  */
-
-import auth from "./auth";
-
 const express = require("express");
 
 //  Routers
@@ -14,4 +11,4 @@ const rootRouter = express.Router();
 
 rootRouter.use("/auth", authRouter);
 
-export default rootRouter;
+module.exports = rootRouter;

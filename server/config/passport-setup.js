@@ -12,7 +12,7 @@
  *  - http://www.passportjs.org/packages/passport-linkedin-oauth2/
  *  - http://www.passportjs.org/packages/passport-local/
  */
-
+const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const config = require("./config");
 
@@ -37,8 +37,8 @@ passport.deserializeUser((id, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: config.KEYS.Google.id,
-      clientSecret: config.KEYS.Google.secret,
+      clientID: config.Google.clientID,
+      clientSecret: config.Google.secret,
       callbackURL: "/auth/google/redirect",
     },
     async (accessToken, refreshToken, profile, done) => {

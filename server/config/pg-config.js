@@ -5,4 +5,4 @@ const pool = new Pool({
   connectionString: config.DATABASE_URI,
 });
 
-export default pool;
+module.exports = pool;

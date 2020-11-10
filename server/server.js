@@ -25,11 +25,6 @@ const config = require("./config/config");
 require("./config/passport-setup");
 require("express-async-errors");
 
-//database
-const { Pool, Client } = require("pg");
-const pgconfig = require("./config/pgconfig");
-const connectionString = config.DATABASE_URI;
-
 /**
  * Middleware
  */
@@ -60,5 +55,5 @@ app.use("/", router);
 // Open server for requests
 const server = http.createServer(app);
 server.listen(config.PORT, () => {
-  logger.info(`Server is currently running on port ${config.PORT}`);
+  console.log(`Server is currently running on port ${config.PORT}`);
 });
