@@ -37,15 +37,26 @@
 }
 
 .wrapper-button-dashboard {
+  background-color: #225311;
+  height: 80vh;
+  width: 90vw;
+  border-radius: 5vh;
+  transition: 0.5s;
+}
+
+#wrapper2-dashboard {
   display: grid;
+  grid-gap: 0 2vw;
   grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto 30vh auto 30vh;
   background-color: #225311;
   height: 80vh;
   width: 90vw;
   border-radius: 5vh;
   transition: 0.5s;
   overflow: hidden;
+  padding: 2vw;
+  opacity: 0;
 }
 
 .grid-item-dashboard {
@@ -53,4 +64,97 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 5vh;
+  border: 0.3vh solid #225311;
+  transition: 0.5s;
+}
+
+.grid-item-dashboard:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}
+
+.MuiCircularProgress-colorPrimary {
+  color: #e2e97e !important;
+  position: absolute;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+.percentage-dashboard {
+  position: absolute;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+/*CSS grid here*/
+
+#a1-grid-dashboard {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+#a2-grid-dashboard {
+  grid-row: 2/3;
+  grid-column: 1/2;
+}
+
+#a3-grid-dashboard {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+#a4-grid-dashboard {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+#a5-grid-dashboard {
+  grid-row: 3;
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+#a6-grid-dashboard {
+  grid-row: 4;
+  grid-column: 1;
+}
+
+#a7-grid-dashboard {
+  grid-row: 3;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+#a8-grid-dashboard {
+  grid-row: 4;
+  grid-column: 2;
 }

@@ -7,8 +7,11 @@
 import React from 'react'
 import './Login.css'
 import serverAddress from '../constants'
+import redux from "../index";
+import { useHistory } from "react-router-dom";
 
 export const Login = () => {
+    let history = useHistory();
 
     const goSignIn = () => {
         document.getElementById('wrapper-button-login').style.height = '50vh';
@@ -40,11 +43,27 @@ export const Login = () => {
     }
 
     const handleGoogle = async () => {
-        window.open(`${serverAddress}/auth/google`, "_self");
+        //window.open(`${serverAddress}/auth/google`, "_self");
+        document.getElementById('wrapper-button-login').style.height = '80vh';
+        document.getElementById('wrapper-button-login').style.width = '90vw';
+        document.getElementById('screen2-login').style.opacity = 0;
+        document.getElementById('screen3-login').style.opacity = 0;
+        redux.store.dispatch(redux.setUser('beep'));
+        setTimeout(function() {
+            history.push("/");
+        },500)
     };
 
     const handleFacebook = async () => {
-        window.open(`${serverAddress}/auth/facebook`, "_self");
+        //window.open(`${serverAddress}/auth/facebook`, "_self");
+        document.getElementById('wrapper-button-login').style.height = '80vh';
+        document.getElementById('wrapper-button-login').style.width = '90vw';
+        document.getElementById('screen2-login').style.opacity = 0;
+        document.getElementById('screen3-login').style.opacity = 0;
+        redux.store.dispatch(redux.setUser('beep'));
+        setTimeout(function() {
+            history.push("/");
+        },500)
     };
 
     return (
