@@ -16,10 +16,6 @@ const express = require("express");
 const cors = require("cors");
 const bodyparser = require("body-parser");
 
-//database
-const { Pool, Client } = require("pg");
-const pgconfig = require("./config/pgconfig");
-
 //service methods
 const auth = require("./controllers/auth");
 const pods = require("./controllers/pods");
@@ -31,18 +27,18 @@ const router = require("./routes/root");
 const config = require("./config/config");
 require("./config/passport-setup");
 require("express-async-errors");
+
+//database
+const { Pool, Client } = require("pg");
+const pgconfig = require("./config/pgconfig");
+const connectionString = config.DATABASE_URI;
 /**
  * PG DB connection
  */
 
  const pool = new Pool({
-     user: pgconfig.dbuser,
-     host: pgconfig.host,
-     database: pgconfig.database,
-     password: pgconfig.password,
-     port: pgconfig.port,
+     connectionString,
  });
-
 /**
  * Middleware
  */
@@ -56,4 +52,4 @@ app.use(passport.session());
  * Controller functions
  */
 
-
+ 

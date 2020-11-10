@@ -7,6 +7,7 @@ const {
   COOKIE_SECRET,
   FACEBOOK_CLIENT_ID,
   FACEBOOK_CLIENT_SECRET,
+  DATABASE_URI,
 } = process.env;
 
 const config = {
@@ -20,6 +21,7 @@ const config = {
   },
   PORT,
   COOKIE_SECRET,
+  DATABASE_URI,
 };
 
 export default config;
