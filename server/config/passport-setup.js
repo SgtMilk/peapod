@@ -42,10 +42,12 @@ passport.use(
       callbackURL: "/auth/google/redirect",
     },
     async (accessToken, refreshToken, profile, done) => {
+      //  Search DB for user
       const user = await User.findOne({
         $or: [{ googleID: profile.id }, { email: profile.emails[0].value }],
       });
 
+      //  If no user -> create a user in DB
       if (!user) {
         /* 
         Create a user
@@ -69,11 +71,13 @@ passport.use(
         if (newUser) done(null, newUser);
       }
 
+      //  If user but no googleID, then user.googleID = profile.id
       if (user && !user.googleID) {
         user.googleID = profile.id;
         await user.save();
       }
 
+      //  Return user data
       done(null, user);
     }
   )
