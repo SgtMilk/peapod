@@ -25,6 +25,12 @@ const auth = require("./controllers/auth");
 const pods = require("./controllers/pods");
 const activities = require("./controllers/activities");
 
+//authentication
+const passport = require("passport");
+const router = require("./routes/root");
+const config = require("./config/config");
+require("./config/passport-setup");
+require("express-async-errors");
 /**
  * PG DB connection
  */
@@ -41,9 +47,13 @@ const activities = require("./controllers/activities");
  * Middleware
  */
 
+const app = express();
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**
  * Controller functions
  */
+
+
