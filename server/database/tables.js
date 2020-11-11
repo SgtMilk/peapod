@@ -9,7 +9,7 @@ const tables = {
 
 //users: || user_uuid || email || firstname || lastname || google_id || facebook_id || riskLevel ||
 
-//pods: || pod_uuid || name || pod_creator_id || 
+//pods: || pod_uuid || name || pod_creator_id || created_date
 
 //pod_users: || pod_uuid || user_uuid || 
 
