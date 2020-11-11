@@ -12,6 +12,7 @@ require("express-async-errors");
 
 const auth = express.Router();
 const google = express.Router();
+const facebook = express.Router();
 
 // AUTHENTICATION
 auth.get("/login/success", loginSuccess);
@@ -31,5 +32,16 @@ google.get(
   })
 );
 
+//  FACEBOOK
+facebook.get("/", passport.authenticate("facebook"));
+facebook.get(
+  "/redirect",
+  passport.authenticate("facebook", {
+    successRedirect: "/auth/login/success",
+    failureRedirect: "/auth/login/failed",
+  })
+);
+
 auth.use("/google", google);
+auth.use("/facebook", facebook);
 module.exports = auth;
