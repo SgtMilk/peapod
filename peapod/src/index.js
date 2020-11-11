@@ -6,13 +6,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import { createStore } from "redux";
 import reportWebVitals from './reportWebVitals';
 
 //ACTIONS
-
 const setUser = (username) => {
   return {
     type: "SETUSER",
@@ -34,6 +32,14 @@ const setActivities = (activities) => {
   };
 };
 
+const setPodsAndActivities = (pods, activities) => {
+  return {
+    type: "SETPODSANDACTIVITIES",
+    pods: pods,
+    activities: activities,
+  };
+};
+
 //REDUCER
 const curuser = (state, action) => {
   if (action.type === "SETUSER")
@@ -44,10 +50,23 @@ const curuser = (state, action) => {
     };
   else if (action.type === "SETPODS")
     return {
-      username: action.username,
+      username: state.username,
+      pods: action.pods,
+      activities: state.activities,
+    };
+  else if (action.type === "SETACTIVITIES")
+    return {
+      username: state.username,
+      pods: state.pods,
+      activities: action.activities,
+    };
+  else if (action.type === 'SETPODSANDACTIVITIES'){
+    return {
+      username: state.username,
       pods: action.pods,
       activities: action.activities,
     };
+  }
   else {
       return {
         username: action.username,
@@ -60,7 +79,7 @@ const curuser = (state, action) => {
 let store = createStore(curuser);
 
 //DISPATCH
-export default { store, setUser, setPods, setActivities };
+export default { store, setUser, setPods, setActivities, setPodsAndActivities };
 
 ReactDOM.render(
   <React.StrictMode>

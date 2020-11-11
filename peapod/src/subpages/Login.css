@@ -47,6 +47,18 @@
   transition: 0.5s;
 }
 
+.wrapper2-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #225311;
+  height: 25vh;
+  width: 40vw;
+  border-radius: 5vh;
+  transition: 0.5s;
+  opacity: 0;
+}
+
 .button-login {
   all: unset;
   display: flex;

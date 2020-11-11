@@ -6,7 +6,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
 
-.pod {
+.activity {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,22 +17,14 @@
   margin: 1vh;
 }
 
-.groupname-pod {
+.name-activity {
   color: #e2e97e;
   font-family: "Montserrat", sans-serif;
   font-size: 2vh;
 }
 
-.percentage-pod {
-  position: absolute;
+.date-activity {
   color: #e2e97e;
   font-family: "Montserrat", sans-serif;
-  font-size: 1.5vh;
-}
-
-.wrapper-progress-pod {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-right: 2vw;
+  font-size: 2vh;
 }

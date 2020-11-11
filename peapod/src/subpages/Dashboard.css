@@ -14,13 +14,53 @@
 .titlebar-dashboard {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100vw;
   height: 8vh;
   background-color: #225311;
   color: #e2e97e;
   font-family: "Montserrat", sans-serif;
   font-size: 6vh;
+}
+
+.title-titlebar-dashboard {
+}
+
+.dummy-titlebar {
+  height: 5vh;
+  width: 12vw;
+  margin: 1vh;
+}
+
+.button-titlebar-dashboard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 5vh;
+  width: 12vw;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
+  margin: 1vh;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.button-titlebar-dashboard:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
 }
 
 .body-dashboard {
@@ -47,7 +87,7 @@
 #wrapper2-dashboard {
   display: grid;
   grid-gap: 0 2vw;
-  grid-template-columns: auto auto;
+  grid-template-columns: 42vw 42vw;
   grid-template-rows: auto 30vh auto 30vh;
   background-color: #225311;
   height: 80vh;
@@ -76,6 +116,16 @@
     radial-gradient(black 20%, transparent 20%);
   background-position: 0 0, 0.8vh 0.8vh;
   background-size: 1vh 1vh;
+}
+
+.special-grid-item-dashboard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5vh;
+  border: 0.3vh solid #225311;
+  transition: 0.5s;
 }
 
 .MuiCircularProgress-colorPrimary {
@@ -109,6 +159,7 @@
 #a2-grid-dashboard {
   grid-row: 2/3;
   grid-column: 1/2;
+  transition: 0.3s;
 }
 
 #a3-grid-dashboard {
@@ -125,6 +176,8 @@
 #a4-grid-dashboard {
   grid-row: 2;
   grid-column: 2;
+  overflow: hidden;
+  margin: 0vh;
 }
 
 #a5-grid-dashboard {
@@ -157,4 +210,12 @@
 #a8-grid-dashboard {
   grid-row: 4;
   grid-column: 2;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+  text-align: center;
+  line-height: 3vh;
+  padding: 2vh;
 }
