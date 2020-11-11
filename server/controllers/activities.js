@@ -8,24 +8,28 @@
 /**
  * Imports
  */
-
-
-
-
-/**
- * Server and DB connection
- */
-
-
-
-
-/**
- * Middleware
- */
-
-
-
+const pool = require("../config/pg-config");
+const { v4: uuidv4 } = require("uuid");
+const tables = require("../database/tables");
+require("express-async-errors");
 
 /**
  * Controller functions
  */
+const postActivity = async (req, res, next) => {
+
+}
+
+const getActivity = async (req, res, next) => {
+
+}
+
+const getActivities = async (req, res, next) => {
+
+}
+
+const deleteActivity = async (req, res, next) => {
+
+}
+
+module.exports = { postActivity, getActivity, getActivities, deleteActivity };
