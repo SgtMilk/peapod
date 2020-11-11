@@ -2,7 +2,7 @@ import React from 'react'
 import './Pods.css'
 import { useHistory } from "react-router-dom";
 import redux from "../index";
-import {Pod} from './components/Pod'
+import {Pods2} from './components/Pods2'
 
 export const Pods = () => {
     let history = useHistory();
@@ -52,7 +52,7 @@ export const Pods = () => {
                             <button className = 'button-pods'>Add a Pod</button>
                             <ul className="list-pods-pods">
                                 {redux.store.getState().pods.map((pod, index) => (
-                                    <Pod props={index} key={index} />
+                                    <Pods2 props={index} key={index} />
                                 ))}
                             </ul>
                         </div>

@@ -1,0 +1,51 @@
+/*
+ * Copyright (C) 2020 Alix Routhier-Lalonde, Adam Di Re, Ricky Liu
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.pods2 {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60vw;
+  height: 53;
+  background-color: #305c20;
+  border-radius: 1vh;
+  padding: 2vh;
+  margin: 1vh;
+  border: #225311 0.3vh solid;
+  transition: 0.3s;
+}
+
+.pods2:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}
+
+.groupname-pods2 {
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+}
+
+.percentage-pods2 {
+  position: absolute;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5vh;
+}
+
+.wrapper-progress-pods2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 2vw;
+}

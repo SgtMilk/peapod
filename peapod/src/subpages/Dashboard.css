@@ -27,9 +27,25 @@
 }
 
 .dummy-titlebar {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   height: 5vh;
   width: 12vw;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
   margin: 1vh;
+  transition: 0.5s;
+  opacity: 0;
 }
 
 .button-titlebar-dashboard {
@@ -97,6 +113,7 @@
   overflow: hidden;
   padding: 2vw;
   opacity: 0;
+  overflow: hidden;
 }
 
 .grid-item-dashboard {
