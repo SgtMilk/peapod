@@ -22,14 +22,6 @@ export const Login = () => {
         document.getElementById('screen2-login').style.zIndex = 'inherit';
     }
 
-    const goSignUp = () => {
-        document.getElementById('wrapper-button-login').style.height = '50vh';
-        document.getElementById('wrapper-button-login').style.width = '50vw';
-        document.getElementById('screen1-login').style.opacity = 0;
-        document.getElementById('screen1-login').style.zIndex = -1;
-        document.getElementById('screen3-login').style.opacity = 1;
-        document.getElementById('screen3-login').style.zIndex = 'inherit';
-    }
 
     const goBack = () => {
         document.getElementById('wrapper-button-login').style.height = '25vh';
@@ -38,8 +30,6 @@ export const Login = () => {
         document.getElementById('screen1-login').style.zIndex = 'inherit';
         document.getElementById('screen2-login').style.opacity = 0;
         document.getElementById('screen2-login').style.zIndex = -1;
-        document.getElementById('screen3-login').style.opacity = 0;
-        document.getElementById('screen3-login').style.zIndex = -1;
     }
 
     const handleGoogle = async () => {
@@ -49,7 +39,6 @@ export const Login = () => {
         document.getElementById('wrapper2-login').style.height = '80vh';
         document.getElementById('wrapper2-login').style.width = '90vw';
         document.getElementById('screen2-login').style.opacity = 0;
-        document.getElementById('screen3-login').style.opacity = 0;
         redux.store.dispatch(redux.setUser('beep'));
         setTimeout(function() {
             history.push("/");
@@ -63,7 +52,6 @@ export const Login = () => {
         document.getElementById('wrapper2-login').style.height = '80vh';
         document.getElementById('wrapper2-login').style.width = '90vw';
         document.getElementById('screen2-login').style.opacity = 0;
-        document.getElementById('screen3-login').style.opacity = 0;
         redux.store.dispatch(redux.setUser('beep'));
         setTimeout(function() {
             history.push("/");
@@ -73,7 +61,7 @@ export const Login = () => {
     const initialSetupLogin = () => {
         setTimeout(function() {
             document.getElementById('wrapper2-login').style.opacity = 1;
-        }, 100)
+        }, 100) 
         
     }
 
@@ -82,24 +70,16 @@ export const Login = () => {
             <div className = 'titlebar-login'>
                 <p>Peapod</p>
             </div>
-            <div className = 'body-login'>
+             <div className = 'body-login'>
                 <div className = 'wrapper-button-login' id = 'wrapper-button-login'>
                     <div className = 'wrapper2-login' id = 'wrapper2-login'>
                         <div className = 'screen1-login' id = 'screen1-login'>
                             <button className = 'button-login' onClick = {goSignIn}>Sign In</button>
-                            <button className = 'button-login' onClick = {goSignUp}>Sign Up</button>
                         </div>
                         <div className = 'screen2-login' id = 'screen2-login'>
-                            <button className = 'button-login' onClick = {handleGoogle}>Sign In With Google</button>
+                        <button className = 'button-login' onClick = {handleGoogle}>Sign In With Google</button>
                             <button className = 'button-login' onClick = {handleFacebook}>Sign In With Facebook</button>
                             <button className = 'button-login' onClick = {goBack}>Back</button>
-                        </div>
-                        <div className = 'screen3-login' id = 'screen3-login'>
-                            <button className = 'button-login' onClick = {handleGoogle}>Sign In With Google</button>
-                            <button className = 'button-login' onClick = {handleFacebook}>Sign In With Facebook</button>
-                            <button className = 'button-login' onClick = {goBack}>Back</button>
-                            <p className = 'disclaimer-login'>Disclaimer: </p>
-                            <p className = 'disclaimer-login'>This web-app should only be used to schedule essential meeting between individuals. Do not use it to bypass federal regulations on COVID-19. Do not take any unnecessary risks. By using our web-app, you understand that the creators are removing themselves from all liability from the usage of this web-app.</p>
                         </div>
                     </div>
                 </div>    

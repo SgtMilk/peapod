@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 
 export const Dashboard = () => {
     let percentage = 70;
-    const testDataPod = [{groupname: 'beep boop' , names:['beep', 'boop', 'bweep', 'gg', 'aaaa', 'ddd', 'hhh'], maxValue:70}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 20} ];
+    const testDataPod = [{groupname: 'beep boop' , names:['beep', 'boop', 'bweep', 'gg', 'aaaa', 'ddd', 'hhh'], maxValue:70}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 20}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 50} ];
     const testDataActivity = [{name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}]
 
     let history = useHistory();
@@ -45,6 +45,26 @@ export const Dashboard = () => {
         },500)
     }
 
+    const goPods = () => {
+        redux.store.dispatch(redux.setPods(testDataPod));
+        document.getElementById('wrapper2-dashboard').style.opacity = 0;
+        document.getElementById('button-titlebar-dashboard').style.opacity = 0;
+        document.getElementById('a2-grid-dashboard').style.opacity = 0;
+        setTimeout(function() {
+            history.push("/pods");
+        },500)
+    }
+
+    const goActivities = () => {
+        redux.store.dispatch(redux.setPods(testDataPod));
+        document.getElementById('wrapper2-dashboard').style.opacity = 0;
+        document.getElementById('button-titlebar-dashboard').style.opacity = 0;
+        document.getElementById('a2-grid-dashboard').style.opacity = 0;
+        setTimeout(function() {
+            history.push("/activities");
+        },500)
+    }
+
     return (
         <div className = 'dashboard' onLoad = {initialSetupDashboard()}>
             <div className = 'titlebar-dashboard'>
@@ -52,8 +72,6 @@ export const Dashboard = () => {
                 <p className = 'title-titlebar-dashboard'>Peapod</p>
                 <button onClick = {goLogout} className = 'button-titlebar-dashboard' id = 'button-titlebar-dashboard'>Logout</button>
             </div>
-            <script>{console.log(redux.store.getState().pods)}</script>
-            <script>{console.log(redux.store.getState().activities)}</script>
             <div className = 'body-dashboard'>
                     <div className = 'wrapper-button-dashboard' id = 'wrapper-button-dashboard' >
                         <div id = 'wrapper2-dashboard'>
@@ -63,7 +81,7 @@ export const Dashboard = () => {
                                 <p className = 'percentage-dashboard'>{`${percentage}%`}</p>
                             </div>
                             <p id = 'a3-grid-dashboard'>Pods</p>
-                            <button className="grid-item-dashboard" id = 'a4-grid-dashboard'>
+                            <button className="grid-item-dashboard" id = 'a4-grid-dashboard' onClick = {goPods}>
                                 <ul className="list-pods-dashboard">
                                     {redux.store.getState().pods.map((pod, index) => (
                                         <Pod props={index} key={index} />
@@ -71,7 +89,7 @@ export const Dashboard = () => {
                                 </ul>
                             </button>
                             <p id = 'a5-grid-dashboard'>Your Activities</p>
-                            <button className="grid-item-dashboard" id = 'a6-grid-dashboard'>
+                            <button className="grid-item-dashboard" id = 'a6-grid-dashboard' onClick = {goActivities}>
                                 <ul className="list-pods-dashboard">
                                     {redux.store.getState().activities.map((activity, index) => (
                                         <Activity props={index} key={index} />

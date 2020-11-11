@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css';
 import { Login } from "./subpages/Login";
 import {Dashboard} from "./subpages/Dashboard"
+import {Pods} from "./subpages/Pods"
+import {Activities} from "./subpages/Activities"
 import {NotFoundPage} from "./subpages/NotFoundPage"
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
       <Switch>
         <Route path="/" exact component={Dashboard} />
         <Route path="/login" exact component={Login} />
+        <Route path="/pods" exact component={Pods} />
+        <Route path="/activities" exact component={Activities} />
         <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

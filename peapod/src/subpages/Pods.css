@@ -1,0 +1,144 @@
+/*
+ * Copyright (C) 2020 Alix Routhier-Lalonde, Adam Di Re, Ricky Liu
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.pods {
+  height: 100vh;
+  width: 100vw;
+}
+
+.titlebar-pods {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 8vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 6vh;
+}
+
+.title-titlebar-pods {
+}
+
+.dummy-titlebar {
+  height: 5vh;
+  width: 12vw;
+  margin: 1vh;
+}
+
+.button-titlebar-pods {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 5vh;
+  width: 12vw;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
+  margin: 1vh;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.button-titlebar-pods:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}
+
+.body-pods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92vh;
+  width: 100vw;
+  background-color: rgb(211, 211, 211);
+  background-image: radial-gradient(#225311 20%, transparent 20%),
+    radial-gradient(#78a567 20%, transparent 20%);
+  background-position: 0 0, 7.5vh 7.5vh;
+  background-size: 15vh 15vh;
+}
+
+.wrapper-button-pods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #225311;
+  height: 80vh;
+  width: 90vw;
+  border-radius: 5vh;
+  transition: 0.5s;
+}
+
+#wrapper2-pods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  grid-gap: 0 2vw;
+  grid-template-columns: 42vw 42vw;
+  grid-template-rows: auto 30vh auto 30vh;
+  background-color: #225311;
+  height: 80vh;
+  width: 90vw;
+  border-radius: 5vh;
+  transition: 0.5s;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.list-pods-pods {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 72vh;
+  width: 90vw;
+  overflow: auto;
+}
+
+.button-pods {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 8vh;
+  width: 12vw;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
+  margin: 5vh;
+}
+
+.button-pods:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}
