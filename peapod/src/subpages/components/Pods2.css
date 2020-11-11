@@ -9,16 +9,19 @@
 .pods2 {
   all: unset;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 60vw;
-  height: 53;
+  height: 6vh;
   background-color: #305c20;
   border-radius: 1vh;
-  padding: 2vh;
   margin: 1vh;
   border: #225311 0.3vh solid;
   transition: 0.3s;
+}
+
+.expanded {
+  height: 20vh;
 }
 
 .pods2:hover {
@@ -34,6 +37,7 @@
   color: #e2e97e;
   font-family: "Montserrat", sans-serif;
   font-size: 2vh;
+  padding: 1.75vh;
 }
 
 .percentage-pods2 {
@@ -47,5 +51,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-right: 2vw;
+  padding-right: 2.5vw;
+  padding-top: 3vh;
 }
