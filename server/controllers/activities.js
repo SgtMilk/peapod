@@ -28,6 +28,7 @@ const postActivity = async (req, res, next) => {
         const newActivityQuery = (await connection).query(
             `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid};`
         );
+        /* UPDATE USER'S RISK LEVEL */
         (await connection).release();
         const newActivity = newActivityQuery.rows[0];
         if (newActivity) {
