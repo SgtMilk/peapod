@@ -50,7 +50,7 @@ const postActivity = async (req, res, next) => {
 }
 
 const getActivity = async (req, res, next) => {
-    const uuid = req.body.activity_id
+    const uuid = req.params.id;
     const connection = pool.connect();
     
     try {
@@ -113,7 +113,7 @@ const getActivities = async (req, res, next) => {
 }
 
 const deleteActivity = async (req, res, next) => {
-    const uuid = req.body.activity_id
+    const uuid = req.params.id;
     const connection = pool.connect();
     
     try {
