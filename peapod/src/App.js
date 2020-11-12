@@ -11,6 +11,8 @@ import {Dashboard} from "./subpages/Dashboard"
 import {Pods} from "./subpages/Pods"
 import {Activities} from "./subpages/Activities"
 import {NotFoundPage} from "./subpages/NotFoundPage"
+import {AddPod} from './subpages/AddPod'
+import {AddActivity} from './subpages/AddActivity'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/pods" exact component={Pods} />
         <Route path="/activities" exact component={Activities} />
+        <Route path="/addpod" exact component={AddPod} />
+        <Route path="/addactivity" exact component={AddActivity} />
         <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

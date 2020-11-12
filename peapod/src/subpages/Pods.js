@@ -29,12 +29,20 @@ export const Pods = () => {
     }
 
     const goBack = () => {
-        redux.store.dispatch(redux.setUser(undefined));
         document.getElementById('wrapper2-pods').style.opacity = 0;
         document.getElementById('button-titlebar-pods').style.opacity = 0;
         document.getElementById('button-back-titlebar-pods').style.opacity = 0;
         setTimeout(function() {
             history.push("/");
+        },500)
+    }
+
+    const goAddPod = () => {
+        document.getElementById('wrapper2-pods').style.opacity = 0;
+        document.getElementById('button-titlebar-pods').style.opacity = 0;
+        document.getElementById('button-back-titlebar-pods').style.opacity = 0;
+        setTimeout(function() {
+            history.push("/addpod");
         },500)
     }
 
@@ -49,7 +57,7 @@ export const Pods = () => {
             <div className = 'body-pods'>
                     <div className = 'wrapper-button-pods' id = 'wrapper-button-pods' >
                         <div id = 'wrapper2-pods'>
-                            <button className = 'button-pods'>Add a Pod</button>
+                            <button className = 'button-pods' onClick = {goAddPod}>Add a Pod</button>
                             <ul className="list-pods-pods">
                                 {redux.store.getState().pods.map((pod, index) => (
                                     <Pods2 props={index} key={index} />

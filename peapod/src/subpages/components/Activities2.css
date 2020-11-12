@@ -6,7 +6,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
 
-.pods2 {
+.activities2 {
   all: unset;
   display: flex;
   align-items: flex-start;
@@ -21,7 +21,7 @@
   transition: 0.3s;
 }
 
-.titlebar-wrapper-pods2 {
+.titlebar-wrapper-activities2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,7 +35,7 @@
   height: auto;
 }
 
-.pods2:hover {
+.activities2:hover {
   background-color: #17380c;
   border: rgb(0, 0, 0) 0.3vh solid;
   background-image: radial-gradient(black 20%, transparent 20%),
@@ -44,29 +44,36 @@
   background-size: 1vh 1vh;
 }
 
-.groupname-pods2 {
+.groupname-activities2 {
   color: #e2e97e;
   font-family: "Montserrat", sans-serif;
   font-size: 2vh;
   padding: 1.75vh;
 }
 
-.percentage-pods2 {
+.date-activities2 {
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+  padding: 1.75vh;
+}
+
+.percentage-activities2 {
   position: absolute;
   color: #e2e97e;
   font-family: "Montserrat", sans-serif;
   font-size: 1.5vh;
 }
 
-.wrapper-progress-pods2 {
+.wrapper-progress-activities2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-right: 2.5vw;
   position: relative;
+  margin: 6vh;
 }
 
-.other-stuff-pods2 {
+.other-stuff-activities2 {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -82,7 +89,7 @@
   z-index: inherit;
 }
 
-.name-pods2 {
+.name-activities2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -94,14 +101,14 @@
   font-size: 1.5vh;
 }
 
-.list-pods-pods2 {
+.list-pods-activities2 {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-.button-pods2 {
+.button-activities2 {
   all: unset;
   display: flex;
   align-items: center;
@@ -118,10 +125,10 @@
   font-size: 2vh;
   transition: 0.3s;
   border: #225311 0.3vh solid;
-  margin: 1vh;
+  margin: 3vh;
 }
 
-.button-pods2:hover {
+.button-activities2:hover {
   background-color: #17380c;
   border: rgb(0, 0, 0) 0.3vh solid;
   background-image: radial-gradient(black 20%, transparent 20%),

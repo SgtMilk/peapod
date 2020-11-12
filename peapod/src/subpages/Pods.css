@@ -112,6 +112,12 @@
   height: 72vh;
   width: 90vw;
   overflow: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.list-pods-pods::-webkit-scrollbar {
+  width: 0 !important;
 }
 
 .button-pods {

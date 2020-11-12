@@ -64,3 +64,22 @@
   background-position: 0 0, 0.8vh 0.8vh;
   background-size: 1vh 1vh;
 }
+
+
+<ul className="list-activities-activities2">
+          {redux.store.getState().activities[index.props].names.map((name, index2) => (
+            <div className = 'name-activities2'>
+              <p>{name}</p>
+              <div className="wrapper-progress-activities2">
+                <CircularProgress
+                  variant="static"
+                  value={redux.store.getState().activities[index.props].maxValue}
+                  size={"5vh"}
+                />
+                <p className="percentage-activities2">{`${
+                  redux.store.getState().activities[index.props].maxValue
+                }%`}</p>
+              </div>
+            </div>
+          ))}
+        </ul>

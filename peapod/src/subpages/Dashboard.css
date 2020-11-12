@@ -231,8 +231,39 @@
   justify-content: space-around;
   color: #e2e97e;
   font-family: "Montserrat", sans-serif;
-  font-size: 2vh;
+  font-size: 1.5vh;
   text-align: center;
-  line-height: 3vh;
+  line-height: 2vh;
   padding: 2vh;
+}
+
+#other-buttons-dashboard {
+  opacity: 1;
+  border: #1b420d 0.3vh solid;
+  width: 19vw;
+}
+
+.disclaimer-dashboard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5vh;
+  background-color: #225311;
+  border: #225311 0.3vh solid;
+  border-radius: 3vh;
+  padding: 2vh;
+  transition: 0.3s;
+}
+
+.disclaimer-dashboard:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
 }

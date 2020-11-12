@@ -2,7 +2,7 @@ import React from 'react'
 import './Activities.css';
 import { useHistory } from "react-router-dom";
 import redux from "../index";
-import {Activity} from './components/Activity'
+import {Activities2} from './components/Activities2'
 
 
 export const Activities = () => {
@@ -30,12 +30,20 @@ export const Activities = () => {
     }
 
     const goBack = () => {
-        redux.store.dispatch(redux.setUser(undefined));
         document.getElementById('wrapper2-activities').style.opacity = 0;
         document.getElementById('button-titlebar-activities').style.opacity = 0;
         document.getElementById('button-back-titlebar-activities').style.opacity = 0;
         setTimeout(function() {
             history.push("/");
+        },500)
+    }
+
+    const goAddActivity = () => {
+        document.getElementById('wrapper2-activities').style.opacity = 0;
+        document.getElementById('button-titlebar-activities').style.opacity = 0;
+        document.getElementById('button-back-titlebar-activities').style.opacity = 0;
+        setTimeout(function() {
+            history.push("/addactivity");
         },500)
     }
 
@@ -50,10 +58,10 @@ export const Activities = () => {
             <div className = 'body-activities'>
                     <div className = 'wrapper-button-activities' id = 'wrapper-button-activities' >
                         <div id = 'wrapper2-activities'>
-                            <button className = 'button-activities'>Add an Activity</button>
+                            <button className = 'button-activities' onClick = {goAddActivity}>Add an Activity</button>
                             <ul className="list-activities-activities">
                                 {redux.store.getState().activities.map((activity, index) => (
-                                    <Activity props={index} key={index} />
+                                    <Activities2 props={index} key={index} />
                                 ))}
                             </ul>
                         </div>

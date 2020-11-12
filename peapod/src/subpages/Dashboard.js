@@ -13,6 +13,7 @@ import {Activity} from './components/Activity';
 import { useHistory } from "react-router-dom";
 
 export const Dashboard = () => {
+    let numberOfNotifications = 2;
     let percentage = 70;
     const testDataPod = [{groupname: 'beep boop' , names:['beep', 'boop', 'bweep', 'gg', 'aaaa', 'ddd', 'hhh'], maxValue:70}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 20}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 50} ];
     const testDataActivity = [{name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}]
@@ -96,11 +97,18 @@ export const Dashboard = () => {
                                     ))}
                                 </ul>
                             </button>
-                            <p id = 'a7-grid-dashboard'>Disclaimer</p>
-                            <button className="grid-item-dashboard" id = 'a8-grid-dashboard' onClick = {goDisclaimer}>
-                                <p className = 'disclaimer-dashboard'>This web-app should only be used to schedule essential meeting between individuals. Do not use it to bypass federal regulations on COVID-19. Do not take any unnecessary risks. By using our web-app, you understand that the creators are removing themselves from all liability from the usage of this web-app.</p>
-                                <p>Copyright © 2020 Alix Routhier-Lalonde, Ricky Liu, Adam Di Re</p>
-                            </button>
+                            <p id = 'a7-grid-dashboard'>Others</p>
+                            <div className="special-grid-item-dashboard" id = 'a8-grid-dashboard' >
+                                <div id = 'a7-grid-dashboard'>
+                                    <button className = 'button-titlebar-dashboard' id = 'other-buttons-dashboard'>{`Notifications (${numberOfNotifications})`}</button>
+                                    <button className = 'button-titlebar-dashboard' id = 'other-buttons-dashboard'>I have Covid</button>
+                                </div>
+                                <button onClick = {goDisclaimer} className = 'disclaimer-dashboard'>
+                                    <p>Disclaimer</p>
+                                    <p>This web-app should only be used to schedule essential meeting between individuals. Do not use it to bypass federal regulations on COVID-19. Do not take any unnecessary risks. By using our web-app, you understand that the creators are removing themselves from all liability from the usage of this web-app.</p>
+                                    <p>Copyright © 2020 Alix Routhier-Lalonde, Ricky Liu, Adam Di Re</p>
+                                </button>
+                            </div>
                         </div>
                     </div>
             </div>
