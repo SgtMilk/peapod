@@ -52,11 +52,12 @@ const postActivity = async (req, res, next) => {
 
 const getActivity = async (req, res, next) => {
     const uuid = req.params.id;
+    const userId = req.user.user_uuid;
     const connection = pool.connect();
 
     try {
         const getActivityQuery = (await connection).query(
-            `SELECT * FROM ${tables.activities} WHERE activity_id = ${uuid};`
+            `SELECT * FROM ${tables.activities} WHERE activity_id = ${uuid} AND user_uuid = ${userId};`
         );
         (await connection).release();
         const getActivity = getActivityQuery.rows[0];
@@ -115,14 +116,15 @@ const getActivities = async (req, res, next) => {
 
 const deleteActivity = async (req, res, next) => {
     const uuid = req.params.id;
+    const userId = req.user.user_uuid;
     const connection = pool.connect();
 
     try {
         const getActivityQuery = (await connection).query(
-            `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid};`
+            `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid} AND user_uuid = ${userId};`
         )
         const deleteActivityQuery = (await connection).query(
-            `DELETE FROM ${tables.activities} WHERE activity_id = ${uuid};`
+            `DELETE FROM ${tables.activities} WHERE activity_id = ${uuid} AND user_uuid = ${userId};`
         );
         (await connection).release();
         const getActivity = getActivityQuery.rows[0];
