@@ -21,16 +21,16 @@ const tables = require("../database/tables");
 const { v4: uuidv4 } = require("uuid");
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.user_uuid);
 });
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (user_uuid, done) => {
   /* 
     Find in db and return
     */
   const connection = await pool.connect();
   const userQuery = await connection.query(
-    `SELECT * FROM ${tables.users} WHERE user_uuid='${id}'`
+    `SELECT * FROM ${tables.users} WHERE user_uuid='${user_uuid}'`
   );
   const user = userQuery.rows[0];
   connection.release();
@@ -60,24 +60,22 @@ passport.use(
         Create a user
         */
         const uuid = uuidv4();
-        const newUserQuery = await connection.query(
-          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, google_id, riskLevel) VALUES('${uuid}', '${profile.email}', '${profile.firstname}', '${profile.lastname}', '${profile.id}', '${profile.riskLevel}');`
+        const createUserQuery = await connection.query(
+          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, google_id, riskLevel) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${profile.riskLevel}');`
         );
+        const newUserQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid=$1`, [uuid]);
         const newUser = newUserQuery.rows[0];
         connection.release();
-        if (!newUser) {
-          done(new Error("Cannot create a new user!"));
-        } else {
-          done(null, newUser);
-        }
-      } else if (user && !user.googleID) {
+        done(null, newUser);
+      } else if (user && !user.google_id) {
         /*
         Update user's google id
         */
         const updatedUserQuery = await connection.query(
           `UPDATE ${tables.users} SET google_id='${profile.id}' WHERE email='${profile.emails[0].value}';`
         );
-        const updatedUser = updatedUserQuery.rows[0];
+        const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE google_id=$1`, [profile.id]);
+        const updatedUser = userQuery.rows[0];
         connection.release();
         done(null, updatedUser);
       } else {
@@ -94,6 +92,7 @@ passport.use(
       clientID: config.Facebook.clientID,
       clientSecret: config.Facebook.secret,
       callbackURL: "/auth/facebook/redirect",
+      profileFields: ['id', 'emails', 'name'] //This
     },
     async (accessToken, refreshToken, profile, done) => {
       const connection = await pool.connect();
@@ -106,16 +105,13 @@ passport.use(
         Create a user
         */
         const uuid = uuidv4();
-        const newUserQuery = await connection.query(
-          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, facebook_id, riskLevel) VALUES('${uuid}', '${profile.email}', '${profile.firstname}', '${profile.lastname}', '${profile.id}', '${profile.riskLevel}');`
+        const createUserQuery = await connection.query(
+          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, facebook_id, riskLevel) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${profile.riskLevel}');`
         );
+        const newUserQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid=$1`, [uuid]);
         const newUser = newUserQuery.rows[0];
         connection.release();
-        if (!newUser) {
-          done(new Error("Cannot create a new user!"));
-        } else {
-          done(null, newUser);
-        }
+        done(null, newUser);
       } else if (user && !user.facebook_id) {
         /*
         Update user's google id
@@ -123,7 +119,8 @@ passport.use(
         const updatedUserQuery = await connection.query(
           `UPDATE ${tables.users} SET facebook_id='${profile.id}' WHERE email='${profile.emails[0].value}';`
         );
-        const updatedUser = updatedUserQuery.rows[0];
+        const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE facebook_id=$1`, [profile.id]);
+        const updatedUser = userQuery.rows[0];
         connection.release();
         done(null, updatedUser);
       } else {
