@@ -13,10 +13,8 @@ const tables = {
 
 //pod_users: || pod_uuid || user_uuid || 
 
-//activities: || activity_id || name || date || indoor || socialinteraction || proximity || peoplepresent ||
+//activities: || activity_id || user_uuid || name || date || indoor || socialinteraction || proximity || peoplepresent ||
 
-//user_activities: || user_uuid || activity_id ||
-
-//notifications: || notification_uuid || user_uuid || message || created_date || sender_id || accepted || pod_uuid ||
+//notifications: || notification_uuid || user_uuid || pod_uuid || sender_uuid || message || created_date || accepted || 
 
 module.exports = tables;

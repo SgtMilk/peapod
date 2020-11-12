@@ -33,7 +33,7 @@ google.get(
 );
 
 //  FACEBOOK
-facebook.get("/", passport.authenticate("facebook"));
+facebook.get("/", passport.authenticate("facebook", { scope: ["email"] }));
 facebook.get(
   "/redirect",
   passport.authenticate("facebook", {
