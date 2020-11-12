@@ -7,7 +7,7 @@ const tables = {
     notifications: 'notifications'
 }
 
-//users: || user_uuid || email || firstname || lastname || google_id || facebook_id || riskLevel ||
+//users: || user_uuid || email || firstname || lastname || google_id || facebook_id || riskLevel || hascovid
 
 //pods: || pod_uuid || name || pod_creator_id || created_date
 
