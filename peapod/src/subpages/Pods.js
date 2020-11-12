@@ -2,12 +2,16 @@ import React from 'react'
 import './Pods.css'
 import { useHistory } from "react-router-dom";
 import redux from "../index";
-import {Pods2} from './components/Pods2'
+import {Pods2} from './components/Pods2';
 
 export const Pods = () => {
     let history = useHistory();
 
+    const testDataPod = [{groupname: 'beep boop' , names:['beep', 'boop', 'bweep', 'gg', 'aaaa', 'ddd', 'hhh'], maxValue:70}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 20}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 50} ];
+
     const initialSetupPods = () => {
+        console.log('axios get here');
+        redux.store.dispatch(redux.setPods(testDataPod));
         setTimeout(function() {
             document.getElementById('wrapper2-pods').style.opacity = 1;
             document.getElementById('button-titlebar-pods').style.opacity = 1;

@@ -17,12 +17,15 @@ export const Dashboard = () => {
     let percentage = 70;
     const testDataPod = [{groupname: 'beep boop' , names:['beep', 'boop', 'bweep', 'gg', 'aaaa', 'ddd', 'hhh'], maxValue:70}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 20}, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 50} ];
     const testDataActivity = [{name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}]
+    const testDataNotification = [{groupname: 'beep boop'}, {groupname: 'beep boop'}, {groupname: 'beep boop'}]
 
     let history = useHistory();
 
     const initialSetupDashboard = () => {
-        redux.store.dispatch(redux.setPodsAndActivities(testDataPod, testDataActivity));
+        console.log('axios get here');
+        redux.store.dispatch(redux.setPodsActivitiesNotifications(testDataPod, testDataActivity, testDataNotification));
         setTimeout(function() {
+            document.getElementById('other-buttons-dashboard1').innerHTML = `Notifications (${redux.store.getState().notifications.length})`;
             document.getElementById('wrapper2-dashboard').style.opacity = 1;
             document.getElementById('button-titlebar-dashboard').style.opacity = 1;
         },100)       
@@ -47,7 +50,6 @@ export const Dashboard = () => {
     }
 
     const goPods = () => {
-        redux.store.dispatch(redux.setPods(testDataPod));
         document.getElementById('wrapper2-dashboard').style.opacity = 0;
         document.getElementById('button-titlebar-dashboard').style.opacity = 0;
         document.getElementById('a2-grid-dashboard').style.opacity = 0;
@@ -57,13 +59,25 @@ export const Dashboard = () => {
     }
 
     const goActivities = () => {
-        redux.store.dispatch(redux.setPods(testDataPod));
         document.getElementById('wrapper2-dashboard').style.opacity = 0;
         document.getElementById('button-titlebar-dashboard').style.opacity = 0;
         document.getElementById('a2-grid-dashboard').style.opacity = 0;
         setTimeout(function() {
             history.push("/activities");
         },500)
+    }
+
+    const goNotifications = () => {
+        document.getElementById('wrapper2-dashboard').style.opacity = 0;
+        document.getElementById('button-titlebar-dashboard').style.opacity = 0;
+        document.getElementById('a2-grid-dashboard').style.opacity = 0;
+        setTimeout(function() {
+            history.push("/notifications");
+        },500)
+    }
+
+    const gotCovid = () => {
+        console.log('axios post here');
     }
 
     return (
@@ -100,8 +114,8 @@ export const Dashboard = () => {
                             <p id = 'a7-grid-dashboard'>Others</p>
                             <div className="special-grid-item-dashboard" id = 'a8-grid-dashboard' >
                                 <div id = 'a7-grid-dashboard'>
-                                    <button className = 'button-titlebar-dashboard' id = 'other-buttons-dashboard'>{`Notifications (${numberOfNotifications})`}</button>
-                                    <button className = 'button-titlebar-dashboard' id = 'other-buttons-dashboard'>I have Covid</button>
+                                    <button className = 'button-titlebar-dashboard' id = 'other-buttons-dashboard1' onClick = {goNotifications}>{`Notifications (${numberOfNotifications})`}</button>
+                                    <button className = 'button-titlebar-dashboard' id = 'other-buttons-dashboard2' onClick = {gotCovid}>I have Covid</button>
                                 </div>
                                 <button onClick = {goDisclaimer} className = 'disclaimer-dashboard'>
                                     <p>Disclaimer</p>

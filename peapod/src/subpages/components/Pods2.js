@@ -7,9 +7,13 @@ export const Pods2 = (index) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const expand = (index) => {
-    console.log("beep");
     setIsExpanded(!isExpanded);
   };
+
+  const removePod = () => {
+    console.log('axios post here');
+  }
+
   const expandMe = isExpanded ? "pods2 expanded" : "pods2";
   const expandMe2 = isExpanded ? "other-stuff-pods2 expanded2" : "other-stuff-pods2";
   return (
@@ -32,7 +36,7 @@ export const Pods2 = (index) => {
       <div className = {expandMe2}>
         <ul className="list-pods-pods2">
           {redux.store.getState().pods[index.props].names.map((name, index2) => (
-            <div className = 'name-pods2'>
+            <div className = 'name-pods2' key={index2}>
               <p>{name}</p>
               <div className="wrapper-progress-pods2">
                 <CircularProgress
@@ -47,7 +51,7 @@ export const Pods2 = (index) => {
             </div>
           ))}
         </ul>
-        <button className = 'button-pods2'>Remove This Pod</button>
+        <button className = 'button-pods2' onClick = {removePod}>Remove This Pod</button>
       </div>
     </button>
   );

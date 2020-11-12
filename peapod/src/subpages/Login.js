@@ -34,6 +34,7 @@ export const Login = () => {
 
     const handleGoogle = async () => {
         //window.open(`${serverAddress}/auth/google`, "_self");
+        console.log('axios push here');
         document.getElementById('wrapper-button-login').style.height = '80vh';
         document.getElementById('wrapper-button-login').style.width = '90vw';
         document.getElementById('wrapper2-login').style.height = '80vh';
@@ -47,6 +48,7 @@ export const Login = () => {
 
     const handleFacebook = async () => {
         //window.open(`${serverAddress}/auth/facebook`, "_self");
+        console.log('axios push here');
         document.getElementById('wrapper-button-login').style.height = '80vh';
         document.getElementById('wrapper-button-login').style.width = '90vw';
         document.getElementById('wrapper2-login').style.height = '80vh';

@@ -7,9 +7,13 @@ export const Activities2 = (index) => {
     const [isExpanded, setIsExpanded] = React.useState(false);
 
   const expand = (index) => {
-    console.log("beep");
     setIsExpanded(!isExpanded);
   };
+
+  const removeActivity = () => {
+    console.log('axios post here');
+  }
+
   const expandMe = isExpanded ? "activities2 expanded" : "activities2";
   const expandMe2 = isExpanded ? "other-stuff-activities2 expanded2" : "other-stuff-activities2";
   return (
@@ -31,7 +35,7 @@ export const Activities2 = (index) => {
             redux.store.getState().activities[index.props].risk
           }%`}</p>
         </div>
-        <button className = 'button-activities2'>Remove This Activity</button>
+        <button className = 'button-activities2' onClick = {removeActivity}>Remove This Activity</button>
       </div>
     </button>
   );

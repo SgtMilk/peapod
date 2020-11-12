@@ -237,7 +237,8 @@
   padding: 2vh;
 }
 
-#other-buttons-dashboard {
+#other-buttons-dashboard1,
+#other-buttons-dashboard2 {
   opacity: 1;
   border: #1b420d 0.3vh solid;
   width: 19vw;

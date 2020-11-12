@@ -10,9 +10,10 @@ import { Login } from "./subpages/Login";
 import {Dashboard} from "./subpages/Dashboard"
 import {Pods} from "./subpages/Pods"
 import {Activities} from "./subpages/Activities"
-import {NotFoundPage} from "./subpages/NotFoundPage"
 import {AddPod} from './subpages/AddPod'
 import {AddActivity} from './subpages/AddActivity'
+import {Notifications} from './subpages/Notifications'
+import {NotFoundPage} from "./subpages/NotFoundPage"
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/activities" exact component={Activities} />
         <Route path="/addpod" exact component={AddPod} />
         <Route path="/addactivity" exact component={AddActivity} />
+        <Route path="/notifications" exact component={Notifications} />
         <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

@@ -1,0 +1,66 @@
+/*
+ * Copyright (C) 2020 Alix Routhier-Lalonde, Adam Di Re, Ricky Liu
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.notification {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50vw;
+  background-color: #305c20;
+  border-radius: 1vh;
+  padding: 2vh;
+  margin: 1vh;
+}
+
+.groupname-notification {
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+}
+
+.percentage-notification {
+  position: absolute;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5vh;
+}
+
+.wrapper-progress-notification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-notification {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 5vh;
+  width: 12vw;
+  margin-right: 0.5vw;
+  margin-left: 0.5vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
+  transition: 0.5s;
+}
+
+.button-notification:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}

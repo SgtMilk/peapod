@@ -41,11 +41,11 @@ export const AddPod = () => {
     }
 
     const onChange = (values) => {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 1; i < 10; i++) {
             document.getElementById(`email${i + 1}-addpod`).style.display = "flex";
         }
-        for (let i = 0; i < 10; i++) {
-            if (values.numberOfEmails < i + 1) {
+        for (let i = 1; i < 10; i++) {
+            if (values.numberOfMembers < i + 1) {
             document.getElementById(`email${i + 1}-addpod`).style.display = "none";
             }
         }
@@ -58,11 +58,15 @@ export const AddPod = () => {
         setTimeout(function() {
             history.push("/pods");
         },500);
+        return false;
+    }
+
+    const onSubmit = (values) =>{
+        console.log('axios post here');
     }
 
     return (
-        <div>
-            <div className = 'addpod' onLoad = {initialSetupAddPod()}>
+        <div className = 'addpod' onLoad = {initialSetupAddPod()}>
             <div className = 'titlebar-addpod'>
                 <button onClick = {goBack} className = 'button-titlebar-addpod' id = 'button-back-titlebar-addpod'>Back</button>
                 <p className = 'title-titlebar-addpod'>Peapod</p>
@@ -70,15 +74,15 @@ export const AddPod = () => {
             </div>
             <div className = 'body-addpod'>
                     <div className = 'wrapper-button-addpod' id = 'wrapper-button-addpod' >
-                        <form id = 'wrapper2-addpod' onChange={handleSubmit(onChange)}>
+                        <form id = 'wrapper2-addpod' onChange={handleSubmit(onChange)} onSubmit={handleSubmit(onSubmit)}>
                             <div className = 'input-wrapper-addpod'>
                                 <label>Group Name</label>
-                                <input ref={register} className = 'input-text-addpod' type = 'text' maxLength = '64' required/>
+                                <input name = 'name' ref={register} className = 'input-text-addpod' type = 'text' maxLength = '64' required/>
                             </div>
                             <div className = 'input-wrapper-addpod'>
                                 <label>Number of Pod Members</label>
-                                <select ref={register} className = 'input-text-addpod' required name = 'numberOfEmails'>
-                                    <option value="2" selected >2</option>
+                                <select ref={register} className = 'input-text-addpod' name = 'numberOfMembers' defaultValue = '2'>
+                                    <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
@@ -91,7 +95,6 @@ export const AddPod = () => {
                             </div>
                             <div className = 'input-wrapper-addpod'>
                                 <label>Emails</label>
-                                <input ref={register} type = 'text' className = 'input-text-addpod' maxLength = '64' minLength = '1' id = 'email1-addpod' name = 'email1'/>
                                 <input ref={register} type = 'text' className = 'input-text-addpod' maxLength = '64' minLength = '1' id = 'email2-addpod' name = 'email2'/>
                                 <input ref={register} type = 'text' className = 'input-text-addpod' maxLength = '64' minLength = '1' id = 'email3-addpod' name = 'email3'/>
                                 <input ref={register} type = 'text' className = 'input-text-addpod' maxLength = '64' minLength = '1' id = 'email4-addpod' name = 'email4'/>
@@ -103,13 +106,12 @@ export const AddPod = () => {
                                 <input ref={register} type = 'text' className = 'input-text-addpod' maxLength = '64' minLength = '1' id = 'email10-addpod' name = 'email10'/>
                             </div>
                             <div className = 'buttons-addpod'>
-                                <button className = 'button-addpod' onClick = {goCancel}>Cancel</button>
+                                <button type="button" className = 'button-addpod' onClick = {goCancel}>Cancel</button>
                                 <input className = 'button-addpod' value = 'Add Pod' type = 'submit'/>
                             </div>
                         </form>
                     </div>
             </div>
-        </div>
         </div>
     )
 }

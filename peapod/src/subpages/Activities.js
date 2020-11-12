@@ -8,7 +8,11 @@ import {Activities2} from './components/Activities2'
 export const Activities = () => {
     let history = useHistory();
 
+    const testDataActivity = [{name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}]
+
     const initialSetupActivities = () => {
+        console.log('axios get here');
+        redux.store.dispatch(redux.setActivities(testDataActivity));
         setTimeout(function() {
             document.getElementById('wrapper2-activities').style.opacity = 1;
             document.getElementById('button-titlebar-activities').style.opacity = 1;

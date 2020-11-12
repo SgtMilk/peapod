@@ -32,11 +32,19 @@ const setActivities = (activities) => {
   };
 };
 
-const setPodsAndActivities = (pods, activities) => {
+const setNotifications = (notifications) => {
   return {
-    type: "SETPODSANDACTIVITIES",
+    type: "SETNOTIFICATIONS",
+    notifications: notifications,
+  };
+};
+
+const setPodsActivitiesNotifications = (pods, activities, notifications) => {
+  return {
+    type: "SETPODSACTIVITIESNOTIFICATIONS",
     pods: pods,
     activities: activities,
+    notifications: notifications,
   };
 };
 
@@ -47,24 +55,35 @@ const curuser = (state, action) => {
       username: action.username,
       pods: [],
       activities: [],
+      notifications: [],
     };
   else if (action.type === "SETPODS")
     return {
       username: state.username,
       pods: action.pods,
       activities: state.activities,
+      notifications: state.notifications,
     };
   else if (action.type === "SETACTIVITIES")
     return {
       username: state.username,
       pods: state.pods,
       activities: action.activities,
+      notifications: state.notifications,
     };
-  else if (action.type === 'SETPODSANDACTIVITIES'){
+  else if (action.type === "SETNOTIFICATIONS")
+    return {
+      username: state.username,
+      pods: state.pods,
+      activities: state.activities,
+      notifications: action.notifications,
+    };
+  else if (action.type === 'SETPODSACTIVITIESNOTIFICATIONS'){
     return {
       username: state.username,
       pods: action.pods,
       activities: action.activities,
+      notifications: action.notifications,
     };
   }
   else {
@@ -72,6 +91,7 @@ const curuser = (state, action) => {
         username: action.username,
         pods: action.pods,
         activities: action.activities,
+        notifications: action.notifications,
       };
     }
 };
@@ -79,7 +99,7 @@ const curuser = (state, action) => {
 let store = createStore(curuser);
 
 //DISPATCH
-export default { store, setUser, setPods, setActivities, setPodsAndActivities };
+export default { store, setUser, setPods, setActivities, setNotifications, setPodsActivitiesNotifications };
 
 ReactDOM.render(
   <React.StrictMode>

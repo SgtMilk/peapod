@@ -54,6 +54,10 @@ export const AddActivity = () => {
         document.getElementById('slider-value').innerHTML = value;
     }
 
+    const onSubmit = (values) =>{
+        console.log('axios post here');
+    }
+
     return (
         <div>
             <div className = 'addactivity' onLoad = {initialSetupAddActivity()}>
@@ -64,24 +68,24 @@ export const AddActivity = () => {
             </div>
             <div className = 'body-addactivity'>
                     <div className = 'wrapper-button-addactivity' id = 'wrapper-button-addactivity' >
-                        <form id = 'wrapper2-addactivity' onChange = {updateSlider} >
+                        <form id = 'wrapper2-addactivity' onChange = {updateSlider} onSubmit={handleSubmit(onSubmit)}>
                             <div className = 'input-wrapper-addactivity'>
                                 <label>Activity Name</label>
-                                <input ref={register} className = 'input-text-addactivity' type = 'text' maxLength = '64' required/>
+                                <input name = 'name' ref={register} className = 'input-text-addactivity' type = 'text' maxLength = '64' required/>
                             </div>
                             <div className = 'input-wrapper-addactivity'>
                                 <label>Date</label>
-                                <input ref={register} className = 'input-text-addactivity' type = 'date' maxLength = '64' required/>
+                                <input name = 'date' ref={register} className = 'input-text-addactivity' type = 'date' min='2020-01-01' max='2100-01-01' required/>
                             </div>
                             <div className = 'input-wrapper-addactivity'>
                                 <label>Will People Be Wearing Masks Generally?</label>
                                 <div className = 'big-wrapper-radio-addactivity'>
                                     <div className = 'wrapper-radio-addactivity'>
-                                        <input type = 'radio' value = 'yes' name = 'masks' className = 'radio'/>
+                                        <input type = 'radio' value = 'yes' name = 'masks' className = 'radio' ref={register}/>
                                         <label>Yes</label>
                                     </div>
                                     <div className = 'wrapper-radio-addactivity'>
-                                        <input type = 'radio' value = 'no' name = 'masks' className = 'radio'/>
+                                        <input type = 'radio' value = 'no' name = 'masks' className = 'radio' ref={register}/>
                                         <label>No</label>
                                     </div>
                                 </div>
@@ -90,11 +94,11 @@ export const AddActivity = () => {
                                 <label>Will You Be Talking To People Face-To-Face?</label>
                                 <div className = 'big-wrapper-radio-addactivity'>
                                     <div className = 'wrapper-radio-addactivity'>
-                                        <input type = 'radio' value = 'yes' name = 'face-to-face' className = 'radio'/>
+                                        <input type = 'radio' value = 'yes' name = 'face-to-face' className = 'radio' ref={register}/>
                                         <label>Yes</label>
                                     </div>
                                     <div className = 'wrapper-radio-addactivity'>
-                                        <input type = 'radio' value = 'no' name = 'face-to-face' className = 'radio'/>
+                                        <input type = 'radio' value = 'no' name = 'face-to-face' className = 'radio' ref={register}/>
                                         <label>No</label>
                                     </div>
                                 </div>
@@ -103,11 +107,11 @@ export const AddActivity = () => {
                                 <label>Indoor Or Outdoor?</label>
                                 <div className = 'big-wrapper-radio-addactivity'>
                                     <div className = 'wrapper-radio-addactivity'>
-                                        <input type = 'radio' value = 'indoor' name = 'indoor-outdoor' className = 'radio'/>
+                                        <input type = 'radio' value = 'indoor' name = 'indoor-outdoor' className = 'radio' ref={register}/>
                                         <label>Indoor</label>
                                     </div>
                                     <div className = 'wrapper-radio-addactivity'>
-                                        <input type = 'radio' value = 'outdoor' name = 'indoor-outdoor' className = 'radio'/>
+                                        <input type = 'radio' value = 'outdoor' name = 'indoor-outdoor' className = 'radio' ref={register}/>
                                         <label>Outdoor</label>
                                     </div>
                                 </div>
@@ -115,10 +119,10 @@ export const AddActivity = () => {
                             <div className = 'input-wrapper-addactivity'>
                                 <label>How Many People Will Be There Per 25 Meters Squared (269 Feet Squared) Approximately?</label>
                                 <p id = 'slider-value'>10</p>
-                                <input type="range" min="0" max="20" className="slider-addactivity" id="slider-addactivity" defaultValue = '10'/>
+                                <input name = 'numberOfPeople' type="range" min="0" max="20" className="slider-addactivity" id="slider-addactivity" defaultValue = '10' ref={register}/>
                             </div>
                             <div className = 'buttons-addactivity'>
-                                <button className = 'button-addactivity' onClick = {goCancel}>Cancel</button>
+                                <button type="button" className = 'button-addactivity' onClick = {goCancel}>Cancel</button>
                                 <input className = 'button-addactivity' value = 'Add activity' type = 'submit'/>
                             </div>
                         </form>
