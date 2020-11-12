@@ -24,12 +24,12 @@ const getNotification = async (req, res, next) => {
             `SELECT * FROM ${tables.notifications} WHERE notification_uuid = ${notificationId} AND user_uuid = ${userId};`
         );
         (await connection).release();
-        const getNotification = getNotificationQuery.rows[0];
-        if (getNotification) {
+        const notification = getNotificationQuery.rows[0];
+        if (notification) {
             return res.status(200).json({
                 success: true,
                 message: `Get notification successful.`,
-                getNotification
+                notification
             })
         } else {
             return res.status(404).json({

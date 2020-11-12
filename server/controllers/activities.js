@@ -60,17 +60,17 @@ const getActivity = async (req, res, next) => {
             `SELECT * FROM ${tables.activities} WHERE activity_id = ${uuid} AND user_uuid = ${userId};`
         );
         (await connection).release();
-        const getActivity = getActivityQuery.rows[0];
-        if (getActivity) {
+        const activity = getActivityQuery.rows[0];
+        if (activity) {
             return res.status(200).json({
                 success: true,
-                message: `Get ${getActivity.name} successful.`,
-                getActivity
+                message: `Get ${activity.name} successful.`,
+                activity
             })
         } else {
             return res.status(404).json({
                 success: false,
-                message: `Get ${getActivity.name} unsuccessful.`,
+                message: `Get ${activity.name} unsuccessful.`,
             })
         }
     } catch (err) {
