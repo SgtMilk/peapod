@@ -22,6 +22,15 @@ export const Dashboard = () => {
     let history = useHistory();
 
     const initialSetupDashboard = () => {
+        axios.get('/user?ID=12345')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
         console.log('axios get here');
         redux.store.dispatch(redux.setPodsActivitiesNotifications(testDataPod, testDataActivity, testDataNotification));
         setTimeout(function() {
