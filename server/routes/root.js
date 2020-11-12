@@ -10,9 +10,11 @@ const rootRouter = express.Router();
 const authRouter = require("./auth");
 const podsRouter = require("./pods");
 const activitiesRouter = require("./activities");
+const userRouter = require("./users");
 
 rootRouter.use("/pods", podsRouter);
 rootRouter.use("/auth", authRouter);
 rootRouter.use("/activities", activitiesRouter);
+rootRouter.use("/user", userRouter);
 
 module.exports = rootRouter;
