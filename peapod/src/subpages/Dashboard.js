@@ -147,7 +147,7 @@ export const Dashboard = () => {
         redux.store.dispatch(redux.setUser(userData));
     }
 
-    /*
+
     //  User Query
     const userOptions = {
         method: "get",
@@ -170,28 +170,30 @@ export const Dashboard = () => {
             }),
         { enabled: !redux.store.getState().username.user_uuid, retry: false }
     );
-    
+    */
+    /*
+//  Notifications Query
+const notificationsOptions = {
+method: "get",
+baseURL: serverAddress,
+url: "/api/notifications/",
+headers: {
+    "Access-Control-Allow-Credentials": true,
+    "Content-Type": "application/json",
+},
+withCredentials: true,
+};
 
-    //  Notifications Query
-    const notificationsOptions = {
-        method: "get",
-        baseURL: serverAddress,
-        url: "/api/notifications/",
-        headers: {
-            "Access-Control-Allow-Credentials": true,
-            "Content-Type": "application/json",
-        },
-        withCredentials: true,
-    };
-
-    const notificationsQuery = useQuery(
-        "notifications",
-        () =>
-            axios(notificationsQuery).then((response) => {
-                //  Set state in redux for notifications
-                redux.store.dispatch(redux.setNotifications(response.notifications));
-            }),
-    );
+const notificationsQuery = useQuery(
+"notifications",
+() =>
+    axios(notificationsQuery).then((response) => {
+        //  Set state in redux for notifications
+        console.log("queried")
+        redux.store.dispatch(redux.setNotifications(response.notifications));
+    }),
+);
+*/
 
     //  Activities Query
     const activitiesOptions = {
@@ -216,28 +218,29 @@ export const Dashboard = () => {
                 redux.store.dispatch(redux.setActivities(response.activities));
             }),
     );
+    /*
     //  Pods Query
     const podsOptions = {
-        method: "get",
-        baseURL: serverAddress,
-        url: "/api/pods/",
-        headers: {
-            "Access-Control-Allow-Credentials": true,
-            "Content-Type": "application/json",
-        },
-        params: {
-            limit: 3
-        },
-        withCredentials: true,
+    method: "get",
+    baseURL: serverAddress,
+    url: "/api/pods/",
+    headers: {
+        "Access-Control-Allow-Credentials": true,
+        "Content-Type": "application/json",
+    },
+    params: {
+        limit: 3
+    },
+    withCredentials: true,
     };
-
+    
     const podsQuery = useQuery(
-        "pods",
-        () =>
-            axios(podsOptions).then((response) => {
-                //  Set state in redux for pods
-                redux.store.dispatch(redux.setPods(response.pods));
-            }),
+    "pods",
+    () =>
+        axios(podsOptions).then((response) => {
+            //  Set state in redux for pods
+            redux.store.dispatch(redux.setPods(response.pods));
+        }),
     );
     */
     return (
