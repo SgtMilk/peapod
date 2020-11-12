@@ -5,12 +5,10 @@ const { authCheck } = require("../controllers/auth");
 
 /* POST an activity */
 activitiesRouter.post("/", authCheck, postActivity);
-/* GET an activity */
+/* GET an activity by uuid */
 activitiesRouter.get("/", authCheck, getActivity);
-/* GET all activities within the last month */
-activitiesRouter.get("/:param", authCheck, getActivities);
-/* GET three activities */
-activitiesRouter.get("/:param", authCheck, getActivities);
+/* GET all activities for a user or get 3 activities from the user, sorted by date created */
+activitiesRouter.get("/", authCheck, getActivities);
 /* DELETE an activity */
 activitiesRouter.delete("/", authCheck, deleteActivity);
 
