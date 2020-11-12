@@ -12,12 +12,22 @@ const { v4: uuidv4 } = require("uuid");
 const tables = require("../database/tables");
 require("express-async-errors");
 
+const getNotification = async (req, res, next) => {
+    //  VARIABLES
+    const { podID } = req.params.id;
+}
+
 const getNotifications = async (req, res, next) => {
 
 }
 
 const putNotification = async (req, res, next) => {
+    //  VARIABLES
+    const podID = req.params.id;
 
+    //  DB
+    const connection = await pool.connect();
+    //  LOGIC
 }
 
-module.exports = { getNotifications, putNotification };
+module.exports = { getNotifications, putNotification, getNotification };

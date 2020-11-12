@@ -6,9 +6,10 @@
 
 const express = require("express");
 const { authCheck } = require("../controllers/auth")
-const { getNotifications, putNotification } = require("../controllers/notifications")
+const { getNotifications, putNotification, getNotification } = require("../controllers/notifications")
 const notificationsRouter = express.Router();
 
+notificationsRouter.get("/:id", authCheck, getNotification);
 notificationsRouter.get("/", authCheck, getNotifications);
 notificationsRouter.put("/:id", authCheck, putNotification);
 
