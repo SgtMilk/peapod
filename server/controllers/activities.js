@@ -83,21 +83,21 @@ const getActivity = async (req, res, next) => {
 
 const getActivities = async (req, res, next) => {
     const userId = req.user.user_uuid;
-    console.log(userId)
+
     const { limit } = req.query;
-    const connection = pool.connect();
+    const connection = await pool.connect();
 
     try {
         const queryLimit = limit ? limit : 18446744073709551615;
-        console.log("entered")
 
+        /* PQ LIMIT isnt good */
         const getActivitiesQuery = await connection.query(
             `SELECT * FROM 
             activities
             WHERE user_uuid ='${userId}'
-            ORDER BY date;`
+            ORDER BY date
+            LIMIT 0, '${queryLimit}';`
         );
-        console.log(getActivitiesQuery)
         await connection.release();
         activities = getActivitiesQuery.rows[0];
         if (activities) {
@@ -114,7 +114,6 @@ const getActivities = async (req, res, next) => {
         }
 
     } catch (err) {
-        console.log(err)
         return res.status(400).json({
             success: false,
             message: `Bad request`
