@@ -38,10 +38,10 @@ export const Dashboard = () => {
         };
         axios(userOptions).then((response) => {
             //  Set state in redux for user
-            redux.store.dispatch(redux.setUser(response.user));
-            document.getElementById('circular-progress-dashboard').value = response.user.riskLevel;
-            document.getElementById('percentage-dashboard').innerHTML = `${response.user.riskLevel}%`;
-            
+            redux.store.dispatch(redux.setUser(response.data.user));
+            document.getElementById('circular-progress-dashboard').value = response.data.user.riskLevel;
+            document.getElementById('percentage-dashboard').innerHTML = `${response.data.user.riskLevel}%`;
+
             //  Get notifications
 
             //  Get pods
@@ -147,6 +147,7 @@ export const Dashboard = () => {
         redux.store.dispatch(redux.setUser(userData));
     }
 
+    /*
     //  User Query
     const userOptions = {
         method: "get",
@@ -169,7 +170,7 @@ export const Dashboard = () => {
             }),
         { enabled: !redux.store.getState().username.user_uuid, retry: false }
     );
-    */
+    
 
     //  Notifications Query
     const notificationsOptions = {
@@ -238,7 +239,7 @@ export const Dashboard = () => {
                 redux.store.dispatch(redux.setPods(response.pods));
             }),
     );
-
+    */
     return (
         <div className='dashboard' onLoad={initialSetupDashboard()}>
             <div className='titlebar-dashboard'>
@@ -251,8 +252,8 @@ export const Dashboard = () => {
                     <div id='wrapper2-dashboard'>
                         <p id='a1-grid-dashboard'>Exposure Meter</p>
                         <div className="special-grid-item-dashboard" id='a2-grid-dashboard'>
-                            <CircularProgress variant="static" value={0} size={'23vh'} id = 'circular-progress-dashboard'/>
-                            <p className='percentage-dashboard' id = 'percentage-dashboard'>{'0%'}</p>
+                            <CircularProgress variant="static" value={0} size={'23vh'} id='circular-progress-dashboard' />
+                            <p className='percentage-dashboard' id='percentage-dashboard'>{'0%'}</p>
                         </div>
                         <p id='a3-grid-dashboard'>Pods</p>
                         <button className="grid-item-dashboard" id='a4-grid-dashboard' onClick={goPods}></button>
