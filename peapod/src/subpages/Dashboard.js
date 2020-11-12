@@ -18,9 +18,9 @@ import axios from "axios"
 export const Dashboard = () => {
     //let numberOfNotifications = 2;
     //let percentage = 70;
-    //const testDataPod = [{ groupname: 'beep boop', names: ['beep', 'boop', 'bweep', 'gg', 'aaaa', 'ddd', 'hhh'], maxValue: 70 }, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 20 }, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 50 }];
-    //const testDataActivity = [{ name: 'beep', risk: 90, date: '11/11/1111' }, { name: 'beep', risk: 90, date: '11/11/1111' }, { name: 'beep', risk: 90, date: '11/11/1111' }]
-    //const testDataNotification = [{ groupname: 'beep boop' }, { groupname: 'beep boop' }, { groupname: 'beep boop' }]
+    const testDataPod = [{ groupname: 'beep boop', names: ['beep', 'boop', 'bweep', 'gg', 'aaaa', 'ddd', 'hhh'], maxValue: 70 }, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 20 }, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 50 }];
+    const testDataActivity = [{ name: 'beep', risk: 90, date: '11/11/1111' }, { name: 'beep', risk: 90, date: '11/11/1111' }, { name: 'beep', risk: 90, date: '11/11/1111' }]
+    const testDataNotification = [{ groupname: 'beep boop' }, { groupname: 'beep boop' }, { groupname: 'beep boop' }]
 
     let history = useHistory();
 
@@ -39,20 +39,37 @@ export const Dashboard = () => {
         axios(userOptions).then((response) => {
             //  Set state in redux for user
             redux.store.dispatch(redux.setUser(response.user));
+            document.getElementById('circular-progress-dashboard').value = response.user.riskLevel;
+            document.getElementById('percentage-dashboard').innerHTML = `${response.user.riskLevel}%`;
+            
+            //  Get notifications
+
+            //  Get pods
+
+            //  Get activities
+
+            redux.store.dispatch(redux.setPodsActivitiesNotifications(testDataPod, testDataActivity, testDataNotification));
+            setTimeout(function () {
+                document.getElementById('a6-grid-dashboard').innerHTML = (
+                    <ul className="list-pods-dashboard">
+                        {redux.store.getState().activities.map((activity, index) => (
+                            <Activity props={index} key={index} />
+                        ))}
+                    </ul>
+                );
+                document.getElementById('a4-grid-dashboard').innerHTML = (
+                    <ul className="list-pods-dashboard">
+                        {redux.store.getState().pods.map((pod, index) => (
+                            <Pod props={index} key={index} />
+                        ))}
+                    </ul>
+                );
+                document.getElementById('other-buttons-dashboard1').innerHTML = `Notifications (${redux.store.getState().notifications.length})`;
+                document.getElementById('wrapper2-dashboard').style.opacity = 1;
+                document.getElementById('button-titlebar-dashboard').style.opacity = 1;
+            }, 100)
         })
 
-        //  Get notifications
-
-        //  Get pods
-
-        //  Get activities
-
-        //redux.store.dispatch(redux.setPodsActivitiesNotifications(testDataPod, testDataActivity, testDataNotification));
-        setTimeout(function () {
-            document.getElementById('other-buttons-dashboard1').innerHTML = `Notifications (${redux.store.getState().notifications.length})`;
-            document.getElementById('wrapper2-dashboard').style.opacity = 1;
-            document.getElementById('button-titlebar-dashboard').style.opacity = 1;
-        }, 100)
     }
 
     const goDisclaimer = () => {
@@ -142,6 +159,7 @@ export const Dashboard = () => {
         withCredentials: true,
     };
 
+    /*
     const userQuery = useQuery(
         "user",
         () =>
@@ -151,6 +169,7 @@ export const Dashboard = () => {
             }),
         { enabled: !redux.store.getState().username.user_uuid, retry: false }
     );
+    */
 
     //  Notifications Query
     const notificationsOptions = {
@@ -232,29 +251,17 @@ export const Dashboard = () => {
                     <div id='wrapper2-dashboard'>
                         <p id='a1-grid-dashboard'>Exposure Meter</p>
                         <div className="special-grid-item-dashboard" id='a2-grid-dashboard'>
-                            <CircularProgress variant="static" value={redux.store.getState().username.riskLevel} size={'23vh'} />
-                            <p className='percentage-dashboard'>{`${redux.store.getState().username.riskLevel}%`}</p>
+                            <CircularProgress variant="static" value={0} size={'23vh'} id = 'circular-progress-dashboard'/>
+                            <p className='percentage-dashboard' id = 'percentage-dashboard'>{'0%'}</p>
                         </div>
                         <p id='a3-grid-dashboard'>Pods</p>
-                        <button className="grid-item-dashboard" id='a4-grid-dashboard' onClick={goPods}>
-                            <ul className="list-pods-dashboard">
-                                {redux.store.getState().pods.map((pod, index) => (
-                                    <Pod props={index} key={index} />
-                                ))}
-                            </ul>
-                        </button>
+                        <button className="grid-item-dashboard" id='a4-grid-dashboard' onClick={goPods}></button>
                         <p id='a5-grid-dashboard'>Your Activities</p>
-                        <button className="grid-item-dashboard" id='a6-grid-dashboard' onClick={goActivities}>
-                            <ul className="list-pods-dashboard">
-                                {redux.store.getState().activities.map((activity, index) => (
-                                    <Activity props={index} key={index} />
-                                ))}
-                            </ul>
-                        </button>
+                        <button className="grid-item-dashboard" id='a6-grid-dashboard' onClick={goActivities}></button>
                         <p id='a7-grid-dashboard'>Others</p>
                         <div className="special-grid-item-dashboard" id='a8-grid-dashboard' >
                             <div id='a7-grid-dashboard'>
-                                <button className='button-titlebar-dashboard' id='other-buttons-dashboard1' onClick={goNotifications}>{`Notifications (${redux.store.getState().notifications.length})`}</button>
+                                <button className='button-titlebar-dashboard' id='other-buttons-dashboard1' onClick={goNotifications}>{`Notifications (0)`}</button>
                                 <button className='button-titlebar-dashboard' id='other-buttons-dashboard2' onClick={gotCovid}>I have Covid</button>
                             </div>
                             <button onClick={goDisclaimer} className='disclaimer-dashboard'>

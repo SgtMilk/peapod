@@ -39,7 +39,6 @@ export const Login = () => {
         document.getElementById('wrapper2-login').style.height = '80vh';
         document.getElementById('wrapper2-login').style.width = '90vw';
         document.getElementById('screen2-login').style.opacity = 0;
-        redux.store.dispatch(redux.setUser('beep'));
         setTimeout(function() {
             history.push("/");
         },500)
@@ -53,7 +52,6 @@ export const Login = () => {
         document.getElementById('wrapper2-login').style.height = '80vh';
         document.getElementById('wrapper2-login').style.width = '90vw';
         document.getElementById('screen2-login').style.opacity = 0;
-        redux.store.dispatch(redux.setUser('beep'));
         setTimeout(function() {
             history.push("/");
         },500)
