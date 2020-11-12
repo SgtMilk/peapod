@@ -23,7 +23,7 @@ const getPod = async (req, res, next) => {
   const connection = await pool.connect();
   //    LOGIC
   try {
-    const podQuery = await connection.query(`SELECT * from ${tables.pods} WHERE pod_uuid=$1 `, podID);
+    const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid IN (SELECT pod_uuid FROM ${tables.pod_users} WHERE pod_uuid = ${podID} AND user_uuid = ${userID})`);
     const pod = podQuery.rows[0];
     if (pod) {
       return res.status(200).json({
@@ -104,8 +104,8 @@ const postPod = async (req, res, next) => {
     if (!receiverID) return;
     const notificationsQuery = await connection.query(`
     INSERT INTO ${tables.notifications} 
-    (notification_uuid, user_uuid, pod_uuid, sender_uuid, message, created_date )
-    VALUES ('${notificationID}', '${receiverID}', '${podID}', '${userID}', 'You've been invited to a ${name}, join the pod part!', ${new Date()} )
+    (notification_uuid, user_uuid, pod_uuid, sender_uuid, message, created_date, accepted )
+    VALUES ('${notificationID}', '${receiverID}', '${podID}', '${userID}', 'You've been invited to a ${name}, join the pod part!', '${new Date()}', FALSE)
     `);
   })
   //  Return Pod
@@ -132,6 +132,8 @@ const deletePod = async (req, res, next) => {
   //    DB
   const connection = await pool.connect();
   //    LOGIC
+  const getPod = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid=$1 AND pod_creator_id=$1`, [podID, userID]);
+  if (!getPod.rows[0]) return res.status(401).json({ success: false, message: `You are not authorized to delete that pod.` })
   try {
     const notificationsQuery = await connection.query(`DELETE from ${tables.notifications} WHERE pod_uuid=$1`, podID);
     const podUsersQuery = await connection.query(`DELETE from ${tables.pod_users} WHERE pod_uuid=$1`, podID);
