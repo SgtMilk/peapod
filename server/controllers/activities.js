@@ -20,7 +20,7 @@ const postActivity = async (req, res, next) => {
     const activity = req.body;
     const connection = pool.connect();
     const uuid = uuidv4();
-    
+
     try {
         (await connection).query(
             `INSERT INTO ${tables.activities}(activity_id, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES (${uuid}, ${activity.name}, ${activity.data}, ${activity.indoor}, ${activity.socialInteraction}, ${activity.proximity}, ${activity.peoplePresent});`
@@ -32,13 +32,13 @@ const postActivity = async (req, res, next) => {
         const newActivity = newActivityQuery.rows[0];
         if (newActivity) {
             return res.status(200).json({
-            success: true,
-            message: `${newActivity.name} was created successfully.`
+                success: true,
+                message: `${newActivity.name} was created successfully.`
             })
         } else {
             return res.status(404).json({
-            success: false,
-            message: `${newActivity.name} was not created.`,
+                success: false,
+                message: `${newActivity.name} was not created.`,
             })
         }
     } catch (err) {
@@ -52,7 +52,7 @@ const postActivity = async (req, res, next) => {
 const getActivity = async (req, res, next) => {
     const uuid = req.params.id;
     const connection = pool.connect();
-    
+
     try {
         const getActivityQuery = (await connection).query(
             `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid};`
@@ -61,14 +61,14 @@ const getActivity = async (req, res, next) => {
         const getActivity = getActivityQuery.rows[0];
         if (getActivity) {
             return res.status(200).json({
-            success: true,
-            message: `Get ${getActivity.name} successful.`,
-            getActivity
+                success: true,
+                message: `Get ${getActivity.name} successful.`,
+                getActivity
             })
         } else {
             return res.status(404).json({
-            success: false,
-            message: `Get ${getActivity.name} unsuccessful.`,
+                success: false,
+                message: `Get ${getActivity.name} unsuccessful.`,
             })
         }
     } catch (err) {
@@ -96,14 +96,14 @@ const getActivities = async (req, res, next) => {
                 success: true,
                 message: `Got activities.`,
                 activities
-              })
+            })
         } else {
             return res.status(404).json({
-            success: false,
-            message: `Got no activities.`,
+                success: false,
+                message: `Got no activities.`,
             })
         }
-        
+
     } catch (err) {
         return res.status(400).json({
             success: false,
@@ -115,7 +115,7 @@ const getActivities = async (req, res, next) => {
 const deleteActivity = async (req, res, next) => {
     const uuid = req.params.id;
     const connection = pool.connect();
-    
+
     try {
         const getActivityQuery = (await connection).query(
             `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid};`
@@ -128,13 +128,13 @@ const deleteActivity = async (req, res, next) => {
         const deleteActivity = deleteActivityQuery.rows[0];
         if (deleteActivity) {
             return res.status(200).json({
-            success: true,
-            message: `${getActivity.name} was deleted successfully.`
+                success: true,
+                message: `${getActivity.name} was deleted successfully.`
             })
         } else {
             return res.status(404).json({
-            success: false,
-            message: `Delete ${getActivity.name} unsuccessful.`,
+                success: false,
+                message: `Delete ${getActivity.name} unsuccessful.`,
             })
         }
     } catch (err) {
