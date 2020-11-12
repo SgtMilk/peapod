@@ -1,5 +1,5 @@
 const express = require("express");
-const { } = require("../controllers/activities");
+const { postActivity, getActivity, getActivities, deleteActivity } = require("../controllers/activities");
 const activitiesRouter = express.Router();
 const { authCheck } = require("../controllers/auth");
 
