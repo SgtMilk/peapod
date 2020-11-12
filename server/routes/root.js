@@ -12,7 +12,9 @@ const authRouter = require("./auth");
 const podsRouter = require("./pods");
 const activitiesRouter = require("./activities");
 const userRouter = require("./users");
+const notificationsRouter = require("./notifications")
 
+apiRouter.use("/notifications", notificationsRouter)
 apiRouter.use("/activities", activitiesRouter);
 apiRouter.use("/user", userRouter);
 apiRouter.use("/pods", podsRouter);
