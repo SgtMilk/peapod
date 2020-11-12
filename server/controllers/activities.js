@@ -26,7 +26,7 @@ const postActivity = async (req, res, next) => {
             `INSERT INTO ${tables.activities}(activity_id, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES (${uuid}, ${activity.name}, ${activity.data}, ${activity.indoor}, ${activity.socialInteraction}, ${activity.proximity}, ${activity.peoplePresent});`
         );
         const newActivityQuery = (await connection).query(
-            `SELECT * FROM ${tables.activities} WHERE activity_id = ${uuid};`
+            `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid};`
         );
         (await connection).release();
         const newActivity = newActivityQuery.rows[0];
@@ -55,7 +55,7 @@ const getActivity = async (req, res, next) => {
 
     try {
         const getActivityQuery = (await connection).query(
-            `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid};`
+            `SELECT * FROM ${tables.activities} WHERE activity_id = ${uuid};`
         );
         (await connection).release();
         const getActivity = getActivityQuery.rows[0];
