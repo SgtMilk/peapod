@@ -25,6 +25,7 @@ const updateUser = async (req, res, next) => {
     const updateUserQuery = await connection.query(`UPDATE ${tables.users} SET hascovid=$1 WHERE user_uuid=$2`, [hascovid, userID]);
     const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid=$1`, [userID])
     const user = userQuery.rows[0];
+    (await connection).release();
     if (!user) {
         return res.status(200).json({
             success: false,
