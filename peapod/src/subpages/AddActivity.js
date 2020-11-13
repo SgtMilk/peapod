@@ -50,8 +50,10 @@ export const AddActivity = () => {
     }
 
     const updateSlider = () => {
-        let value = document.getElementById('slider-addactivity').value;
-        document.getElementById('slider-value').innerHTML = value;
+        let value1 = document.getElementById('slider-people-addactivity').value;
+        document.getElementById('slider-people-value').innerHTML = value1;
+        let value2 = document.getElementById('slider-duration-addactivity').value;
+        document.getElementById('slider-duration-value').innerHTML = value2;
     }
 
     const onSubmit = (values) =>{
@@ -118,8 +120,13 @@ export const AddActivity = () => {
                             </div>
                             <div className = 'input-wrapper-addactivity'>
                                 <label>How Many People Will Be There Per 25 Meters Squared (269 Feet Squared) Approximately?</label>
-                                <p id = 'slider-value'>10</p>
-                                <input name = 'numberOfPeople' type="range" min="0" max="20" className="slider-addactivity" id="slider-addactivity" defaultValue = '10' ref={register}/>
+                                <p id = 'slider-people-value'>10</p>
+                                <input name = 'numberOfPeople' type="range" min="0" max="20" className="slider-people-addactivity" id="slider-people-addactivity" defaultValue = '10' ref={register}/>
+                            </div>
+                            <div className = 'input-wrapper-addactivity'>
+                                <label>What will be the duration of the activity (in hours)?</label>
+                                <p id = 'slider-duration-value'>5</p>
+                                <input name = 'duration' type="range" min="0" max="10" className="slider-duration-addactivity" id="slider-duration-addactivity" defaultValue = '5' ref={register}/>
                             </div>
                             <div className = 'buttons-addactivity'>
                                 <button type="button" className = 'button-addactivity' onClick = {goCancel}>Cancel</button>
