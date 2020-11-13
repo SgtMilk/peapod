@@ -11,7 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 export const Pod = (index) => {
 
-    const maxValue = Math.max(redux.store.getState().pods[index.props].users.map((user) => user.risklevel));
+    const maxValue = Math.max(...redux.store.getState().pods[index.props].users.map((user) => parseInt(user.risklevel)));
 
     return (
         <div className='pod'>
