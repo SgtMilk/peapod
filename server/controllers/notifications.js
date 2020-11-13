@@ -17,13 +17,13 @@ const getNotification = async (req, res, next) => {
     //  VARIABLES
     const notificationId = req.params.id;
     const userId = req.user.user_uuid;
-    const connection = pool.connect();
+    const connection = await pool.connect();
 
     try {
-        const getNotificationQuery = (await connection).query(
-            `SELECT * FROM ${tables.notifications} WHERE notification_uuid = ${notificationId} AND user_uuid = ${userId};`
+        const getNotificationQuery = await connection.query(
+            `SELECT * FROM '${tables.notifications}' WHERE notification_uuid = '${notificationId}' AND user_uuid = '${userId}';`
         );
-        (await connection).release();
+        await connection.release();
         const notification = getNotificationQuery.rows[0];
         if (notification) {
             return res.status(200).json({
@@ -48,14 +48,14 @@ const getNotification = async (req, res, next) => {
 const getNotifications = async (req, res, next) => {
     const userId = req.user.user_uuid;
     const { limit } = req.query;
-    const connection = pool.connect();
+    const connection = await pool.connect();
 
     try {
         const queryLimit = limit ? limit : 18446744073709551615;
-        const getNotificationsQuery = (await connection).query(
-            `SELECT * FROM ${tables.notifications} WHERE user_uuid = ${userId} ORDER BY created_date LIMIT 0, ${queryLimit};`
+        const getNotificationsQuery = await connection.query(
+            `SELECT * FROM '${tables.notifications}' WHERE user_uuid = '${userId}' ORDER BY created_date DESC LIMIT '${queryLimit}';`
         );
-        (await connection).release();
+        await connection.release();
         notifications = getNotificationsQuery.rows[0];
         if (notifications) {
             return res.status(200).json({
@@ -85,11 +85,11 @@ const putNotification = async (req, res, next) => {
     //  DB
     const connection = await pool.connect();
     //  LOGIC
-    const updateNotificationQuery = await connection.query(`UPDATE ${tables.notifications} SET accepted=$1 WHERE notification_uuid=$2 AND user_uuid=$3;`, [accepted, notificationID, userID])
-    const notificationQuery = await connection.query(`SELECT * FROM ${tables.notifications} WHERE notification_uuid=$1 AND user_uuid=$2;`, [notificationID, userID]);
+    const updateNotificationQuery = await connection.query(`UPDATE '${tables.notifications}' SET accepted='${accepted}' WHERE notification_uuid='${notificationID}' AND user_uuid='${userID}';`);
+    const notificationQuery = await connection.query(`SELECT * FROM '${tables.notifications}' WHERE notification_uuid='${notificationID}' AND user_uuid='${userID}';`);
     const notification = notificationQuery.rows[0];
-    const createPodUsers = await connection.query(`INSERT INTO ${tables.pod_users} (pod_uuid, user_uuid) VALUES ('${notification.pod_uuid}', '${userID}');`);
-    (await connection).release();
+    const createPodUsers = await connection.query(`INSERT INTO '${tables.pod_users}' (pod_uuid, user_uuid) VALUES ('${notification.pod_uuid}', '${userID}');`);
+    await connection.release();
     return res.status(200).json({
         success: true,
         message: `${notificationID} has been updated.`,

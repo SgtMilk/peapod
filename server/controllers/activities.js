@@ -18,18 +18,18 @@ require("express-async-errors");
  */
 const postActivity = async (req, res, next) => {
     const activity = req.body;
-    const connection = pool.connect();
+    const connection = await pool.connect();
     const uuid = uuidv4();
 
     try {
-        (await connection).query(
-            `INSERT INTO ${tables.activities}(activity_id, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES (${uuid}, ${activity.name}, ${activity.data}, ${activity.indoor}, ${activity.socialInteraction}, ${activity.proximity}, ${activity.peoplePresent});`
+        await connection.query(
+            `INSERT INTO '${tables.activities}'(activity_id, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES ('${uuid}', '${activity.name}', '${activity.data}', '${activity.indoor}', '${activity.socialInteraction}', '${activity.proximity}', '${activity.peoplePresent}');`
         );
-        const newActivityQuery = (await connection).query(
-            `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid};`
+        const newActivityQuery = await connection.query(
+            `SELECT (name) FROM '${tables.activities}' WHERE activity_id = '${uuid}';`
         );
         /* UPDATE USER'S RISK LEVEL */
-        (await connection).release();
+        await connection.release();
         const newActivity = newActivityQuery.rows[0];
         if (newActivity) {
             return res.status(200).json({
@@ -53,13 +53,13 @@ const postActivity = async (req, res, next) => {
 const getActivity = async (req, res, next) => {
     const uuid = req.params.id;
     const userId = req.user.user_uuid;
-    const connection = pool.connect();
+    const connection = await pool.connect();
 
     try {
-        const getActivityQuery = (await connection).query(
-            `SELECT * FROM ${tables.activities} WHERE activity_id = ${uuid} AND user_uuid = ${userId};`
+        const getActivityQuery = await connection.query(
+            `SELECT * FROM '${tables.activities}' WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         );
-        (await connection).release();
+        await connection.release();
         const activity = getActivityQuery.rows[0];
         if (activity) {
             return res.status(200).json({
@@ -95,8 +95,8 @@ const getActivities = async (req, res, next) => {
             `SELECT * FROM 
             activities
             WHERE user_uuid ='${userId}'
-            ORDER BY date
-            LIMIT 0, '${queryLimit}';`
+            ORDER BY date DESC
+            LIMIT '${queryLimit}';`
         );
         await connection.release();
         activities = getActivitiesQuery.rows[0];
@@ -124,16 +124,16 @@ const getActivities = async (req, res, next) => {
 const deleteActivity = async (req, res, next) => {
     const uuid = req.params.id;
     const userId = req.user.user_uuid;
-    const connection = pool.connect();
+    const connection = await pool.connect();
 
     try {
-        const getActivityQuery = (await connection).query(
-            `SELECT (name) FROM ${tables.activities} WHERE activity_id = ${uuid} AND user_uuid = ${userId};`
+        const getActivityQuery = await connection.query(
+            `SELECT (name) FROM '${tables.activities}' WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         )
-        const deleteActivityQuery = (await connection).query(
-            `DELETE FROM ${tables.activities} WHERE activity_id = ${uuid} AND user_uuid = ${userId};`
+        const deleteActivityQuery = await connection.query(
+            `DELETE FROM '${tables.activities}' WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         );
-        (await connection).release();
+        await connection.release();
         const getActivity = getActivityQuery.rows[0];
         const deleteActivity = deleteActivityQuery.rows[0];
         if (deleteActivity) {
