@@ -33,7 +33,7 @@ const getPod = async (req, res, next) => {
       return res.status(200).json({
         success: true,
         message: `${podID} was successfully.`,
-        pod
+        pod: pod
       })
     } else {
       return res.status(404).json({
@@ -129,7 +129,7 @@ const postPod = async (req, res, next) => {
     return res.status(201).json({
       success: true,
       message: `${podID} created successfully.`,
-      pod
+      pod: pod
     })
   } else {
     return res.status(400).json({

@@ -15,6 +15,7 @@ const {
   FACEBOOK_CLIENT_SECRET,
   DATABASE_URI,
   HOME_PAGE_DOMAIN,
+  LOCAL_SERVER_URL,
 } = process.env;
 
 const config = {
@@ -30,6 +31,7 @@ const config = {
   COOKIE_SECRET,
   DATABASE_URI,
   HOME_PAGE_DOMAIN,
+  LOCAL_SERVER_URL,
 };
 
 module.exports = config;
