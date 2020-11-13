@@ -1,0 +1,30 @@
+/*
+ * Copyright (C) 2020 Alix Routhier-Lalonde, Adam Di Re, Ricky Liu
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.activity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30vw;
+  background-color: #305c20;
+  border-radius: 1vh;
+  padding: 2vh;
+  margin: 1vh;
+}
+
+.name-activity {
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+}
+
+.date-activity {
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+}

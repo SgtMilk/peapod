@@ -1,0 +1,138 @@
+/*
+ * Copyright (C) 2020 Alix Routhier-Lalonde, Adam Di Re, Ricky Liu
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.activities2 {
+  all: unset;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 60vw;
+  height: 6vh;
+  background-color: #305c20;
+  border-radius: 1vh;
+  margin: 1vh;
+  border: #225311 0.3vh solid;
+  transition: 0.3s;
+}
+
+.titlebar-wrapper-activities2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60vw;
+  height: 6vh;
+  height: auto;
+}
+
+.expanded {
+  height: 70vh;
+  height: auto;
+}
+
+.activities2:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}
+
+.groupname-activities2 {
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+  padding: 1.75vh;
+}
+
+.date-activities2 {
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+  padding: 1.75vh;
+}
+
+.percentage-activities2 {
+  position: absolute;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5vh;
+}
+
+.wrapper-progress-activities2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 6vh;
+}
+
+.other-stuff-activities2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 60vw;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: -1;
+}
+
+.expanded2 {
+  opacity: 1;
+  z-index: inherit;
+}
+
+.name-activities2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30vw;
+  height: 6vh;
+  border-radius: 1vh;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5vh;
+}
+
+.list-pods-activities2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.button-activities2 {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 6vh;
+  width: 12vw;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
+  margin: 3vh;
+}
+
+.button-activities2:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}

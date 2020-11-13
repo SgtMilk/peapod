@@ -1,0 +1,270 @@
+/*
+ * Copyright (C) 2020 Alix Routhier-Lalonde, Adam Di Re, Ricky Liu
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.dashboard {
+  height: 100vh;
+  width: 100vw;
+}
+
+.titlebar-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 8vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 6vh;
+}
+
+.title-titlebar-dashboard {
+}
+
+.dummy-titlebar {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 5vh;
+  width: 12vw;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
+  margin: 1vh;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.button-titlebar-dashboard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 5vh;
+  width: 12vw;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  border-radius: 2vh;
+  background-color: #225311;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+  transition: 0.3s;
+  border: #225311 0.3vh solid;
+  margin: 1vh;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.button-titlebar-dashboard:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}
+
+.body-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92vh;
+  width: 100vw;
+  background-color: rgb(211, 211, 211);
+  background-image: radial-gradient(#225311 20%, transparent 20%),
+    radial-gradient(#78a567 20%, transparent 20%);
+  background-position: 0 0, 7.5vh 7.5vh;
+  background-size: 15vh 15vh;
+}
+
+.wrapper-button-dashboard {
+  background-color: #225311;
+  height: 80vh;
+  width: 90vw;
+  border-radius: 5vh;
+  transition: 0.5s;
+}
+
+#wrapper2-dashboard {
+  display: grid;
+  grid-gap: 0 2vw;
+  grid-template-columns: 42vw 42vw;
+  grid-template-rows: auto 30vh auto 30vh;
+  background-color: #225311;
+  height: 80vh;
+  width: 90vw;
+  border-radius: 5vh;
+  transition: 0.5s;
+  overflow: hidden;
+  padding: 2vw;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.grid-item-dashboard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5vh;
+  border: 0.3vh solid #225311;
+  transition: 0.5s;
+}
+
+.grid-item-dashboard:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}
+
+.special-grid-item-dashboard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5vh;
+  border: 0.3vh solid #225311;
+  transition: 0.5s;
+}
+
+.MuiCircularProgress-colorPrimary {
+  color: #e2e97e !important;
+  position: absolute;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+.percentage-dashboard {
+  position: absolute;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+/*CSS grid here*/
+
+#a1-grid-dashboard {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+#a2-grid-dashboard {
+  grid-row: 2/3;
+  grid-column: 1/2;
+  transition: 0.3s;
+}
+
+#a3-grid-dashboard {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+#a4-grid-dashboard {
+  grid-row: 2;
+  grid-column: 2;
+  overflow: hidden;
+  margin: 0vh;
+}
+
+#a5-grid-dashboard {
+  grid-row: 3;
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+#a6-grid-dashboard {
+  grid-row: 4;
+  grid-column: 1;
+}
+
+#a7-grid-dashboard {
+  grid-row: 3;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3vh;
+}
+
+#a8-grid-dashboard {
+  grid-row: 4;
+  grid-column: 2;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5vh;
+  text-align: center;
+  line-height: 2vh;
+  padding: 2vh;
+}
+
+#other-buttons-dashboard1,
+#other-buttons-dashboard2 {
+  opacity: 1;
+  border: #1b420d 0.3vh solid;
+  width: 19vw;
+}
+
+.disclaimer-dashboard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #e2e97e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5vh;
+  background-color: #225311;
+  border: #225311 0.3vh solid;
+  border-radius: 3vh;
+  padding: 2vh;
+  transition: 0.3s;
+}
+
+.disclaimer-dashboard:hover {
+  background-color: #17380c;
+  border: rgb(0, 0, 0) 0.3vh solid;
+  background-image: radial-gradient(black 20%, transparent 20%),
+    radial-gradient(black 20%, transparent 20%);
+  background-position: 0 0, 0.8vh 0.8vh;
+  background-size: 1vh 1vh;
+}
