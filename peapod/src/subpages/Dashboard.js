@@ -24,9 +24,7 @@ export const Dashboard = () => {
 
     let history = useHistory();
 
-    const initialSetupDashboard = () => {
-        redux.store.dispatch(redux.setUser({name: 'name', riskLevel: 0}));
-        redux.store.dispatch(redux.setPodsActivitiesNotifications(testDataPod, testDataActivity, testDataNotification));
+    React.useEffect(() => {
         //  Get user
         const userOptions = {
             method: "get",
@@ -41,21 +39,20 @@ export const Dashboard = () => {
         axios(userOptions).then((response) => {
             //  Set state in redux for user
             redux.store.dispatch(redux.setUser(response.data.user));
-            document.getElementById('circular-progress-dashboard').value = response.data.user.riskLevel;
-            document.getElementById('percentage-dashboard').innerHTML = `${response.data.user.riskLevel}%`;
 
             //  Get notifications
 
             //  Get pods
 
             //  Get activities
+        })
+    }, []);
 
-            setTimeout(function () {
+    const initialSetupDashboard = () => {
+        setTimeout(function () {
                 document.getElementById('wrapper2-dashboard').style.opacity = 1;
                 document.getElementById('button-titlebar-dashboard').style.opacity = 1;
             }, 100)
-        })
-
     }
 
     const goDisclaimer = () => {
@@ -240,6 +237,7 @@ export const Dashboard = () => {
                     <div id='wrapper2-dashboard'>
                         <p id='a1-grid-dashboard'>Exposure Meter</p>
                         <div className="special-grid-item-dashboard" id='a2-grid-dashboard'>
+                            <script>{console.log(redux.store.getState())}</script>
                             <CircularProgress variant="static" value={redux.store.getState().username.riskLevel} size={'23vh'} id='circular-progress-dashboard' />
                             <p className='percentage-dashboard' id='percentage-dashboard'>{`${redux.store.getState().username.riskLevel}%`}</p>
                         </div>
