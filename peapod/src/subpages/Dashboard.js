@@ -107,7 +107,7 @@ export const Dashboard = () => {
             withCredentials: true,
         }
         const response = await axios(axiosOptions);
-        const userData = response.user;
+        const userData = response.data.user;
         redux.store.dispatch(redux.setUser(userData));
     }
 
