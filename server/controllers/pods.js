@@ -59,12 +59,12 @@ const getPods = async (req, res, next) => {
   //    LOGIC
   try {
     const queryLimit = limit ? limit : 18446744073709551615;
-    
+
     const podQuery = await connection.query(`SELECT (pod_uuid) from '${tables.pod_users}' 
     WHERE user_uuid='${userID}' 
     RIGHT JOIN '${tables.pods}' ON pod_uuid = pod_uuid
     ORDER BY created_date DESC LIMIT '${queryLimit}';`);
-    
+
     const pods = podQuery.rows;
     await connection.release();
     if (podQuery.rows[0]) {
