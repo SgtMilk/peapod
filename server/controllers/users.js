@@ -10,6 +10,7 @@
 const pool = require("../config/pg-config");
 const { v4: uuidv4 } = require("uuid");
 const tables = require("../database/tables");
+const { postRisk } = require("./risk-calculation/risk-calculation");
 require("express-async-errors");
 
 /**
@@ -26,8 +27,8 @@ const updateUser = async (req, res, next) => {
     const updateUserQuery = await connection.query(`UPDATE ${tables.users} SET hascovid=${hascovid} WHERE user_uuid='${userID}';`);
     const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${userID}';`)
     const user = userQuery.rows[0];
-    console.log(user)
     connection.release();
+    postRisk(userId);
     if (!user) {
         return res.status(200).json({
             success: true,

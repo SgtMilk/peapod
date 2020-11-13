@@ -12,6 +12,7 @@ const pool = require("../config/pg-config");
 const { v4: uuidv4 } = require("uuid");
 const tables = require("../database/tables");
 const { activities } = require("../database/tables");
+const { postRisk } = require("./risk-calculation/risk-calculation");
 require("express-async-errors");
 
 /**
@@ -42,7 +43,7 @@ const postActivity = async (req, res, next) => {
         /* UPDATE USER'S RISK LEVEL */
         connection.release();
         const newActivity = newActivityQuery.rows[0];
-        console.log(newActivity);
+        postRisk(userId);
         if (newActivity) {
             return res.status(200).json({
                 success: true,
@@ -153,6 +154,7 @@ const deleteActivity = async (req, res, next) => {
         );
         connection.release();
         const getActivity = getActivityQuery.rows[0];
+        postRisk(userId);
         return res.status(200).json({
             success: true,
             message: `${getActivity.name} was deleted successfully.`
