@@ -71,9 +71,9 @@ export const AddActivity = () => {
                 activity: {
                     name: values.name,
                     date: values.date,
-                    indoor: values.indoor,
-                    mask: values.masks,
-                    socialInteraction: values.socialInteraction,
+                    indoor: values.indoor === "indoor" ? true : false,
+                    mask: values.masks === "yes" ? true : false,
+                    socialInteraction: values.socialInteraction === "yes" ? true : false,
                     peoplePresent: values.numberOfPeople,
                     duration: values.duration,
                 }
