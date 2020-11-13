@@ -127,7 +127,7 @@ export const Dashboard = () => {
 
 
     const userQuery = useQuery(
-        "user",
+        "userDashboard",
         () =>
             axios(userOptions).then((response) => {
                 //  Set state in redux for user
@@ -155,7 +155,7 @@ export const Dashboard = () => {
     };
 
     const notificationsQuery = useQuery(
-        "notifications",
+        "notificationsDashboard",
         () =>
             axios(notificationsOptions).then((response) => {
                 //  Set state in redux for notifications
@@ -184,7 +184,7 @@ export const Dashboard = () => {
     };
 
     const activitiesQuery = useQuery(
-        "activities",
+        "activitiesDashboard",
         () =>
             axios(activitiesOptions).then((response) => {
                 //  Set state in redux for activities
@@ -211,7 +211,7 @@ export const Dashboard = () => {
     };
 
     const podsQuery = useQuery(
-        "pods",
+        "podsDashboard",
         () =>
             axios(podsOptions).then((response) => {
                 //  Set state in redux for pods
@@ -219,6 +219,8 @@ export const Dashboard = () => {
                 if (response.data.pods !== undefined) {
                     redux.store.dispatch(redux.setPods(response.data.pods));
                 }
+
+                console.log(redux.store.getState().pods)
             }),
     );
 

@@ -64,7 +64,7 @@ const getPods = async (req, res, next) => {
     const podUsers = podUsersQuery.rows;
     console.log(JSON.stringify(podUsers));
     let pods = [];
-    
+
 
     for (let i = 0; i < podUsers.length; i++) {
       let users = [];
@@ -74,12 +74,11 @@ const getPods = async (req, res, next) => {
       const usersPerPodQuery = await connection.query(`SELECT (user_uuid) FROM ${tables.pod_users} WHERE pod_uuid='${podUsers[i].pod_uuid}';`);
       const usersPerPod = usersPerPodQuery.rows;
       for (let j = 0; j < usersPerPod.length; j++) {
-        const userQuery = await connection.query(`SELECT (firstname, lastname, risklevel, hascovid) FROM ${tables.users} WHERE user_uuid='${usersPerPod[j].user_uuid}';`);
+        const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${usersPerPod[j].user_uuid}';`);
         const user = userQuery.rows[0];
-        users[j] = user;
+        users[j] = { firstname: user.firstname, lastname: user.lastname, hascovid: user.hascovid, risklevel: user.risklevel };
       }
       const pod = podQuery.rows[0];
-      console.log(pod);
       pods[i] = pod;
       pods[i].users = users;
       console.log(pods[i]);
@@ -166,13 +165,13 @@ const postPod = async (req, res, next) => {
 
 const deletePod = async (req, res, next) => {
   //    VARIABLES
-  const podID = req.user.user_uuid;
+  const podID = req.params.id;
   const userID = req.user.user_uuid;
   //    DB
   const connection = await pool.connect();
   //    LOGIC
-  const getPod = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podID}' AND pod_creator_id='${userID}';`);
-  if (!getPod.rows[0]) {
+  const getPodQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podID}' AND pod_creator_id='${userID}';`);
+  if (getPodQuery.rows.length == 0) {
     connection.release();
     return res.status(401).json({ success: false, message: `You are not authorized to delete that pod.` })
   }

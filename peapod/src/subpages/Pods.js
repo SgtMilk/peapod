@@ -73,7 +73,7 @@ export const Pods = () => {
     };
 
     const podsQuery = useQuery(
-        "pods",
+        "podsPods",
         () =>
             axios(podsOptions).then((response) => {
                 //  Set state in redux for pods
@@ -106,7 +106,7 @@ export const Pods = () => {
 
     return (
         <div>
-            <div className='pods' onLoad={initialSetupPods()}>
+            <div className='pods'>
                 <div className='titlebar-pods'>
                     <button onClick={goBack} className='button-titlebar-pods' id='button-back-titlebar-pods'>Back</button>
                     <p className='title-titlebar-pods'>Peapod</p>

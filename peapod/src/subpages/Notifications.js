@@ -64,7 +64,7 @@ export const Notifications = () => {
     };
 
     const notificationsQuery = useQuery(
-        "notifications",
+        "notificationsNotifications",
         () =>
             axios(notificationsOptions).then((response) => {
                 //  Set state in redux for notifications
@@ -74,6 +74,10 @@ export const Notifications = () => {
                 }
 
             }),
+        {
+            // Refetch the data every second
+            refetchInterval: 500,
+        }
     );
 
     if (notificationsQuery.isLoading) {
