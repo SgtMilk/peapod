@@ -61,7 +61,7 @@ passport.use(
         */
         const uuid = uuidv4();
         const createUserQuery = await connection.query(
-          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, google_id, riskLevel) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${0}');`
+          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, google_id, riskLevel, hascovid) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${0}', FALSE);`
         );
         const newUserQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${uuid}';`);
         const newUser = newUserQuery.rows[0];
@@ -106,7 +106,7 @@ passport.use(
         */
         const uuid = uuidv4();
         const createUserQuery = await connection.query(
-          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, facebook_id, riskLevel) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${0}');`
+          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, facebook_id, riskLevel, hascovid) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${0}', FALSE);`
         );
         const newUserQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${uuid}';`);
         const newUser = newUserQuery.rows[0];

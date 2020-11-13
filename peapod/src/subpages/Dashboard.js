@@ -109,6 +109,7 @@ export const Dashboard = () => {
         const response = await axios(axiosOptions);
         const userData = response.data.user;
         redux.store.dispatch(redux.setUser(userData));
+        console.log(redux.store.getState().username)
     }
 
 
@@ -131,6 +132,7 @@ export const Dashboard = () => {
             axios(userOptions).then((response) => {
                 //  Set state in redux for user
                 redux.store.dispatch(redux.setUser(response.data.user));
+                console.log(redux.store.getState().username)
                 setFoundUser(true);
             }),
         { enabled: !foundUser, retry: false }
@@ -219,6 +221,9 @@ export const Dashboard = () => {
                 }
             }),
     );
+
+
+
     if (userQuery.isLoading) {
         return (
             <div className='dashboard'>
@@ -259,7 +264,7 @@ export const Dashboard = () => {
             </div>
         )
     }
-
+    const hasCovid = redux.store.getState().username.hascovid ? "I have Covid" : "I don't have Covid";
     return (
         <div className='dashboard' onLoad={initialSetupDashboard()}>
             <div className='titlebar-dashboard'>
@@ -295,7 +300,7 @@ export const Dashboard = () => {
                         <div className="special-grid-item-dashboard" id='a8-grid-dashboard' >
                             <div id='a7-grid-dashboard'>
                                 <button className='button-titlebar-dashboard' id='other-buttons-dashboard1' onClick={goNotifications}>{`Notifications (${redux.store.getState().notifications.length})`}</button>
-                                <button className='button-titlebar-dashboard' id='other-buttons-dashboard2' onClick={gotCovid}>I have Covid</button>
+                                <button className='button-titlebar-dashboard' id='other-buttons-dashboard2' onClick={gotCovid}>{hasCovid}</button>
                             </div>
                             <button onClick={goDisclaimer} className='disclaimer-dashboard'>
                                 <p>Disclaimer</p>
