@@ -25,7 +25,7 @@ const postActivity = async (req, res, next) => {
 
     try {
         await connection.query(
-            `INSERT INTO ${tables.activities}(activity_id, user_uuid, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES ('${uuid}', '${userId}' '${activity.name}', '${activity.date}', '${activity.indoor}', '${activity.socialInteraction}', '${activity.proximity}', '${activity.peoplePresent}');`
+            `INSERT INTO ${tables.activities}(activity_id, user_uuid, name, date, indoor, socialinteraction, proximity, peoplepresent, duration) VALUES ('${uuid}', '${userId}' '${activity.name}', '${activity.date}', '${activity.indoor}', '${activity.socialInteraction}', '${activity.proximity}', '${activity.peoplePresent}', '${activity.duration}');`
         );
         const newActivityQuery = await connection.query(
             `SELECT (name) FROM ${tables.activities} WHERE activity_id = '${uuid}';`
