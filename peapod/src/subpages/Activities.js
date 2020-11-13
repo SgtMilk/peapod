@@ -10,41 +10,37 @@ import axios from "axios"
 export const Activities = () => {
     let history = useHistory();
 
-    const testDataActivity = [{name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}]
+    //const testDataActivity = [{name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}, {name: 'beep', risk: 90, date: '11/11/1111'}]
 
     const [isLoading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         //  Get user
         const fetchActivity = async () => {
-            const userOptions = {
+            const activitiesOptions = {
                 method: "get",
                 baseURL: serverAddress,
-                url: "/auth/activities/success",
+                url: "/api/activities",
                 headers: {
                     "Access-Control-Allow-Credentials": true,
                     "Content-Type": "application/json",
                 },
                 withCredentials: true,
             };
-            const response = await axios(userOptions);
-            console.log(response.data.user)
+            const response = await axios(activitiesOptions);
             //  Set state in redux for user
-            redux.store.dispatch(redux.setActivities(response.data));
-            console.log(redux.store.getState().activities);
+            redux.store.dispatch(redux.setActivities(response.data.activities));
             setLoading(false);
         }
         fetchActivity()
     }, []);
 
     const initialSetupActivities = () => {
-        console.log('axios get here');
-        redux.store.dispatch(redux.setActivities(testDataActivity));
         setTimeout(function() {
             document.getElementById('wrapper2-activities').style.opacity = 1;
             document.getElementById('button-titlebar-activities').style.opacity = 1;
-            document.getElementById('button-back-titlebar-activities').style.opacity = 1;
-        },100)       
+            document.getElementById('button-back-titlebar-activities').style.opacity = 1; 
+        }, 100)
     }
 
     const goLogout = () => {

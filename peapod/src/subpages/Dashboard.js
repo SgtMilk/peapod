@@ -24,7 +24,10 @@ export const Dashboard = () => {
 
     let history = useHistory();
 
-    const [isLoading, setLoading] = React.useState(true);
+    const [isLoading1, setLoading1] = React.useState(true);
+    const [isLoading2, setLoading2] = React.useState(true);
+    const [isLoading3, setLoading3] = React.useState(true);
+    const [isLoading4, setLoading4] = React.useState(true);
 
     React.useEffect(() => {
         //  Get user
@@ -42,6 +45,7 @@ export const Dashboard = () => {
             const response = await axios(userOptions);
             //  Set state in redux for user
             redux.store.dispatch(redux.setUser(response.data.user));
+            setLoading1(false);
             const fetchNotifications = async () => {
                 const notificationsOptions = {
                     method: "get",
@@ -56,6 +60,7 @@ export const Dashboard = () => {
                 const response = await axios(notificationsOptions);
                 //  Set state in redux for user
                 redux.store.dispatch(redux.setNotifications(response.data.notifications));
+                setLoading2(false);
                 const fetchPods = async () => {
                     const podsOptions = {
                         method: "get",
@@ -70,6 +75,7 @@ export const Dashboard = () => {
                     const response = await axios(podsOptions);
                     //  Set state in redux for user
                     redux.store.dispatch(redux.setPods(response.data.pods));
+                    setLoading3(false);
                     const fetchActivities = async () => {
                         const activitiesOptions = {
                             method: "get",
@@ -84,7 +90,7 @@ export const Dashboard = () => {
                         const response = await axios(activitiesOptions);
                         //  Set state in redux for user
                         redux.store.dispatch(redux.setActivities(response.data.activities));
-                        setLoading(false);
+                        setLoading4(false);
                     }
                     fetchActivities()
                 }
@@ -97,7 +103,7 @@ export const Dashboard = () => {
 
 
     const initialSetupDashboard = () => {
-        setTimeout(function () {
+        setTimeout(function() {
             document.getElementById('wrapper2-dashboard').style.opacity = 1;
             document.getElementById('button-titlebar-dashboard').style.opacity = 1;
         }, 100)
@@ -273,7 +279,7 @@ export const Dashboard = () => {
             }),
     );
 
-    if (isLoading) {
+    if (isLoading1 || isLoading2 || isLoading3 || isLoading4) {
         return (
         <div className='dashboard' onLoad={initialSetupDashboard()}>
             <div className='titlebar-dashboard'>
