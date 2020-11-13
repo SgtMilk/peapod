@@ -26,33 +26,36 @@ export const Dashboard = () => {
 
     React.useEffect(() => {
         //  Get user
-        const userOptions = {
-            method: "get",
-            baseURL: serverAddress,
-            url: "/auth/login/success",
-            headers: {
-                "Access-Control-Allow-Credentials": true,
-                "Content-Type": "application/json",
-            },
-            withCredentials: true,
-        };
-        axios(userOptions).then((response) => {
+        const fetchUser = async () => {
+            const userOptions = {
+                method: "get",
+                baseURL: serverAddress,
+                url: "/auth/login/success",
+                headers: {
+                    "Access-Control-Allow-Credentials": true,
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            };
+            const response = await axios(userOptions);
+            console.log(response.data.user)
             //  Set state in redux for user
             redux.store.dispatch(redux.setUser(response.data.user));
-
+            console.log(redux.store.getState().username);
             //  Get notifications
 
             //  Get pods
 
             //  Get activities
-        })
+        }
+        fetchUser()
     }, []);
 
     const initialSetupDashboard = () => {
         setTimeout(function () {
-                document.getElementById('wrapper2-dashboard').style.opacity = 1;
-                document.getElementById('button-titlebar-dashboard').style.opacity = 1;
-            }, 100)
+            document.getElementById('wrapper2-dashboard').style.opacity = 1;
+            document.getElementById('button-titlebar-dashboard').style.opacity = 1;
+        }, 100)
     }
 
     const goDisclaimer = () => {
