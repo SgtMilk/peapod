@@ -68,7 +68,7 @@ const riskCalculation = (activities, hasCovid) => {
 
     console.log("1-4: " + risk1to4 + " 1-4 (count): " + count1to4 + " 5-10: " + risk5to10 + " 5-10 (count): " + count5to10 + " 10-14: " + risk10to14 + " 10-14 (count): " + count10to14);
 
-    const sumAll = (risk1to4 * count1to4) + (risk5to10 * count5to10) + (risk10to14 * count10to14) + covid;
+    const sumAll = ((risk1to4 * count1to4) / 2) + ((risk5to10 * count5to10) / 4) + ((risk10to14 * count10to14) / 8) + covid;
     console.log(sumAll);
     if (sumAll > 100) {
         return 100;

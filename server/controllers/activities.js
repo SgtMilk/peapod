@@ -147,12 +147,13 @@ const deleteActivity = async (req, res, next) => {
 
     try {
         const getActivityQuery = await connection.query(
-            `SELECT (name) FROM ${tables.activities} WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
+            `SELECT * FROM ${tables.activities} WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         )
         const deleteActivityQuery = await connection.query(
             `DELETE FROM ${tables.activities} WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         );
         connection.release();
+        console.log(getActivityQuery.rows);
         const getActivity = getActivityQuery.rows[0];
         postRisk(userId);
         return res.status(200).json({
@@ -160,7 +161,7 @@ const deleteActivity = async (req, res, next) => {
             message: `${getActivity.name} was deleted successfully.`
         })
     } catch (err) {
-        connection.release();
+        console.log(err);
         return res.status(400).json({
             success: false,
             message: `Bad request`
