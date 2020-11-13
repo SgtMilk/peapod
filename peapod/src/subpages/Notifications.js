@@ -74,10 +74,6 @@ export const Notifications = () => {
                 }
 
             }),
-        {
-            // Refetch the data every second
-            refetchInterval: 500,
-        }
     );
 
     if (notificationsQuery.isLoading) {
@@ -102,7 +98,7 @@ export const Notifications = () => {
 
     return (
         <div>
-            <div className='notifications' onLoad={initialSetupNotifications()}>
+            <div className='notifications'>
                 <div className='titlebar-notifications'>
                     <button onClick={goBack} className='button-titlebar-notifications' id='button-back-titlebar-notifications'>Back</button>
                     <p className='title-titlebar-notifications'>Peapod</p>
@@ -120,6 +116,6 @@ export const Notifications = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
