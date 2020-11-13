@@ -58,9 +58,6 @@ export const Activities = () => {
             "Access-Control-Allow-Credentials": true,
             "Content-Type": "application/json",
         },
-        params: {
-            limit: 3
-        },
         withCredentials: true,
     };
 
@@ -109,7 +106,7 @@ export const Activities = () => {
                         <div id='wrapper2-activities'>
                             <button className='button-activities' onClick={goAddActivity}>Add an Activity</button>
                             <ul className="list-activities-activities">
-                                {redux.store.getState().activities.map((activity, index) => (
+                                {redux.store.getState().activities && redux.store.getState().activities.map((activity, index) => (
                                     <Activities2 props={index} key={index} />
                                 ))}
                             </ul>
