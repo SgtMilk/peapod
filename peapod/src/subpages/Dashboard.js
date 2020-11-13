@@ -24,57 +24,38 @@ export const Dashboard = () => {
 
     let history = useHistory();
 
-    const initialSetupDashboard = () => {
+    React.useEffect(() => {
         //  Get user
-        const userOptions = {
-            method: "get",
-            baseURL: serverAddress,
-            url: "/auth/login/success",
-            headers: {
-                "Access-Control-Allow-Credentials": true,
-                "Content-Type": "application/json",
-            },
-            withCredentials: true,
-        };
-        axios(userOptions).then((response) => {
+        const fetchUser = async () => {
+            const userOptions = {
+                method: "get",
+                baseURL: serverAddress,
+                url: "/auth/login/success",
+                headers: {
+                    "Access-Control-Allow-Credentials": true,
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            };
+            const response = await axios(userOptions);
+            console.log(response.data.user)
             //  Set state in redux for user
             redux.store.dispatch(redux.setUser(response.data.user));
-            document.getElementById('circular-progress-dashboard').value = response.data.user.riskLevel;
-            document.getElementById('percentage-dashboard').innerHTML = `${response.data.user.riskLevel}%`;
-
+            console.log(redux.store.getState().username);
             //  Get notifications
 
             //  Get pods
 
             //  Get activities
+        }
+        fetchUser()
+    }, []);
 
-            //redux.store.dispatch(redux.setPodsActivitiesNotifications(testDataPod, testDataActivity, testDataNotification));
-            setTimeout(function () {
-                document.getElementById('a4-grid-dashboard').innerHTML = (
-                    
-                    <ul className="list-pods-dashboard">
-                        {redux.store.getState().activities.map((activity, index) => (
-                            <Activity props={index} key={index} />
-                        ))}
-                    </ul>
-                );
-                document.getElementById('other-buttons-dashboard1').innerHTML = `Notifications (${redux.store.getState().notifications.length})`;
-                document.getElementById('wrapper2-dashboard').style.opacity = 1;
-                document.getElementById('button-titlebar-dashboard').style.opacity = 1;
-            }, 100)
-        })
-
-    }
-
-    const loadPods = () => {
-        redux.store.dispatch(redux.setPods(testDataPod));
-        return (
-            <ul className="list-pods-dashboard">
-                {redux.store.getState().pods.map((pod, index) => (
-                    <Pod props={index} key={index} />
-                ))}
-            </ul>
-        )
+    const initialSetupDashboard = () => {
+        setTimeout(function () {
+            document.getElementById('wrapper2-dashboard').style.opacity = 1;
+            document.getElementById('button-titlebar-dashboard').style.opacity = 1;
+        }, 100)
     }
 
     const goDisclaimer = () => {
@@ -176,29 +157,28 @@ export const Dashboard = () => {
         { enabled: !redux.store.getState().username.user_uuid, retry: false }
     );
     */
-    /*
-//  Notifications Query
-const notificationsOptions = {
-method: "get",
-baseURL: serverAddress,
-url: "/api/notifications/",
-headers: {
-    "Access-Control-Allow-Credentials": true,
-    "Content-Type": "application/json",
-},
-withCredentials: true,
-};
 
-const notificationsQuery = useQuery(
-"notifications",
-() =>
-    axios(notificationsQuery).then((response) => {
-        //  Set state in redux for notifications
-        console.log("queried")
-        redux.store.dispatch(redux.setNotifications(response.notifications));
-    }),
-);
-*/
+    //  Notifications Query
+    const notificationsOptions = {
+        method: "get",
+        baseURL: serverAddress,
+        url: "/api/notifications/",
+        headers: {
+            "Access-Control-Allow-Credentials": true,
+            "Content-Type": "application/json",
+        },
+        withCredentials: true,
+    };
+
+    const notificationsQuery = useQuery(
+        "notifications",
+        () =>
+            axios(notificationsOptions).then((response) => {
+                //  Set state in redux for notifications
+                redux.store.dispatch(redux.setNotifications(response.data.notifications));
+            }),
+    );
+
 
     //  Activities Query
     const activitiesOptions = {
@@ -220,34 +200,34 @@ const notificationsQuery = useQuery(
         () =>
             axios(activitiesOptions).then((response) => {
                 //  Set state in redux for activities
-                redux.store.dispatch(redux.setActivities(response.activities));
+                redux.store.dispatch(redux.setActivities(response.data.activities));
             }),
     );
-    /*
+
     //  Pods Query
     const podsOptions = {
-    method: "get",
-    baseURL: serverAddress,
-    url: "/api/pods/",
-    headers: {
-        "Access-Control-Allow-Credentials": true,
-        "Content-Type": "application/json",
-    },
-    params: {
-        limit: 3
-    },
-    withCredentials: true,
+        method: "get",
+        baseURL: serverAddress,
+        url: "/api/pods/",
+        headers: {
+            "Access-Control-Allow-Credentials": true,
+            "Content-Type": "application/json",
+        },
+        params: {
+            limit: 3
+        },
+        withCredentials: true,
     };
-    
+
     const podsQuery = useQuery(
-    "pods",
-    () =>
-        axios(podsOptions).then((response) => {
-            //  Set state in redux for pods
-            redux.store.dispatch(redux.setPods(response.pods));
-        }),
+        "pods",
+        () =>
+            axios(podsOptions).then((response) => {
+                //  Set state in redux for pods
+                redux.store.dispatch(redux.setPods(response.data.pods));
+            }),
     );
-    */
+
     return (
         <div className='dashboard' onLoad={initialSetupDashboard()}>
             <div className='titlebar-dashboard'>
@@ -260,17 +240,30 @@ const notificationsQuery = useQuery(
                     <div id='wrapper2-dashboard'>
                         <p id='a1-grid-dashboard'>Exposure Meter</p>
                         <div className="special-grid-item-dashboard" id='a2-grid-dashboard'>
-                            <CircularProgress variant="static" value={0} size={'23vh'} id='circular-progress-dashboard' />
-                            <p className='percentage-dashboard' id='percentage-dashboard'>{'0%'}</p>
+                            <script>{console.log(redux.store.getState())}</script>
+                            <CircularProgress variant="static" value={redux.store.getState().username.riskLevel} size={'23vh'} id='circular-progress-dashboard' />
+                            <p className='percentage-dashboard' id='percentage-dashboard'>{`${redux.store.getState().username.riskLevel}%`}</p>
                         </div>
                         <p id='a3-grid-dashboard'>Pods</p>
-                        <button className="grid-item-dashboard" id='a4-grid-dashboard' onClick={goPods}><script>{loadPods()}</script></button>
+                        <button className="grid-item-dashboard" id='a4-grid-dashboard' onClick={goPods}>
+                            <ul className="list-pods-dashboard">
+                                {redux.store.getState().pods && redux.store.getState().pods.map((pod, index) => (
+                                    <Pod props={index} key={index} />
+                                ))}
+                            </ul>
+                        </button>
                         <p id='a5-grid-dashboard'>Your Activities</p>
-                        <button className="grid-item-dashboard" id='a6-grid-dashboard' onClick={goActivities}></button>
+                        <button className="grid-item-dashboard" id='a6-grid-dashboard' onClick={goActivities}>
+                            <ul className="list-pods-dashboard">
+                                {redux.store.getState().activities && redux.store.getState().activities.map((activity, index) => (
+                                    <Activity props={index} key={index} />
+                                ))}
+                            </ul>
+                        </button>
                         <p id='a7-grid-dashboard'>Others</p>
                         <div className="special-grid-item-dashboard" id='a8-grid-dashboard' >
                             <div id='a7-grid-dashboard'>
-                                <button className='button-titlebar-dashboard' id='other-buttons-dashboard1' onClick={goNotifications}>{`Notifications (0)`}</button>
+                                <button className='button-titlebar-dashboard' id='other-buttons-dashboard1' onClick={goNotifications}>{`Notifications (${redux.store.getState().notifications.length})`}</button>
                                 <button className='button-titlebar-dashboard' id='other-buttons-dashboard2' onClick={gotCovid}>I have Covid</button>
                             </div>
                             <button onClick={goDisclaimer} className='disclaimer-dashboard'>

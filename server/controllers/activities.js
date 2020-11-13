@@ -26,7 +26,7 @@ const postActivity = async (req, res, next) => {
             `INSERT INTO '${tables.activities}'(activity_id, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES ('${uuid}', '${activity.name}', '${activity.date}', '${activity.indoor}', '${activity.socialInteraction}', '${activity.proximity}', '${activity.peoplePresent}');`
         );
         const newActivityQuery = await connection.query(
-            `SELECT (name) FROM '${tables.activities}' WHERE activity_id = '${uuid}';`
+            `SELECT (name) FROM ${tables.activities} WHERE activity_id = '${uuid}';`
         );
         /* UPDATE USER'S RISK LEVEL */
         await connection.release();
@@ -57,7 +57,7 @@ const getActivity = async (req, res, next) => {
 
     try {
         const getActivityQuery = await connection.query(
-            `SELECT * FROM '${tables.activities}' WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
+            `SELECT * FROM ${tables.activities} WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         );
         await connection.release();
         const activity = getActivityQuery.rows[0];
@@ -88,19 +88,19 @@ const getActivities = async (req, res, next) => {
     const connection = await pool.connect();
 
     try {
-        const queryLimit = limit ? limit : 18446744073709551615;
+        const queryLimit = limit ? limit : Number.MAX_SAFE_INTEGER;
 
         /* PQ LIMIT isnt good */
         const getActivitiesQuery = await connection.query(
             `SELECT * FROM 
-            activities
+            ${tables.activities}
             WHERE user_uuid ='${userId}'
             ORDER BY date DESC
             LIMIT '${queryLimit}';`
         );
         await connection.release();
-        activities = getActivitiesQuery.rows[0];
-        if (activities) {
+        activities = getActivitiesQuery.rows;
+        if (activities.length != 0) {
             return res.status(200).json({
                 success: true,
                 message: `Got activities.`,
@@ -128,10 +128,10 @@ const deleteActivity = async (req, res, next) => {
 
     try {
         const getActivityQuery = await connection.query(
-            `SELECT (name) FROM '${tables.activities}' WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
+            `SELECT (name) FROM ${tables.activities} WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         )
         const deleteActivityQuery = await connection.query(
-            `DELETE FROM '${tables.activities}' WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
+            `DELETE FROM ${tables.activities} WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         );
         await connection.release();
         const getActivity = getActivityQuery.rows[0];

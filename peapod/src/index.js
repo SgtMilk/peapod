@@ -53,9 +53,9 @@ const curuser = (state, action) => {
   if (action.type === "SETUSER")
     return {
       username: action.username,
-      pods: [],
-      activities: [],
-      notifications: [],
+      pods: state.pods,
+      activities: state.activities,
+      notifications: state.notifications,
     };
   else if (action.type === "SETPODS")
     return {
