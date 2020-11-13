@@ -60,18 +60,22 @@ const getPods = async (req, res, next) => {
   try {
     const queryLimit = limit ? limit : Number.MAX_SAFE_INTEGER;
 
-    const podQuery = await connection.query(`SELECT (pod_uuid) from ${tables.pod_users}
-    WHERE user_uuid = '${userID}'
-    RIGHT JOIN ${tables.pods} ON ${tables.pod_users}.pod_uuid = ${tables.pods}.pod_uuid
-    ORDER BY created_date DESC LIMIT '${queryLimit}';`);
+    const podUsersQuery = await connection.query(`SELECT (pod_uuid) FROM ${tables.pod_users} WHERE user_uuid = '${userID}';`);
+    const podUsers = podUsersQuery.rows;
+    const pods = [];
 
-    const pods = podQuery.rows;
+    podUsers.forEach(async (pod_uuid) => {
+      const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${pod_uuid}'`);
+      const pod = podQuery.rows[0];
+      pods.push(pod);
+    })
+
     await connection.release();
     if (pods.length != 0) {
       return res.status(200).json({
         success: true,
         message: `Pods found was successfully.`,
-        pods
+        pods: pods.sort((a, b) => b.created_date - a.created_date).slice(0, queryLimit)
       })
     } else {
       return res.status(404).json({
@@ -79,6 +83,7 @@ const getPods = async (req, res, next) => {
         message: `No pods were found.`,
       })
     }
+
 
   } catch (err) {
     console.log(err);
