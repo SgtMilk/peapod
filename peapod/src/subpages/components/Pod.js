@@ -12,11 +12,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 export const Pod = (index) => {
 
     return (
-        <div className = 'pod'>
-            <p className = 'groupname-pod'>{redux.store.getState().pods[index.props].groupname}</p>
-            <div className = 'wrapper-progress-pod'>
-                <CircularProgress variant="static" value={redux.store.getState().pods[index.props].maxValue} size = {'5vh'}/>
-                <p className = 'percentage-pod'>{`${redux.store.getState().pods[index.props].maxValue}%`}</p>
+        <div className='pod'>
+            <p className='groupname-pod'>{redux.store.getState().pods[index.props].name}</p>
+            <div className='wrapper-progress-pod'>
+                <CircularProgress variant="static" value={10/*redux.store.getState().pods[index.props].maxValue*/} size={'5vh'} />
+                <p className='percentage-pod'>{10/*`${redux.store.getState().pods[index.props].maxValue}%`*/}</p>
             </div>
         </div>
     )

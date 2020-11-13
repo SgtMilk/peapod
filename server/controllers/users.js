@@ -23,7 +23,7 @@ const updateUser = async (req, res, next) => {
     const connection = await pool.connect();
     //  LOGIC
     const updateUserQuery = await connection.query(`UPDATE ${tables.users} SET hascovid='${hascovid}' WHERE user_uuid='${userID}';`);
-    const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${userID};`)
+    const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${userID}';`)
     const user = userQuery.rows[0];
     connection.release();
     if (!user) {
