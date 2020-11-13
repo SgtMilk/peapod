@@ -23,7 +23,7 @@ const getNotification = async (req, res, next) => {
         const getNotificationQuery = await connection.query(
             `SELECT * FROM ${tables.notifications} WHERE notification_uuid = '${notificationId}' AND user_uuid = '${userId}';`
         );
-        await connection.release();
+        connection.release();
         const notification = getNotificationQuery.rows[0];
         if (notification) {
             return res.status(200).json({
@@ -32,8 +32,8 @@ const getNotification = async (req, res, next) => {
                 notification: notification
             })
         } else {
-            return res.status(404).json({
-                success: false,
+            return res.status(200).json({
+                success: true,
                 message: `Get notification unsuccessful.`,
             })
         }
@@ -55,7 +55,7 @@ const getNotifications = async (req, res, next) => {
         const getNotificationsQuery = await connection.query(
             `SELECT * FROM ${tables.notifications} WHERE user_uuid = '${userId}' ORDER BY created_date DESC LIMIT '${queryLimit}';`
         );
-        await connection.release();
+        connection.release();
         const notifications = getNotificationsQuery.rows;
         if (notifications.length != 0) {
             return res.status(200).json({
@@ -64,8 +64,8 @@ const getNotifications = async (req, res, next) => {
                 notifications: notifications
             })
         } else {
-            return res.status(404).json({
-                success: false,
+            return res.status(200).json({
+                success: true,
                 message: `Got no notifications.`,
             })
         }
@@ -90,7 +90,7 @@ const putNotification = async (req, res, next) => {
     const notificationQuery = await connection.query(`SELECT * FROM ${tables.notifications} WHERE notification_uuid='${notificationID}' AND user_uuid='${userID}';`);
     const notification = notificationQuery.rows[0];
     const createPodUsers = await connection.query(`INSERT INTO ${tables.pod_users} (pod_uuid, user_uuid) VALUES ('${notification.pod_uuid}', '${userID}');`);
-    await connection.release();
+    connection.release();
     return res.status(200).json({
         success: true,
         message: `${notificationID} has been updated.`,

@@ -11,6 +11,7 @@
 const pool = require("../config/pg-config");
 const { v4: uuidv4 } = require("uuid");
 const tables = require("../database/tables");
+const { activities } = require("../database/tables");
 require("express-async-errors");
 
 /**
@@ -18,18 +19,19 @@ require("express-async-errors");
  */
 const postActivity = async (req, res, next) => {
     const activity = req.body;
+    const userId = req.user.user_uuid;
     const connection = await pool.connect();
     const uuid = uuidv4();
 
     try {
         await connection.query(
-            `INSERT INTO '${tables.activities}'(activity_id, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES ('${uuid}', '${activity.name}', '${activity.date}', '${activity.indoor}', '${activity.socialInteraction}', '${activity.proximity}', '${activity.peoplePresent}');`
+            `INSERT INTO ${tables.activities}(activity_id, user_uuid, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES ('${uuid}', '${userId}' '${activity.name}', '${activity.date}', '${activity.indoor}', '${activity.socialInteraction}', '${activity.proximity}', '${activity.peoplePresent}');`
         );
         const newActivityQuery = await connection.query(
             `SELECT (name) FROM ${tables.activities} WHERE activity_id = '${uuid}';`
         );
         /* UPDATE USER'S RISK LEVEL */
-        await connection.release();
+        connection.release();
         const newActivity = newActivityQuery.rows[0];
         if (newActivity) {
             return res.status(200).json({
@@ -37,8 +39,8 @@ const postActivity = async (req, res, next) => {
                 message: `${newActivity.name} was created successfully.`
             })
         } else {
-            return res.status(404).json({
-                success: false,
+            return res.status(200).json({
+                success: true,
                 message: `${newActivity.name} was not created.`,
             })
         }
@@ -59,7 +61,7 @@ const getActivity = async (req, res, next) => {
         const getActivityQuery = await connection.query(
             `SELECT * FROM ${tables.activities} WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         );
-        await connection.release();
+        connection.release();
         const activity = getActivityQuery.rows[0];
         if (activity) {
             return res.status(200).json({
@@ -68,8 +70,8 @@ const getActivity = async (req, res, next) => {
                 activity: activity
             })
         } else {
-            return res.status(404).json({
-                success: false,
+            return res.status(200).json({
+                success: true,
                 message: `Get ${activity.name} unsuccessful.`,
             })
         }
@@ -90,6 +92,8 @@ const getActivities = async (req, res, next) => {
     try {
         const queryLimit = limit ? limit : Number.MAX_SAFE_INTEGER;
 
+        console.log("user: " + userId);
+
         /* PQ LIMIT isnt good */
         const getActivitiesQuery = await connection.query(
             `SELECT * FROM 
@@ -98,8 +102,10 @@ const getActivities = async (req, res, next) => {
             ORDER BY date DESC
             LIMIT '${queryLimit}';`
         );
-        await connection.release();
-        activities = getActivitiesQuery.rows;
+        connection.release();
+        const activities = getActivitiesQuery.rows;
+        
+        console.log("activities: " + activities);
         if (activities.length != 0) {
             return res.status(200).json({
                 success: true,
@@ -107,8 +113,8 @@ const getActivities = async (req, res, next) => {
                 activities: activities
             })
         } else {
-            return res.status(404).json({
-                success: false,
+            return res.status(200).json({
+                success: true,
                 message: `Got no activities.`,
             })
         }
@@ -133,21 +139,14 @@ const deleteActivity = async (req, res, next) => {
         const deleteActivityQuery = await connection.query(
             `DELETE FROM ${tables.activities} WHERE activity_id = '${uuid}' AND user_uuid = '${userId}';`
         );
-        await connection.release();
+        connection.release();
         const getActivity = getActivityQuery.rows[0];
-        const deleteActivity = deleteActivityQuery.rows[0];
-        if (deleteActivity) {
-            return res.status(200).json({
-                success: true,
-                message: `${getActivity.name} was deleted successfully.`
-            })
-        } else {
-            return res.status(404).json({
-                success: false,
-                message: `Delete ${getActivity.name} unsuccessful.`,
-            })
-        }
+        return res.status(200).json({
+            success: true,
+            message: `${getActivity.name} was deleted successfully.`
+        })
     } catch (err) {
+        connection.release();
         return res.status(400).json({
             success: false,
             message: `Bad request`
