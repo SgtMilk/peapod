@@ -28,7 +28,9 @@ export const Pods2 = (index) => {
     history.push("/pods")
   }
 
-  const maxValue = Math.max(redux.store.getState().pods[index.props].users.map((user) => user.risklevel));
+  const maxValue = Math.max(...redux.store.getState().pods[index.props].users.map((user) => parseInt(user.risklevel)));
+  console.log(redux.store.getState().pods[index.props].users.map((user) => parseInt(user.risklevel)));
+  console.log(maxValue);
 
   const expandMe = isExpanded ? "pods2 expanded" : "pods2";
   const expandMe2 = isExpanded ? "other-stuff-pods2 expanded2" : "other-stuff-pods2";

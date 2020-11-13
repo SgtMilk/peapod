@@ -18,17 +18,26 @@ require("express-async-errors");
  * Controller functions
  */
 const postActivity = async (req, res, next) => {
-    const activity = req.body;
+    const activity = req.body.activity;
     const userId = req.user.user_uuid;
     const connection = await pool.connect();
     const uuid = uuidv4();
-
+    console.log(activity.date);
+    const date = new Date(activity.date).toDateString();
+    console.log(date);
+    const name = activity.name;
+    const indoor = activity.indoor;
+    const socialInteraction = activity.socialInteraction;
+    const peoplePresent = activity.peoplePresent;
+    const duration = activity.duration;
+    const mask = activity.mask;
     try {
         const postNewActivity = await connection.query(
-            `INSERT INTO ${tables.activities}(activity_id, user_uuid, name, date, indoor, socialinteraction, peoplepresent, duration, mask) VALUES ('${uuid}', '${userId}' '${activity.name}', '${activity.date}', '${activity.indoor}', '${activity.socialInteraction}', ${activity.peoplePresent}', '${activity.duration}', '${activity.mask}');`
+            `INSERT INTO ${tables.activities}(activity_id, user_uuid, name, date, indoor, socialinteraction, peoplepresent, duration, mask) VALUES ('${uuid}', '${userId}', '${name}', '${date}', '${indoor}', '${socialInteraction}', '${peoplePresent}', '${duration}', '${mask}');`
         );
+        console.log("ayo gang")
         const newActivityQuery = await connection.query(
-            `SELECT (name) FROM ${tables.activities} WHERE activity_id = '${uuid}';`
+            `SELECT * FROM ${tables.activities} WHERE activity_id = '${uuid}';`
         );
         /* UPDATE USER'S RISK LEVEL */
         connection.release();
