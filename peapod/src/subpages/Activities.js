@@ -29,7 +29,7 @@ export const Activities = () => {
         document.getElementById('wrapper2-activities').style.height = '25vh';
         document.getElementById('wrapper2-activities').style.width = '40vw';
         setTimeout(function() {
-            history.push("/login");
+            history.push("/");
         },500)
     }
 
@@ -38,7 +38,7 @@ export const Activities = () => {
         document.getElementById('button-titlebar-activities').style.opacity = 0;
         document.getElementById('button-back-titlebar-activities').style.opacity = 0;
         setTimeout(function() {
-            history.push("/");
+            history.push("/dashboard");
         },500)
     }
 

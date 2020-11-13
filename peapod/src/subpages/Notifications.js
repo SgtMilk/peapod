@@ -28,7 +28,7 @@ export const Notifications = () => {
         document.getElementById('wrapper2-notifications').style.height = '25vh';
         document.getElementById('wrapper2-notifications').style.width = '40vw';
         setTimeout(function() {
-            history.push("/login");
+            history.push("/");
         },500)
     }
 
@@ -37,7 +37,7 @@ export const Notifications = () => {
         document.getElementById('button-titlebar-notifications').style.opacity = 0;
         document.getElementById('button-back-titlebar-notifications').style.opacity = 0;
         setTimeout(function() {
-            history.push("/");
+            history.push("/dashboard");
         },500)
     }
 

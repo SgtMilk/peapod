@@ -97,7 +97,7 @@ export const Dashboard = () => {
         document.getElementById('wrapper2-dashboard').style.height = '25vh';
         document.getElementById('wrapper2-dashboard').style.width = '40vw';
         setTimeout(function () {
-            history.push("/login");
+            history.push("/");
         }, 500)
     }
 

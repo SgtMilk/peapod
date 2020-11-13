@@ -19,8 +19,8 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Dashboard} />
-        <Route path="/login" exact component={Login} />
+        <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/" exact component={Login} />
         <Route path="/pods" exact component={Pods} />
         <Route path="/activities" exact component={Activities} />
         <Route path="/addpod" exact component={AddPod} />

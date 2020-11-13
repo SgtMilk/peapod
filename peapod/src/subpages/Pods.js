@@ -28,7 +28,7 @@ export const Pods = () => {
         document.getElementById('wrapper2-pods').style.height = '25vh';
         document.getElementById('wrapper2-pods').style.width = '40vw';
         setTimeout(function() {
-            history.push("/login");
+            history.push("/");
         },500)
     }
 
@@ -37,7 +37,7 @@ export const Pods = () => {
         document.getElementById('button-titlebar-pods').style.opacity = 0;
         document.getElementById('button-back-titlebar-pods').style.opacity = 0;
         setTimeout(function() {
-            history.push("/");
+            history.push("/dashboard");
         },500)
     }
 

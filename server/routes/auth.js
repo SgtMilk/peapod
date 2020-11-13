@@ -27,7 +27,7 @@ google.get(
 google.get(
   "/redirect",
   passport.authenticate("google", {
-    successRedirect: config.HOME_PAGE_DOMAIN,
+    successRedirect: config.HOME_PAGE_DOMAIN + '/dashboard',
     failureRedirect: "/auth/login/failed",
   })
 );
@@ -37,7 +37,7 @@ facebook.get("/", passport.authenticate("facebook", { scope: ["email"] }));
 facebook.get(
   "/redirect",
   passport.authenticate("facebook", {
-    successRedirect: config.HOME_PAGE_DOMAIN,
+    successRedirect: config.HOME_PAGE_DOMAIN + '/dashboard',
     failureRedirect: "/auth/login/failed",
   })
 );

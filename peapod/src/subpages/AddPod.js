@@ -26,7 +26,7 @@ export const AddPod = () => {
         document.getElementById('wrapper2-addpod').style.height = '25vh';
         document.getElementById('wrapper2-addpod').style.width = '40vw';
         setTimeout(function() {
-            history.push("/login");
+            history.push("/");
         },500)
     }
 
@@ -36,7 +36,7 @@ export const AddPod = () => {
         document.getElementById('button-titlebar-addpod').style.opacity = 0;
         document.getElementById('button-back-titlebar-addpod').style.opacity = 0;
         setTimeout(function() {
-            history.push("/");
+            history.push("/dashboard");
         },500)
     }
 

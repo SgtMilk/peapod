@@ -33,27 +33,24 @@ export const Login = () => {
     }
 
     const handleGoogle = async () => {
-        window.open(`${serverAddress}/auth/google`, "_self");
         document.getElementById('wrapper-button-login').style.height = '80vh';
         document.getElementById('wrapper-button-login').style.width = '90vw';
         document.getElementById('wrapper2-login').style.height = '80vh';
         document.getElementById('wrapper2-login').style.width = '90vw';
         document.getElementById('screen2-login').style.opacity = 0;
         setTimeout(function() {
-            history.push("/");
+            window.open(`${serverAddress}/auth/google`, "_self");
         },500)
     };
 
     const handleFacebook = async () => {
-        window.open(`${serverAddress}/auth/facebook`, "_self");
-        console.log('axios push here');
         document.getElementById('wrapper-button-login').style.height = '80vh';
         document.getElementById('wrapper-button-login').style.width = '90vw';
         document.getElementById('wrapper2-login').style.height = '80vh';
         document.getElementById('wrapper2-login').style.width = '90vw';
         document.getElementById('screen2-login').style.opacity = 0;
         setTimeout(function() {
-            history.push("/");
+            window.open(`${serverAddress}/auth/facebook`, "_self");
         },500)
     };
 
