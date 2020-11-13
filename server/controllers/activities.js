@@ -24,7 +24,7 @@ const postActivity = async (req, res, next) => {
     const uuid = uuidv4();
 
     try {
-        await connection.query(
+        const postNewActivity = await connection.query(
             `INSERT INTO ${tables.activities}(activity_id, user_uuid, name, date, indoor, socialinteraction, peoplepresent, duration, mask) VALUES ('${uuid}', '${userId}' '${activity.name}', '${activity.date}', '${activity.indoor}', '${activity.socialInteraction}', ${activity.peoplePresent}', '${activity.duration}', '${activity.mask}');`
         );
         const newActivityQuery = await connection.query(
@@ -33,6 +33,7 @@ const postActivity = async (req, res, next) => {
         /* UPDATE USER'S RISK LEVEL */
         connection.release();
         const newActivity = newActivityQuery.rows[0];
+        console.log(newActivity);
         if (newActivity) {
             return res.status(200).json({
                 success: true,
@@ -45,6 +46,7 @@ const postActivity = async (req, res, next) => {
             })
         }
     } catch (err) {
+        console.log(err);
         return res.status(400).json({
             success: false,
             message: `Bad request`
