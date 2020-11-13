@@ -23,7 +23,7 @@ const postActivity = async (req, res, next) => {
 
     try {
         await connection.query(
-            `INSERT INTO '${tables.activities}'(activity_id, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES ('${uuid}', '${activity.name}', '${activity.data}', '${activity.indoor}', '${activity.socialInteraction}', '${activity.proximity}', '${activity.peoplePresent}');`
+            `INSERT INTO '${tables.activities}'(activity_id, name, date, indoor, socialinteraction, proximity, peoplepresent) VALUES ('${uuid}', '${activity.name}', '${activity.date}', '${activity.indoor}', '${activity.socialInteraction}', '${activity.proximity}', '${activity.peoplePresent}');`
         );
         const newActivityQuery = await connection.query(
             `SELECT (name) FROM '${tables.activities}' WHERE activity_id = '${uuid}';`
@@ -65,7 +65,7 @@ const getActivity = async (req, res, next) => {
             return res.status(200).json({
                 success: true,
                 message: `Get ${activity.name} successful.`,
-                activity
+                activity: activity
             })
         } else {
             return res.status(404).json({
@@ -104,7 +104,7 @@ const getActivities = async (req, res, next) => {
             return res.status(200).json({
                 success: true,
                 message: `Got activities.`,
-                activities
+                activities: activities
             })
         } else {
             return res.status(404).json({

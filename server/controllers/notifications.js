@@ -29,7 +29,7 @@ const getNotification = async (req, res, next) => {
             return res.status(200).json({
                 success: true,
                 message: `Get notification successful.`,
-                notification
+                notification: notification
             })
         } else {
             return res.status(404).json({
@@ -61,7 +61,7 @@ const getNotifications = async (req, res, next) => {
             return res.status(200).json({
                 success: true,
                 message: `Got notifications.`,
-                notifications
+                notifications: notifications
             })
         } else {
             return res.status(404).json({
@@ -93,7 +93,7 @@ const putNotification = async (req, res, next) => {
     return res.status(200).json({
         success: true,
         message: `${notificationID} has been updated.`,
-        notification
+        notification: notification
     });
 }
 
