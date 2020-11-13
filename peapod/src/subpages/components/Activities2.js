@@ -21,7 +21,7 @@ export const Activities2 = (index) => {
         "Content-Type": "application/json",
       },
       baseURL: serverAddress,
-      url: `/api/activities/${redux.store.getState().pods[index.props].pod_uuid}`,
+      url: `/api/activities/${redux.store.getState().activities[index.props].activity_id}`,
       withCredentials: true,
     }
     const response = await axios(axiosOptions);
