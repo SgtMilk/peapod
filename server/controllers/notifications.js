@@ -53,7 +53,7 @@ const getNotifications = async (req, res, next) => {
     try {
         const queryLimit = limit ? limit : Number.MAX_SAFE_INTEGER;
         const getNotificationsQuery = await connection.query(
-            `SELECT * FROM ${tables.notifications} WHERE user_uuid = '${userId}' ORDER BY created_date DESC LIMIT '${queryLimit}';`
+            `SELECT * FROM ${tables.notifications} WHERE user_uuid = '${userId}' AND accepted=FALSE ORDER BY created_date DESC LIMIT '${queryLimit}';`
         );
         connection.release();
         const notifications = getNotificationsQuery.rows;
@@ -82,20 +82,31 @@ const putNotification = async (req, res, next) => {
     //  VARIABLES
     const userID = req.user.user_uuid;
     const notificationID = req.params.id;
-    const { accepted } = req.body;
+    const { accepted, declined } = req.body;
     //  DB
     const connection = await pool.connect();
     //  LOGIC
-    const updateNotificationQuery = await connection.query(`UPDATE ${tables.notifications} SET accepted='${accepted}' WHERE notification_uuid='${notificationID}' AND user_uuid='${userID}';`);
-    const notificationQuery = await connection.query(`SELECT * FROM ${tables.notifications} WHERE notification_uuid='${notificationID}' AND user_uuid='${userID}';`);
-    const notification = notificationQuery.rows[0];
-    const createPodUsers = await connection.query(`INSERT INTO ${tables.pod_users} (pod_uuid, user_uuid) VALUES ('${notification.pod_uuid}', '${userID}');`);
-    connection.release();
-    return res.status(200).json({
-        success: true,
-        message: `${notificationID} has been updated.`,
-        notification: notification
-    });
+    if (accepted) {
+
+        const updateNotificationQuery = await connection.query(`UPDATE ${tables.notifications} SET accepted='${accepted}' WHERE notification_uuid='${notificationID}' AND user_uuid='${userID}';`);
+        const notificationQuery = await connection.query(`SELECT * FROM ${tables.notifications} WHERE notification_uuid='${notificationID}' AND user_uuid='${userID}';`);
+        const notification = notificationQuery.rows[0];
+        const createPodUsers = await connection.query(`INSERT INTO ${tables.pod_users} (pod_uuid, user_uuid) VALUES ('${notification.pod_uuid}', '${userID}');`);
+        connection.release();
+        return res.status(200).json({
+            success: true,
+            message: `${notificationID} has been updated.`,
+            notification: notification
+        });
+    } else if (declined) {
+        const updateNotificationQuery = await connection.query(`DELETE FROM ${tables.notifications} WHERE notification_uuid='${notificationID}' AND user_uuid='${userID}';`);
+        connection.release();
+        return res.status(200).json({
+            success: true,
+            message: `${notificationID} has been declined.`,
+        });
+    }
+
 }
 
 module.exports = { getNotifications, putNotification, getNotification };

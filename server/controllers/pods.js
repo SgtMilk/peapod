@@ -62,16 +62,15 @@ const getPods = async (req, res, next) => {
 
     const podUsersQuery = await connection.query(`SELECT (pod_uuid) FROM ${tables.pod_users} WHERE user_uuid = '${userID}';`);
     const podUsers = podUsersQuery.rows;
-    const pods = [];
+    let pods = [];
 
-    podUsers.forEach(async (pod_uuid) => {
-      const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${pod_uuid}'`);
+    for (let i = 0; i < podUsers.length; i++) {
+      const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podUsers[i].pod_uuid}'`);
       const pod = podQuery.rows[0];
-      pods.push(pod);
-    })
-
+      pods[i] = pod
+    }
     connection.release();
-    
+
     if (pods.length != 0) {
       return res.status(200).json({
         success: true,
@@ -105,38 +104,48 @@ const postPod = async (req, res, next) => {
   const connection = await pool.connect();
   //    LOGIC
   //  Create POD
-  const createPodQuery = await connection.query(`
+  try {
+    const createPodQuery = await connection.query(`
   INSERT INTO ${tables.pods} 
   (pod_uuid, name, pod_creator_id, created_date) 
-  VALUES ('${podID}', ${name}', '${userID}', '${new Date()}');
+  VALUES ('${podID}', '${name}', '${userID}', '${new Date().toDateString()}');
   `)
-  //  Create NOTIFICATIONS
-  emails.forEach(async (email) => {
-    if (email = "") return;
-    const userQuery = await connection.query(`SELECT (user_uuid) FROM ${tables.users} WHERE email='${email}';`);
-    const receiverID = userQuery.rows[0];
-    if (!receiverID) return;
-    const notificationsQuery = await connection.query(`
+
+    const createPodUsers = await connection.query(`
+  INSERT INTO ${tables.pod_users} 
+  (pod_uuid, user_uuid) 
+  VALUES ('${podID}', '${userID}');
+  `)
+    //  Create NOTIFICATIONS
+    emails.forEach(async (email) => {
+      if (email = "") return;
+      const userQuery = await connection.query(`SELECT (user_uuid) FROM ${tables.users} WHERE email='${email}';`);
+      const receiverID = userQuery.rows[0];
+      if (!receiverID) return;
+      const notificationsQuery = await connection.query(`
     INSERT INTO ${tables.notifications} 
     (notification_uuid, user_uuid, pod_uuid, sender_uuid, message, created_date, accepted )
     VALUES ('${notificationID}', '${receiverID}', '${podID}', '${userID}', 'You've been invited to a ${name}, join the pod party!', '${new Date()}', FALSE);
     `);
-  })
-  //  Return Pod
-  const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podID}';`);
-  const pod = podQuery.rows[0];
-  connection.release();
-  if (pod) {
-    return res.status(200).json({
-      success: true,
-      message: `${podID} created successfully.`,
-      pod: pod
     })
-  } else {
-    return res.status(400).json({
-      success: false,
-      message: `Pod could not be created.`
-    })
+    //  Return Pod
+    const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podID}';`);
+    const pod = podQuery.rows[0];
+    connection.release();
+    if (pod) {
+      return res.status(200).json({
+        success: true,
+        message: `${podID} created successfully.`,
+        pod: pod
+      })
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: `Pod could not be created.`
+      })
+    }
+  } catch (err) {
+    console.log(err)
   }
 };
 

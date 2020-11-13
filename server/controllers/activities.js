@@ -104,7 +104,7 @@ const getActivities = async (req, res, next) => {
         );
         connection.release();
         const activities = getActivitiesQuery.rows;
-        
+
         console.log("activities: " + activities);
         if (activities.length != 0) {
             return res.status(200).json({
@@ -120,6 +120,7 @@ const getActivities = async (req, res, next) => {
         }
 
     } catch (err) {
+        console.log(err)
         return res.status(400).json({
             success: false,
             message: `Bad request`

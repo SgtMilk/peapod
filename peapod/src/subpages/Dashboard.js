@@ -16,11 +16,6 @@ import serverAddress from "../constants"
 import axios from "axios"
 
 export const Dashboard = () => {
-    //let numberOfNotifications = 2;
-    //let percentage = 70;
-    //const testDataPod = [{ groupname: 'beep boop', names: ['beep', 'boop', 'bweep', 'gg', 'aaaa', 'ddd', 'hhh'], maxValue: 70 }, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 20 }, { groupname: 'beep boop', names: ['beep', 'boop', 'bweep'], maxValue: 50 }];
-    //const testDataActivity = [{ name: 'beep', risk: 90, date: '11/11/1111' }, { name: 'beep', risk: 90, date: '11/11/1111' }, { name: 'beep', risk: 90, date: '11/11/1111' }]
-    //const testDataNotification = [{ groupname: 'beep boop' }, { groupname: 'beep boop' }, { groupname: 'beep boop' }]
 
     let history = useHistory();
     const [foundUser, setFoundUser] = React.useState(false);
@@ -219,7 +214,7 @@ export const Dashboard = () => {
             axios(podsOptions).then((response) => {
                 //  Set state in redux for pods
 
-                if (response.data.notifications !== undefined) {
+                if (response.data.pods !== undefined) {
                     redux.store.dispatch(redux.setPods(response.data.pods));
                 }
             }),

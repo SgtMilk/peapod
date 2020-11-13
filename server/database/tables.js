@@ -15,6 +15,6 @@ const tables = {
 
 //activities: || activity_id || user_uuid || name || date || indoor || socialinteraction || proximity || peoplepresent ||
 
-//notifications: || notification_uuid || user_uuid || pod_uuid || sender_uuid || message || created_date || accepted || 
+//notifications: || notification_uuid || user_uuid || pod_uuid || sender_uuid || message || created_date || accepted ||
 
 module.exports = tables;

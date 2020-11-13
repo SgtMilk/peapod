@@ -1,0 +1,15 @@
+<ul className="list-pods-pods2">
+          {redux.store.getState().pods[index.props].names.map((name, index2) => (
+            <div className='name-pods2' key={index2}>
+              <p>{name}</p>
+              <div className="wrapper-progress-pods2">
+                <CircularProgress
+                  variant="static"
+                  value={0/*redux.store.getState().pods[index.props].maxValue*/}
+                  size={"5vh"}
+                />
+                <p className="percentage-pods2">{0/*`${redux.store.getState().pods[index.props].maxValue}%`*/}</p>
+              </div>
+            </div>
+          ))}
+        </ul>
