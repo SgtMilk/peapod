@@ -141,6 +141,9 @@ export const Dashboard = () => {
         { enabled: !foundUser, retry: false }
     );
 
+    if (userQuery.isError) {
+        history.push("/");
+    }
 
     //  Notifications Query
     const notificationsOptions = {
@@ -159,7 +162,11 @@ export const Dashboard = () => {
         () =>
             axios(notificationsOptions).then((response) => {
                 //  Set state in redux for notifications
-                redux.store.dispatch(redux.setNotifications(response.data.notifications));
+
+                if (response.data.notifications !== undefined) {
+                    redux.store.dispatch(redux.setNotifications(response.data.notifications));
+                }
+
             }),
     );
 
@@ -184,7 +191,10 @@ export const Dashboard = () => {
         () =>
             axios(activitiesOptions).then((response) => {
                 //  Set state in redux for activities
-                redux.store.dispatch(redux.setActivities(response.data.activities));
+
+                if (response.data.activities !== undefined) {
+                    redux.store.dispatch(redux.setActivities(response.data.activities));
+                }
             }),
     );
 
@@ -208,7 +218,10 @@ export const Dashboard = () => {
         () =>
             axios(podsOptions).then((response) => {
                 //  Set state in redux for pods
-                redux.store.dispatch(redux.setPods(response.data.pods));
+
+                if (response.data.notifications !== undefined) {
+                    redux.store.dispatch(redux.setPods(response.data.pods));
+                }
             }),
     );
     if (userQuery.isLoading) {
