@@ -33,7 +33,7 @@ passport.deserializeUser(async (user_uuid, done) => {
     `SELECT * FROM ${tables.users} WHERE user_uuid='${user_uuid}'`
   );
   const user = userQuery.rows[0];
-  connection.release();
+  await connection.release();
   if (!user) {
     done(new Error("Failed to deserialize an user."));
   } else {
@@ -61,11 +61,11 @@ passport.use(
         */
         const uuid = uuidv4();
         const createUserQuery = await connection.query(
-          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, google_id, riskLevel) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${profile.riskLevel}');`
+          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, google_id, riskLevel) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${0}');`
         );
-        const newUserQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid=$1`, [uuid]);
+        const newUserQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${uuid}';`);
         const newUser = newUserQuery.rows[0];
-        connection.release();
+        await connection.release();
         done(null, newUser);
       } else if (user && !user.google_id) {
         /*
@@ -74,9 +74,9 @@ passport.use(
         const updatedUserQuery = await connection.query(
           `UPDATE ${tables.users} SET google_id='${profile.id}' WHERE email='${profile.emails[0].value}';`
         );
-        const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE google_id=$1`, [profile.id]);
+        const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE google_id='${profile.id}';`);
         const updatedUser = userQuery.rows[0];
-        connection.release();
+        await connection.release();
         done(null, updatedUser);
       } else {
         connection.release();
@@ -106,11 +106,11 @@ passport.use(
         */
         const uuid = uuidv4();
         const createUserQuery = await connection.query(
-          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, facebook_id, riskLevel) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${profile.riskLevel}');`
+          `INSERT INTO ${tables.users}(user_uuid, email, firstname, lastname, facebook_id, riskLevel) VALUES('${uuid}', '${profile.emails[0].value}', '${profile.name.givenName}', '${profile.name.familyName}', '${profile.id}', '${0}');`
         );
-        const newUserQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid=$1`, [uuid]);
+        const newUserQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${uuid}';`);
         const newUser = newUserQuery.rows[0];
-        connection.release();
+        await connection.release();
         done(null, newUser);
       } else if (user && !user.facebook_id) {
         /*
@@ -119,9 +119,9 @@ passport.use(
         const updatedUserQuery = await connection.query(
           `UPDATE ${tables.users} SET facebook_id='${profile.id}' WHERE email='${profile.emails[0].value}';`
         );
-        const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE facebook_id=$1`, [profile.id]);
+        const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE facebook_id='${profile.id};`);
         const updatedUser = userQuery.rows[0];
-        connection.release();
+        await connection.release();
         done(null, updatedUser);
       } else {
         connection.release();
