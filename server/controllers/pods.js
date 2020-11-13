@@ -23,9 +23,9 @@ const getPod = async (req, res, next) => {
   const connection = await pool.connect();
   //    LOGIC
   try {
-    const podQuery = await connection.query(`SELECT * FROM '${tables.pods}' 
+    const podQuery = await connection.query(`SELECT * FROM ${tables.pods}
     WHERE pod_uuid IN 
-    (SELECT pod_uuid FROM '${tables.pod_users}' 
+    (SELECT pod_uuid FROM ${tables.pod_users}
       WHERE pod_uuid = '${podID}' AND user_uuid = '${userID}');`);
     const pod = podQuery.rows[0];
     await connection.release();
@@ -58,16 +58,16 @@ const getPods = async (req, res, next) => {
   const connection = await pool.connect();
   //    LOGIC
   try {
-    const queryLimit = limit ? limit : 18446744073709551615;
+    const queryLimit = limit ? limit : Number.MAX_SAFE_INTEGER;
 
-    const podQuery = await connection.query(`SELECT (pod_uuid) from '${tables.pod_users}' 
+    const podQuery = await connection.query(`SELECT (pod_uuid) from ${tables.pod_users}
     WHERE user_uuid='${userID}' 
-    RIGHT JOIN '${tables.pods}' ON pod_uuid = pod_uuid
+    RIGHT JOIN ${tables.pods} ON pod_uuid = pod_uuid
     ORDER BY created_date DESC LIMIT '${queryLimit}';`);
 
     const pods = podQuery.rows;
     await connection.release();
-    if (podQuery.rows[0]) {
+    if (pods.length != 0) {
       return res.status(200).json({
         success: true,
         message: `Pods found was successfully.`,
@@ -81,6 +81,7 @@ const getPods = async (req, res, next) => {
     }
 
   } catch (err) {
+    console.log(err);
     return res.status(400).json({
       success: false,
       message: `Bad request`
@@ -106,17 +107,17 @@ const postPod = async (req, res, next) => {
   //  Create NOTIFICATIONS
   emails.forEach(async (email) => {
     if (email = "") return;
-    const userQuery = await connection.query(`SELECT (user_uuid) FROM '${tables.users}' WHERE email='${email}';`);
+    const userQuery = await connection.query(`SELECT (user_uuid) FROM ${tables.users} WHERE email='${email}';`);
     const receiverID = userQuery.rows[0];
     if (!receiverID) return;
     const notificationsQuery = await connection.query(`
-    INSERT INTO '${tables.notifications}' 
+    INSERT INTO ${tables.notifications} 
     (notification_uuid, user_uuid, pod_uuid, sender_uuid, message, created_date, accepted )
     VALUES ('${notificationID}', '${receiverID}', '${podID}', '${userID}', 'You've been invited to a ${name}, join the pod party!', '${new Date()}', FALSE);
     `);
   })
   //  Return Pod
-  const podQuery = await connection.query(`SELECT * FROM '${tables.pods}' WHERE pod_uuid='${podID}';`);
+  const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podID}';`);
   const pod = podQuery.rows[0];
   await connection.release();
   if (pod) {
@@ -140,15 +141,15 @@ const deletePod = async (req, res, next) => {
   //    DB
   const connection = await pool.connect();
   //    LOGIC
-  const getPod = await connection.query(`SELECT * FROM '${tables.pods}' WHERE pod_uuid='${podID}' AND pod_creator_id='${userID}';`);
+  const getPod = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podID}' AND pod_creator_id='${userID}';`);
   if (!getPod.rows[0]) {
     (await connection).release();
     return res.status(401).json({ success: false, message: `You are not authorized to delete that pod.` })
   }
   try {
-    const notificationsQuery = await connection.query(`DELETE from '${tables.notifications}' WHERE pod_uuid='${podID}';`);
-    const podUsersQuery = await connection.query(`DELETE from '${tables.pod_users}' WHERE pod_uuid='${podID}';`);
-    const podQuery = await connection.query(`DELETE from '${tables.pods}' WHERE pod_creator_id='${userID}' AND pod_uuid='${podID}';`);
+    const notificationsQuery = await connection.query(`DELETE from ${tables.notifications} WHERE pod_uuid='${podID}';`);
+    const podUsersQuery = await connection.query(`DELETE from ${tables.pod_users} WHERE pod_uuid='${podID}';`);
+    const podQuery = await connection.query(`DELETE from ${tables.pods} WHERE pod_creator_id='${userID}' AND pod_uuid='${podID}';`);
     await connection.release();
     return res.status(200).json({
       success: true,
