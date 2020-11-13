@@ -48,19 +48,13 @@ export const Dashboard = () => {
 
             //  Get activities
 
-            redux.store.dispatch(redux.setPodsActivitiesNotifications(testDataPod, testDataActivity, testDataNotification));
+            //redux.store.dispatch(redux.setPodsActivitiesNotifications(testDataPod, testDataActivity, testDataNotification));
             setTimeout(function () {
-                document.getElementById('a6-grid-dashboard').innerHTML = (
+                document.getElementById('a4-grid-dashboard').innerHTML = (
+                    
                     <ul className="list-pods-dashboard">
                         {redux.store.getState().activities.map((activity, index) => (
                             <Activity props={index} key={index} />
-                        ))}
-                    </ul>
-                );
-                document.getElementById('a4-grid-dashboard').innerHTML = (
-                    <ul className="list-pods-dashboard">
-                        {redux.store.getState().pods.map((pod, index) => (
-                            <Pod props={index} key={index} />
                         ))}
                     </ul>
                 );
@@ -70,6 +64,17 @@ export const Dashboard = () => {
             }, 100)
         })
 
+    }
+
+    const loadPods = () => {
+        redux.store.dispatch(redux.setPods(testDataPod));
+        return (
+            <ul className="list-pods-dashboard">
+                {redux.store.getState().pods.map((pod, index) => (
+                    <Pod props={index} key={index} />
+                ))}
+            </ul>
+        )
     }
 
     const goDisclaimer = () => {
@@ -258,7 +263,7 @@ export const Dashboard = () => {
                             <p className='percentage-dashboard' id='percentage-dashboard'>{'0%'}</p>
                         </div>
                         <p id='a3-grid-dashboard'>Pods</p>
-                        <button className="grid-item-dashboard" id='a4-grid-dashboard' onClick={goPods}></button>
+                        <button className="grid-item-dashboard" id='a4-grid-dashboard' onClick={goPods}><script>{loadPods()}</script></button>
                         <p id='a5-grid-dashboard'>Your Activities</p>
                         <button className="grid-item-dashboard" id='a6-grid-dashboard' onClick={goActivities}></button>
                         <p id='a7-grid-dashboard'>Others</p>
