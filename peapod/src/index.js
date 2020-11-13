@@ -78,7 +78,7 @@ const curuser = (state, action) => {
       activities: state.activities,
       notifications: action.notifications,
     };
-  else if (action.type === 'SETPODSACTIVITIESNOTIFICATIONS'){
+  else if (action.type === 'SETPODSACTIVITIESNOTIFICATIONS') {
     return {
       username: state.username,
       pods: action.pods,
@@ -87,13 +87,13 @@ const curuser = (state, action) => {
     };
   }
   else {
-      return {
-        username: action.username,
-        pods: action.pods,
-        activities: action.activities,
-        notifications: action.notifications,
-      };
-    }
+    return {
+      username: action.username,
+      pods: action.pods,
+      activities: action.activities,
+      notifications: action.notifications,
+    };
+  }
 };
 
 let store = createStore(curuser);
