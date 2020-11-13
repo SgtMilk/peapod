@@ -63,11 +63,22 @@ const getPods = async (req, res, next) => {
     const podUsersQuery = await connection.query(`SELECT (pod_uuid) FROM ${tables.pod_users} WHERE user_uuid = '${userID}';`);
     const podUsers = podUsersQuery.rows;
     let pods = [];
+    
 
     for (let i = 0; i < podUsers.length; i++) {
-      const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podUsers[i].pod_uuid}'`);
+      let users = [];
+
+      const podQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podUsers[i].pod_uuid}';`);
+      const usersPerPodQuery = await connection.query(`SELECT (user_uuid) FROM ${tables.pod_users} WHERE pod_uuid='${podUsers[i].pod_uuid}';`);
+      const usersPerPod = usersPerPodQuery.rows;
+      for (let j = 0; j < usersPerPod.length; j++) {
+        const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${usersPerPod[j].user_uuid}';`);
+        const user = userQuery.rows[0];
+        users[j] = {firstname: user.firstname, lastname: user.lastname, risklevel: user.risklevel};
+      }
       const pod = podQuery.rows[0];
-      pods[i] = pod
+      pods[i].pod = pod;
+      pods[i].users = users;
     }
     connection.release();
 
