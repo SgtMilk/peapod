@@ -16,6 +16,9 @@ export const Pods2 = (index) => {
   const removePod = async () => {
     const axiosOptions = {
       method: "delete",
+      data: {
+                user_uuid: redux.store.getState().username.user_uuid,
+            },
       headers: {
         "Access-Control-Allow-Credentials": true,
         "Content-Type": "application/json",
@@ -25,7 +28,12 @@ export const Pods2 = (index) => {
       withCredentials: true,
     }
     const response = await axios(axiosOptions);
-    history.push("/pods")
+    document.getElementById('wrapper2-pods').style.opacity = 0;
+    document.getElementById('button-titlebar-pods').style.opacity = 0;
+    document.getElementById('button-back-titlebar-pods').style.opacity = 0;
+    setTimeout(function () {
+        history.go(0);
+    }, 500)
   }
 
   const maxValue = Math.max(...redux.store.getState().pods[index.props].users.map((user) => parseInt(user.risklevel)));

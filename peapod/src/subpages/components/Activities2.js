@@ -25,7 +25,12 @@ export const Activities2 = (index) => {
       withCredentials: true,
     }
     const response = await axios(axiosOptions);
-    history.push("/activities")
+    document.getElementById('wrapper2-activities').style.opacity = 0;
+        document.getElementById('button-titlebar-activities').style.opacity = 0;
+        document.getElementById('button-back-titlebar-activities').style.opacity = 0;
+        setTimeout(function () {
+            history.go(0);
+        }, 500)
   }
 
   const expandMe = isExpanded ? "activities2 expanded" : "activities2";
@@ -36,7 +41,7 @@ export const Activities2 = (index) => {
         <p className="groupname-activities2">
           {redux.store.getState().activities[index.props].name}
         </p>
-        <p className='date-activities2'>{redux.store.getState().activities[index.props].date}</p>
+        <p className='date-activities2'>{redux.store.getState().activities[index.props].date.substring(0, 10)}</p>
       </div>
       <div className={expandMe2}>
         <button className='button-activities2' onClick={removeActivity}>Remove This Activity</button>

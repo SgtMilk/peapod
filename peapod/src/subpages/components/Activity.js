@@ -6,7 +6,7 @@ export const Activity = (index) => {
     return (
         <div className = 'activity'>
             <p className = 'name-activity'>{redux.store.getState().activities[index.props].name}</p>
-            <p className = 'date-activity'>{redux.store.getState().activities[index.props].date}</p>
+            <p className = 'date-activity'>{redux.store.getState().activities[index.props].date.substring(0, 10)}</p>
         </div>
     )
 }

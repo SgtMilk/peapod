@@ -3,8 +3,11 @@ import './Notification.css';
 import redux from "../../index";
 import axios from "axios"
 import serverAddress from "../../constants"
+import { useHistory } from "react-router-dom";
 
 export const Notification = ({ index, notification }) => {
+
+    let history = useHistory();
 
     const accept = async () => {
         const axiosOptions = {
@@ -21,13 +24,13 @@ export const Notification = ({ index, notification }) => {
             withCredentials: true,
         }
         const response = await axios(axiosOptions);
-        redux.store.dispatch(
-            redux.setNotifications(
-                redux.store.getState().notifications.filter(
-                    (notif) => notif.notification_uuid !== notification.notification_uuid
-                )
-            )
-        )
+        document.getElementById('wrapper2-notifications').style.opacity = 0;
+        document.getElementById('button-titlebar-notifications').style.opacity = 0;
+        document.getElementById('button-back-titlebar-notifications').style.opacity = 0;
+        setTimeout(function () {
+            history.go(0);
+        }, 500)
+         
     }
 
     const decline = async () => {
@@ -52,6 +55,7 @@ export const Notification = ({ index, notification }) => {
                 )
             )
         )
+        history.push("/notifications");
     }
 
     return (

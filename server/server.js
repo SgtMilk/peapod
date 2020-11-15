@@ -52,7 +52,6 @@ app.use(
 app.use(bodyParser.json());
 app.use("/", router);
 
-
 // Open server for requests
 const server = http.createServer(app);
 server.listen(config.PORT, () => {

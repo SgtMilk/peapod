@@ -169,15 +169,17 @@ const postPod = async (req, res, next) => {
 const deletePod = async (req, res, next) => {
   //    VARIABLES
   const podID = req.params.id;
-  const userID = req.user.user_uuid;
+  const userID = req.body.user_uuid;
   //    DB
   const connection = await pool.connect();
   //    LOGIC
   const getPodQuery = await connection.query(`SELECT * FROM ${tables.pods} WHERE pod_uuid='${podID}' AND pod_creator_id='${userID}';`);
+
   if (getPodQuery.rows.length == 0) {
     connection.release();
     return res.status(401).json({ success: false, message: `You are not authorized to delete that pod.` })
   }
+
   try {
     const notificationsQuery = await connection.query(`DELETE from ${tables.notifications} WHERE pod_uuid='${podID}';`);
     const podUsersQuery = await connection.query(`DELETE from ${tables.pod_users} WHERE pod_uuid='${podID}';`);

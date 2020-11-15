@@ -18,8 +18,8 @@ require("express-async-errors");
  */
 const updateUser = async (req, res, next) => {
     //  VARIABLES
-    const userID = req.user.user_uuid;
-    const { hascovid } = req.body;
+    const userID = req.body.user_uuid;
+    const hascovid = req.body.hascovid;
     console.log(hascovid);
     //  DB
     const connection = await pool.connect();
@@ -28,7 +28,7 @@ const updateUser = async (req, res, next) => {
     const userQuery = await connection.query(`SELECT * FROM ${tables.users} WHERE user_uuid='${userID}';`)
     const user = userQuery.rows[0];
     connection.release();
-    postRisk(userId);
+    postRisk(userID);
     if (!user) {
         return res.status(200).json({
             success: true,

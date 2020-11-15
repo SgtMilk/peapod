@@ -97,6 +97,7 @@ export const Dashboard = () => {
             method: "put",
             data: {
                 hascovid: !redux.store.getState().username.hascovid, //    user from state
+                user_uuid: redux.store.getState().username.user_uuid,
             },
             headers: {
                 "Access-Control-Allow-Credentials": true,
@@ -109,7 +110,13 @@ export const Dashboard = () => {
         const response = await axios(axiosOptions);
         const userData = response.data.user;
         redux.store.dispatch(redux.setUser(userData));
-        console.log(redux.store.getState().username)
+        document.getElementById('wrapper2-dashboard').style.opacity = 0;
+        document.getElementById('button-titlebar-dashboard').style.opacity = 0;
+        document.getElementById('a2-grid-dashboard').style.opacity = 0;
+        setTimeout(function () {
+            history.go(0);
+        }, 500)
+        
     }
 
 
@@ -132,7 +139,6 @@ export const Dashboard = () => {
             axios(userOptions).then((response) => {
                 //  Set state in redux for user
                 redux.store.dispatch(redux.setUser(response.data.user));
-                console.log(redux.store.getState().username)
                 setFoundUser(true);
             }),
         { enabled: !foundUser, retry: false }
@@ -219,8 +225,6 @@ export const Dashboard = () => {
                 if (response.data.pods !== undefined) {
                     redux.store.dispatch(redux.setPods(response.data.pods));
                 }
-
-                console.log(redux.store.getState().pods)
             }),
     );
 
@@ -266,7 +270,7 @@ export const Dashboard = () => {
             </div>
         )
     }
-    const hasCovid = redux.store.getState().username.hascovid ? "I have Covid" : "I don't have Covid";
+    const hasCovid = redux.store.getState().username.hascovid ? "I don't have Covid" : "I have Covid";
     return (
         <div className='dashboard' onLoad={initialSetupDashboard()}>
             <div className='titlebar-dashboard'>
@@ -279,8 +283,8 @@ export const Dashboard = () => {
                     <div id='wrapper2-dashboard'>
                         <p id='a1-grid-dashboard'>Exposure Meter</p>
                         <div className="special-grid-item-dashboard" id='a2-grid-dashboard'>
-                            <CircularProgress variant="static" value={redux.store.getState().username.risklevel} size={'23vh'} id='circular-progress-dashboard' />
-                            <p className='percentage-dashboard' id='percentage-dashboard'>{`${redux.store.getState().username.risklevel}%`}</p>
+                            <CircularProgress variant="static" value={gotCovid ? redux.store.getState().username.risklevel*1 : 100} size={'23vh'} id='circular-progress-dashboard' />
+                            <p className='percentage-dashboard' id='percentage-dashboard'>{ gotCovid ? `${redux.store.getState().username.risklevel}%`: '100%'}</p>
                         </div>
                         <p id='a3-grid-dashboard'>Pods</p>
                         <button className="grid-item-dashboard" id='a4-grid-dashboard' onClick={goPods}>
