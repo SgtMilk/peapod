@@ -4,6 +4,7 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css';
 import { Login } from "./subpages/Login";
@@ -19,13 +20,13 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/dashboard" exact component={Dashboard} />
-        <Route path="/" exact component={Login} />
-        <Route path="/pods" exact component={Pods} />
-        <Route path="/activities" exact component={Activities} />
-        <Route path="/addpod" exact component={AddPod} />
-        <Route path="/addactivity" exact component={AddActivity} />
-        <Route path="/notifications" exact component={Notifications} />
+        <Route exact path="/dashboard" exact component={Dashboard} />
+        <Route exact path="/" exact component={Login} />
+        <Route exact path="/pods" exact component={Pods} />
+        <Route exact path="/activities" exact component={Activities} />
+        <Route exact path="/addpod" exact component={AddPod} />
+        <Route exact path="/addactivity" exact component={AddActivity} />
+        <Route exact path="/notifications" exact component={Notifications} />
         <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

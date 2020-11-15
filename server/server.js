@@ -52,6 +52,13 @@ app.use(
 app.use(bodyParser.json());
 app.use("/", router);
 
+app.use(express.static("./peapod/build"));
+//browser request for the web app
+app.get("/", (req, res) => {
+  const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  res.sendFile("index.html", { root: "./peapod/build" });
+});
+
 // Open server for requests
 const server = http.createServer(app);
 server.listen(config.PORT, () => {
