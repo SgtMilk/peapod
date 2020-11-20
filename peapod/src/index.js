@@ -96,9 +96,9 @@ const curuser = (state, action) => {
 };
 
 let store = createStore(curuser);
-
+const allfunctions = { store, setUser, setPods, setActivities, setNotifications, setPodsActivitiesNotifications }
 //DISPATCH
-export default { store, setUser, setPods, setActivities, setNotifications, setPodsActivitiesNotifications };
+export default allfunctions;
 
 ReactDOM.render(
   <React.StrictMode>

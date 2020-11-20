@@ -30,7 +30,7 @@ export const AddPod = () => {
             url: "/auth/logout",
             withCredentials: true,
         }
-        const response = await axios(axiosOptions);
+        await axios(axiosOptions);
         redux.store.dispatch(redux.setUser(undefined));
         document.getElementById('wrapper2-addpod').style.opacity = 0;
         document.getElementById('button-titlebar-addpod').style.opacity = 0;

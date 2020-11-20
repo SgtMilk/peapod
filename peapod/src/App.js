@@ -20,13 +20,13 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/dashboard" exact component={Dashboard} />
-        <Route exact path="/" exact component={Login} />
-        <Route exact path="/pods" exact component={Pods} />
-        <Route exact path="/activities" exact component={Activities} />
-        <Route exact path="/addpod" exact component={AddPod} />
-        <Route exact path="/addactivity" exact component={AddActivity} />
-        <Route exact path="/notifications" exact component={Notifications} />
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/" component={Login} />
+        <Route exact path="/pods" component={Pods} />
+        <Route exact path="/activities" component={Activities} />
+        <Route exact path="/addpod" component={AddPod} />
+        <Route exact path="/addactivity" component={AddActivity} />
+        <Route exact path="/notifications" component={Notifications} />
         <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

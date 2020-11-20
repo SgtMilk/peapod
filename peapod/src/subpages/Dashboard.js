@@ -52,7 +52,7 @@ export const Dashboard = () => {
             url: "/auth/logout",
             withCredentials: true,
         }
-        const response = await axios(axiosOptions);
+        await axios(axiosOptions);
         redux.store.dispatch(redux.setUser(undefined));
         document.getElementById('wrapper2-dashboard').style.opacity = 0;
         document.getElementById('button-titlebar-dashboard').style.opacity = 0;
