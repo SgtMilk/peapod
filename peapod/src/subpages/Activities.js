@@ -11,6 +11,7 @@ export const Activities = () => {
     let history = useHistory();
 
     const initialSetupActivities = () => {
+        activitiesQuery.refetch();
         setTimeout(function () {
             document.getElementById('wrapper2-activities').style.opacity = 1;
             document.getElementById('button-titlebar-activities').style.opacity = 1;
@@ -71,6 +72,7 @@ export const Activities = () => {
                     redux.store.dispatch(redux.setActivities(response.data.activities));
                 }
             }),
+            { enabled: true, retry: true }
     );
 
     if (activitiesQuery.isLoading) {
