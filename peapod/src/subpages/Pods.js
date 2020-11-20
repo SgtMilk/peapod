@@ -29,7 +29,7 @@ export const Pods = () => {
             url: "/auth/logout",
             withCredentials: true,
         }
-        const response = await axios(axiosOptions);
+        await axios(axiosOptions);
         redux.store.dispatch(redux.setUser(undefined));
         document.getElementById('wrapper2-pods').style.opacity = 0;
         document.getElementById('button-titlebar-pods').style.opacity = 0;

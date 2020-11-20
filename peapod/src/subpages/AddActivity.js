@@ -81,7 +81,7 @@ export const AddActivity = () => {
             withCredentials: true,
         }
 
-        const response = await axios(axiosOptions);
+        await axios(axiosOptions);
         history.push("/activities")
     }
 

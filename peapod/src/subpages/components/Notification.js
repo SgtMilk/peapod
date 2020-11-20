@@ -23,7 +23,7 @@ export const Notification = ({ index, notification }) => {
             },
             withCredentials: true,
         }
-        const response = await axios(axiosOptions);
+        await axios(axiosOptions);
         document.getElementById('wrapper2-notifications').style.opacity = 0;
         document.getElementById('button-titlebar-notifications').style.opacity = 0;
         document.getElementById('button-back-titlebar-notifications').style.opacity = 0;
@@ -47,7 +47,7 @@ export const Notification = ({ index, notification }) => {
             },
             withCredentials: true,
         }
-        const response = await axios(axiosOptions);
+        await axios(axiosOptions);
         redux.store.dispatch(
             redux.setNotifications(
                 redux.store.getState().notifications.filter(

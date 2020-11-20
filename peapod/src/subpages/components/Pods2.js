@@ -27,7 +27,7 @@ export const Pods2 = (index) => {
       url: `/api/pods/${redux.store.getState().pods[index.props].pod_uuid}`,
       withCredentials: true,
     }
-    const response = await axios(axiosOptions);
+    await axios(axiosOptions);
     history.push('/pods');
   }
 

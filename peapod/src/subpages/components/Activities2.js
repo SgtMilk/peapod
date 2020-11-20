@@ -1,7 +1,6 @@
 import React from 'react'
 import "./Activities2.css";
 import redux from "../../index";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios"
 import serverAddress from "../../constants"
 import { useHistory } from "react-router-dom"
@@ -24,7 +23,7 @@ export const Activities2 = (index) => {
       url: `/api/activities/${redux.store.getState().activities[index.props].activity_id}`,
       withCredentials: true,
     }
-    const response = await axios(axiosOptions);
+    await axios(axiosOptions);
     document.getElementById('wrapper2-activities').style.opacity = 0;
     document.getElementById('button-titlebar-activities').style.opacity = 0;
     document.getElementById('button-back-titlebar-activities').style.opacity = 0;

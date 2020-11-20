@@ -162,7 +162,7 @@ export const Dashboard = () => {
         withCredentials: true,
     };
 
-    const notificationsQuery = useQuery(
+    useQuery(
         "notificationsDashboard",
         () =>
             axios(notificationsOptions).then((response) => {
@@ -192,7 +192,7 @@ export const Dashboard = () => {
         withCredentials: true,
     };
 
-    const activitiesQuery = useQuery(
+    useQuery(
         "activitiesDashboard",
         () =>
             axios(activitiesOptions).then((response) => {
@@ -220,7 +220,7 @@ export const Dashboard = () => {
         withCredentials: true,
     };
 
-    const podsQuery = useQuery(
+    useQuery(
         "podsDashboard",
         () =>
             axios(podsOptions).then((response) => {
