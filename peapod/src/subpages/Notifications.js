@@ -33,6 +33,7 @@ export const Notifications = () => {
         redux.store.dispatch(redux.setUser(undefined));
         document.getElementById('wrapper2-notifications').style.opacity = 0;
         document.getElementById('button-titlebar-notifications').style.opacity = 0;
+        document.getElementById('button-back-titlebar-notifications').style.opacity = 0;
         document.getElementById('wrapper-button-notifications').style.height = '25vh';
         document.getElementById('wrapper-button-notifications').style.width = '40vw';
         document.getElementById('wrapper2-notifications').style.height = '25vh';

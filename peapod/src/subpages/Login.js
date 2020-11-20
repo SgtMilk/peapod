@@ -9,6 +9,8 @@ import './Login.css'
 import serverAddress from '../constants'
 import redux from "../index";
 import { useHistory } from "react-router-dom";
+import { useQuery } from "react-query"
+import axios from "axios"
 
 export const Login = () => {
     let history = useHistory();
@@ -59,6 +61,33 @@ export const Login = () => {
             document.getElementById('wrapper2-login').style.opacity = 1;
         }, 100) 
         
+    }
+
+    //  User Query
+    const userOptions = {
+        method: "get",
+        baseURL: serverAddress,
+        url: "/auth/login/success",
+        headers: {
+            "Access-Control-Allow-Credentials": true,
+            "Content-Type": "application/json",
+        },
+        withCredentials: true,
+    };
+
+    const userQuery = useQuery(
+        "userDashboard",
+        () =>
+            axios(userOptions).then((response) => {
+                //  Set state in redux for user
+                redux.store.dispatch(redux.setUser(response.data.user));
+                history.push('/dashboard');
+            }),
+        { enabled: true, retry: false }
+    );
+
+    if (userQuery.isError) {
+        history.push("/");
     }
 
     return (

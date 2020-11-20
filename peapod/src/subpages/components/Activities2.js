@@ -26,11 +26,14 @@ export const Activities2 = (index) => {
     }
     const response = await axios(axiosOptions);
     document.getElementById('wrapper2-activities').style.opacity = 0;
-        document.getElementById('button-titlebar-activities').style.opacity = 0;
-        document.getElementById('button-back-titlebar-activities').style.opacity = 0;
-        setTimeout(function () {
-            history.go(0);
-        }, 500)
+    document.getElementById('button-titlebar-activities').style.opacity = 0;
+    document.getElementById('button-back-titlebar-activities').style.opacity = 0;
+    setTimeout(function () {
+        history.push('/activities');
+        document.getElementById('wrapper2-activities').style.opacity = 1;
+        document.getElementById('button-titlebar-activities').style.opacity = 1;
+        document.getElementById('button-back-titlebar-activities').style.opacity = 1;
+    }, 500)
   }
 
   const expandMe = isExpanded ? "activities2 expanded" : "activities2";

@@ -28,7 +28,7 @@ export const Notification = ({ index, notification }) => {
         document.getElementById('button-titlebar-notifications').style.opacity = 0;
         document.getElementById('button-back-titlebar-notifications').style.opacity = 0;
         setTimeout(function () {
-            history.go(0);
+            history.push('/notifications');
         }, 500)
          
     }

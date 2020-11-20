@@ -52,6 +52,8 @@
   margin: 1vh;
   transition: 0.5s;
   opacity: 0;
+  height: 5vh;
+  width: 12vw;
 }
 
 .button-titlebar-notifications:hover {

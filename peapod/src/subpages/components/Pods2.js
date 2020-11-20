@@ -28,12 +28,7 @@ export const Pods2 = (index) => {
       withCredentials: true,
     }
     const response = await axios(axiosOptions);
-    document.getElementById('wrapper2-pods').style.opacity = 0;
-    document.getElementById('button-titlebar-pods').style.opacity = 0;
-    document.getElementById('button-back-titlebar-pods').style.opacity = 0;
-    setTimeout(function () {
-        history.go(0);
-    }, 500)
+    history.push('/pods');
   }
 
   const maxValue = Math.max(...redux.store.getState().pods[index.props].users.map((user) => parseInt(user.risklevel)));

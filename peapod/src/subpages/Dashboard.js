@@ -33,6 +33,7 @@ export const Dashboard = () => {
         setTimeout(function () {
             document.getElementById('wrapper2-dashboard').style.opacity = 1;
             document.getElementById('button-titlebar-dashboard').style.opacity = 1;
+            document.getElementById('a2-grid-dashboard').style.opacity = 1;
         }, 500)
     }
 
@@ -114,7 +115,8 @@ export const Dashboard = () => {
         document.getElementById('button-titlebar-dashboard').style.opacity = 0;
         document.getElementById('a2-grid-dashboard').style.opacity = 0;
         setTimeout(function () {
-            history.go(0);
+            setFoundUser(false);
+            history.push('/dashboard');
         }, 500)
         
     }
@@ -171,6 +173,7 @@ export const Dashboard = () => {
                 }
 
             }),
+            { enabled: true, retry: true }
     );
 
 
@@ -199,6 +202,7 @@ export const Dashboard = () => {
                     redux.store.dispatch(redux.setActivities(response.data.activities));
                 }
             }),
+            { enabled: true, retry: true }
     );
 
     //  Pods Query
@@ -226,6 +230,7 @@ export const Dashboard = () => {
                     redux.store.dispatch(redux.setPods(response.data.pods));
                 }
             }),
+            { enabled: true, retry: true }
     );
 
 
@@ -270,7 +275,7 @@ export const Dashboard = () => {
             </div>
         )
     }
-    const hasCovid = redux.store.getState().username.hascovid ? "I don't have Covid" : "I have Covid";
+    const hasCovid = redux.store.getState().username.hascovid;
     return (
         <div className='dashboard' onLoad={initialSetupDashboard()}>
             <div className='titlebar-dashboard'>
@@ -306,7 +311,7 @@ export const Dashboard = () => {
                         <div className="special-grid-item-dashboard" id='a8-grid-dashboard' >
                             <div id='a7-grid-dashboard'>
                                 <button className='button-titlebar-dashboard' id='other-buttons-dashboard1' onClick={goNotifications}>{`Notifications (${redux.store.getState().notifications.length})`}</button>
-                                <button className='button-titlebar-dashboard' id='other-buttons-dashboard2' onClick={gotCovid}>{hasCovid}</button>
+                                <button className='button-titlebar-dashboard' id='other-buttons-dashboard2' onClick={gotCovid}>{hasCovid ? "I don't have Covid" : "I have Covid"}</button>
                             </div>
                             <button onClick={goDisclaimer} className='disclaimer-dashboard'>
                                 <p>Disclaimer</p>
